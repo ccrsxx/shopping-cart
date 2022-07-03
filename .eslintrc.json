@@ -31,6 +31,7 @@
     "@typescript-eslint/no-unused-expressions": "off",
     "react/no-array-index-key": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-no-constructed-context-values": "off",
     "jsx-quotes": ["error", "prefer-single"],
     "no-console": "warn",
     "linebreak-style": "off",
