@@ -1,7 +1,7 @@
 interface SetTransitionProps {
   layout?: boolean;
   direction?: 'left' | 'right' | 'top' | 'bottom' | 'none';
-  distance?: number;
+  distance?: 'full' | number;
   durationIn?: number;
   durationOut?: number;
 }
@@ -21,30 +21,43 @@ export function setTransition({
     none: { x: 0, y: 0 }
   };
 
+  const rawDirection = directions[direction];
+
+  const directionProp =
+    direction !== 'none'
+      ? Object.entries(rawDirection).reduce(
+          (acc, [key, value]) => ({
+            ...acc,
+            [key]: distance === 'full' ? '100%' : value
+          }),
+          {}
+        )
+      : rawDirection;
+
   const transitionIn = {
     type: 'spring',
     duration: durationIn
   };
 
   const transitionOut = {
-    type: 'spring',
+    type: 'normal',
     duration: durationOut
   };
 
   const variants = {
     initial: {
       opacity: 0,
-      ...directions[direction]
+      ...directionProp
     },
     enter: {
       opacity: 1,
-      ...directions.none,
-      transition: transitionIn
+      transition: transitionIn,
+      ...directions.none
     },
     exit: {
       opacity: 0,
-      ...directions[direction],
-      transition: transitionOut
+      transition: transitionOut,
+      ...directionProp
     }
   };
 

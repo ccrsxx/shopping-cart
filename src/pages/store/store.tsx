@@ -1,4 +1,5 @@
-import { Aside, Fetching, Listing } from './components';
+import { Aside, Listing } from './components';
+import { Fetching } from '../../components';
 
 interface StoreProps {
   isFetching: boolean;

@@ -5,7 +5,7 @@ export function About() {
   return (
     <motion.main
       className='px-8 py-6 pt-28'
-      {...setTransition({ direction: 'left' })}
+      {...setTransition({ direction: 'right' })}
     >
       <h1 className='text-3xl'>About</h1>
       <p className='text-darkgray'>

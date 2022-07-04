@@ -1,12 +1,22 @@
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Product } from './Product';
-import { StoreContext } from '../../../contexts';
+import { ShoppingCartContext } from '../../../contexts';
 import { setTransition } from '../../../utils';
 
 export function Listing() {
-  const { allProducts, parameter } = useContext(StoreContext);
-  const currentCategory = parameter.get('category');
+  const {
+    allProducts,
+    parameter,
+    location: { pathname }
+  } = useContext(ShoppingCartContext);
+  const [currentCategory, setCurrentCategory] = useState<string | null>(null);
+
+  const paramCategory = parameter.get('category');
+
+  useEffect(() => {
+    if (pathname === '/store') setCurrentCategory(paramCategory);
+  }, [paramCategory]);
 
   return (
     <motion.div
@@ -18,8 +28,8 @@ export function Listing() {
         .filter(
           ({ category }) => category === currentCategory || !currentCategory
         )
-        .map(({ id, title, image, price }) => (
-          <Product id={id} title={title} image={image} price={price} key={id} />
+        .map((product) => (
+          <Product {...product} key={product.id} />
         ))}
     </motion.div>
   );

@@ -1,13 +1,24 @@
 import { Link } from 'react-router-dom';
+import { formatCurrency, RiStarSFill } from '../../../utils';
 
 interface ProductProps {
   id: number;
   title: string;
   image: string;
   price: number;
+  rating: {
+    count: number;
+    rate: number;
+  };
 }
 
-export function Product({ id, title, image, price }: ProductProps) {
+export function Product({
+  id,
+  title,
+  image,
+  price,
+  rating: { count, rate }
+}: ProductProps) {
   return (
     <Link
       to={`/product/${id}`}
@@ -19,16 +30,27 @@ export function Product({ id, title, image, price }: ProductProps) {
           className='h-full w-auto rounded-t-lg p-4'
           src={image}
           alt={title}
+          loading='lazy'
         />
       </div>
-      <div className='p-2'>
-        <p
-          className='overflow-hidden text-ellipsis [display:-webkit-box] 
-                           [-webkit-line-clamp:2] [-webkit-box-orient:vertical]'
-        >
-          {title}
-        </p>
-        <p className='font-bold'>${price}</p>
+      <div className='flex flex-col gap-1 p-2'>
+        <div>
+          <p
+            className='overflow-hidden text-ellipsis [display:-webkit-box]
+                       [-webkit-line-clamp:2] [-webkit-box-orient:vertical]'
+          >
+            {title}
+          </p>
+          <p className='font-bold'>{formatCurrency(price)}</p>
+        </div>
+        <div>
+          <p className='flex items-center gap-1 text-sm font-light'>
+            <i className='text-yellow-400'>
+              <RiStarSFill />
+            </i>{' '}
+            {rate} | Sold {count}
+          </p>
+        </div>
       </div>
     </Link>
   );
