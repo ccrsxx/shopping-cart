@@ -10,4 +10,8 @@ export interface IShoppingCartContext {
   location: Location;
   addProduct: (productId: number) => () => void;
   deleteProduct: (productId: number) => () => void;
+  handleProductQuantity: (
+    productId: number,
+    type?: 'increment' | 'decrement'
+  ) => (e?: React.ChangeEvent<HTMLInputElement>) => void;
 }

@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Routes, Route, useLocation, useSearchParams } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useLocalStorage as useStore } from './hooks';
 import { ShoppingCartContext } from './contexts';
 import { Navbar, Cart } from './components';
-import { Home, Store, About, Product } from './pages';
+import { Home, Store, Product, About } from './pages';
 import { getAllProducts } from './api';
+import { formatPathname } from './utils';
 import type { IProduct, ICart } from './types';
 
 export function App() {
@@ -26,6 +27,7 @@ export function App() {
         const products = await getAllProducts();
         setAllProducts(products);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error(error);
         setIsFetching(false);
         setIsError(true);
@@ -37,6 +39,10 @@ export function App() {
 
     if (!allProducts.length) fetchAllProducts();
   }, []);
+
+  useEffect(() => {
+    document.title = `Shopping Cart | ${formatPathname(location.pathname)}`;
+  }, [location]);
 
   useEffect(() => {
     if (isCartOpen) document.body.style.overflow = 'hidden';
@@ -56,7 +62,7 @@ export function App() {
       );
     } else {
       const product = allProducts.find(({ id }) => id === productId);
-      setCurrentCart([...currentCart, { ...product, quantity: 1 } as ICart]);
+      setCurrentCart([{ ...product, quantity: 1 } as ICart, ...currentCart]);
     }
   };
 
@@ -64,11 +70,43 @@ export function App() {
     setCurrentCart(currentCart.filter(({ id }) => id !== productId));
   };
 
+  const handleProductQuantity =
+    (productId: number, type?: 'increment' | 'decrement') =>
+    (e?: React.ChangeEvent<HTMLInputElement>) => {
+      let inputValue = !type ? parseInt(e!.target.value, 10) : null;
+
+      if (!type && !inputValue) inputValue = 1;
+      else if (inputValue && inputValue >= 10_000) inputValue = 10_000;
+
+      setCurrentCart(
+        currentCart.map((cartProduct) =>
+          cartProduct.id === productId
+            ? {
+                ...cartProduct,
+                quantity:
+                  inputValue ||
+                  (type === 'increment'
+                    ? cartProduct.quantity + 1
+                    : cartProduct.quantity - 1)
+              }
+            : cartProduct
+        )
+      );
+    };
+
+  const clearCart = () => setCurrentCart([]);
   const toggleCart = () => setIsCartOpen(!isCartOpen);
 
-  const cartLength = currentCart.reduce(
-    (acc, { quantity }) => acc + quantity,
-    0
+  const [cartProducts, cartLength, totalPrice] = useMemo(
+    () => [
+      currentCart.reduce((acc, { quantity }) => acc + quantity, 0),
+      currentCart.length,
+      currentCart.reduce(
+        (acc, { price, quantity }) => acc + price * quantity,
+        0
+      )
+    ],
+    [currentCart]
   );
 
   return (
@@ -80,12 +118,20 @@ export function App() {
         parameter,
         location,
         addProduct,
-        deleteProduct
+        deleteProduct,
+        handleProductQuantity
       }}
     >
-      <Navbar cartLength={cartLength} toggleCart={toggleCart} />
+      <Navbar cartProducts={cartProducts} toggleCart={toggleCart} />
       <AnimatePresence exitBeforeEnter>
-        {isCartOpen && <Cart toggleCart={toggleCart} />}
+        {isCartOpen && (
+          <Cart
+            cartLength={cartLength}
+            totalPrice={totalPrice}
+            clearCart={clearCart}
+            toggleCart={toggleCart}
+          />
+        )}
       </AnimatePresence>
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>
