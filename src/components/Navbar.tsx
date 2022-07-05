@@ -2,12 +2,12 @@ import { NavLink } from 'react-router-dom';
 import { Button } from './Button';
 import { MdShoppingCart } from '../utils';
 
-interface NavBarProps {
+interface NavbarProps {
   cartProducts: number;
   toggleCart: () => void;
 }
 
-export function Navbar({ cartProducts, toggleCart }: NavBarProps) {
+export function Navbar({ cartProducts, toggleCart }: NavbarProps) {
   return (
     <nav
       className='fixed z-10 flex w-full items-center justify-between

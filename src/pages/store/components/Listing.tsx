@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
-import { Product } from './Product';
+import { ProductCard } from './ProductCard';
 import { ShoppingCartContext } from '../../../contexts';
 import { setTransition } from '../../../utils';
 
@@ -29,7 +29,7 @@ export function Listing() {
           ({ category }) => category === currentCategory || !currentCategory
         )
         .map((product) => (
-          <Product {...product} key={product.id} />
+          <ProductCard {...product} key={product.id} />
         ))}
     </motion.div>
   );

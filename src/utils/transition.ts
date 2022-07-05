@@ -1,7 +1,10 @@
 interface SetTransitionProps {
+  delay?: boolean;
   layout?: boolean;
   direction?: 'left' | 'right' | 'top' | 'bottom' | 'none';
   distance?: 'full' | number;
+  delayIn?: number;
+  delayOut?: number;
   durationIn?: number;
   durationOut?: number;
 }
@@ -10,6 +13,8 @@ export function setTransition({
   layout = false,
   direction = 'none',
   distance = 50,
+  delayIn,
+  delayOut,
   durationIn,
   durationOut
 }: SetTransitionProps) {
@@ -36,11 +41,13 @@ export function setTransition({
 
   const transitionIn = {
     type: 'spring',
+    delay: delayIn,
     duration: durationIn
   };
 
   const transitionOut = {
     type: 'normal',
+    delay: delayOut,
     duration: durationOut
   };
 

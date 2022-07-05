@@ -13,21 +13,21 @@ import {
 
 interface CartItemProps {
   id: number;
+  index: number;
   title: string;
   image: string;
   price: number;
   quantity: number;
-  cartLength: number;
   toggleCart: () => void;
 }
 
 export function CartItem({
   id,
+  index,
   title,
   image,
   price,
   quantity,
-  cartLength,
   toggleCart
 }: CartItemProps) {
   const { deleteProduct, handleProductQuantity } =
@@ -35,39 +35,42 @@ export function CartItem({
 
   return (
     <motion.li
-      className={`${cartLength > 5 && 'mr-6'}`}
       key={id}
       {...setTransition({
         direction: 'right',
         layout: true,
-        durationOut: 0.25
+        durationOut: 0.25,
+        delayIn: index < 5 ? index * 0.02 : 0
       })}
     >
       <div className='rounded-lg border border-neutral-700'>
         <div className='flex'>
           <Link
-            className='flex h-[108px] w-[108px] shrink-0 items-center 
-                       justify-center rounded-l-lg bg-white'
+            className='hidden h-[108px] w-[108px] shrink-0 items-center justify-center
+                       rounded-l-lg bg-white transition hover:brightness-110 sm:flex'
             to={`/product/${id}`}
             onClick={toggleCart}
           >
             <img className='h-full w-full p-4' src={image} alt={title} />
           </Link>
           <div className='flex w-full flex-col justify-between py-2 px-4'>
-            <Link to={`/product/${id}`} onClick={toggleCart}>
-              <h3
-                className='overflow-hidden text-ellipsis [display:-webkit-box]
-                           [-webkit-line-clamp:1] [-webkit-box-orient:vertical]'
+            <div>
+              <Link
+                className='overflow-hidden text-ellipsis font-medium brightness-90 transition
+                           duration-300 [display:-webkit-box] [-webkit-line-clamp:1] 
+                           [-webkit-box-orient:vertical] hover:brightness-100'
+                to={`/product/${id}`}
+                onClick={toggleCart}
               >
                 {title}
-              </h3>
+              </Link>
               <p className='text-lg font-bold'>{formatCurrency(price)}</p>
-            </Link>
+            </div>
             <div className='flex flex-wrap justify-between text-sm font-light'>
               <div className='flex gap-1'>
                 <p>Quantity: </p>
                 <input
-                  className='max-w-[60px] rounded-lg bg-dark px-1 transition 
+                  className='max-w-[60px] rounded-lg bg-dark px-1 transition
                              focus:outline-none focus:ring-2 focus:ring-pink-400'
                   type='number'
                   min={1}
@@ -76,7 +79,9 @@ export function CartItem({
                   onChange={handleProductQuantity(id)}
                 />
               </div>
-              <p>Total: {formatCurrency(price * quantity)}</p>
+              <p className='font-semibold'>
+                Total: {formatCurrency(price * quantity)}
+              </p>
             </div>
           </div>
           <div className='grid border-l border-neutral-700 [&>*]:rounded-none'>

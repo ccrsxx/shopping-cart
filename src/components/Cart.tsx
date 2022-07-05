@@ -6,19 +6,14 @@ import { ShoppingCartContext } from '../contexts';
 import { formatCurrency, setTransition, MdArrowForward } from '../utils';
 
 interface CartProps {
-  cartLength: number;
   totalPrice: number;
   clearCart: () => void;
   toggleCart: () => void;
 }
 
-export function Cart({
-  cartLength,
-  totalPrice,
-  clearCart,
-  toggleCart
-}: CartProps) {
+export function Cart({ totalPrice, clearCart, toggleCart }: CartProps) {
   const { currentCart } = useContext(ShoppingCartContext);
+  const cartLength = currentCart.length;
 
   return (
     <div className='fixed inset-0 z-10'>
@@ -49,11 +44,14 @@ export function Cart({
               onClick={clearCart}
             />
           </div>
-          <ul className='flex flex-1 flex-col gap-4 overflow-auto overflow-x-hidden rounded-lg'>
+          <ul
+            className='relative -mx-8 -mr-6 flex flex-1 flex-col gap-4 
+                       overflow-y-auto overflow-x-hidden rounded-lg px-8 pr-6'
+          >
             <AnimatePresence>
-              {currentCart.map((cartProduct) => (
+              {currentCart.map((cartProduct, index) => (
                 <CartItem
-                  cartLength={cartLength}
+                  index={index}
                   toggleCart={toggleCart}
                   key={cartProduct.id}
                   {...cartProduct}
@@ -63,7 +61,7 @@ export function Cart({
           </ul>
           <div className='flex items-center justify-between'>
             <p className='text-lg font-bold text-grayish'>
-              Total: <span>{formatCurrency(totalPrice)}</span>
+              Total: {formatCurrency(totalPrice)}
             </p>
             <Button
               Icon={MdArrowForward}

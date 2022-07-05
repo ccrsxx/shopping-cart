@@ -15,10 +15,15 @@ export function Product({ isFetching, isError }: ProductProps) {
 
   const product = allProducts.find(({ id }) => id === parseInt(productId!, 10));
 
-  const { id, title, price, description, category, image, rating } =
-    product ?? {};
-
-  const { count, rate } = rating ?? {};
+  const {
+    id,
+    title,
+    price,
+    description,
+    category,
+    image,
+    rating: { count, rate }
+  } = product ?? { rating: {} };
 
   return (
     <main className='flex min-h-screen justify-center gap-8 px-8 py-6 pt-28'>

@@ -26,12 +26,10 @@ export function AddCart({ id }: AddCartProps) {
       className='w-full max-w-xs'
       {...setTransition({ direction: 'right' })}
     >
-      <div
-        className={`${
-          quantity && '!h-[180px] !max-h-96'
-        } flex h-auto max-h-[136px] flex-col gap-6 self-start
-        overflow-hidden rounded-lg border border-neutral-700
-        p-4 transition-all duration-300 ease-in-out`}
+      <motion.div
+        className='flex flex-col gap-6 self-start overflow-hidden 
+                   rounded-lg border border-neutral-700 p-4'
+        animate={{ height: quantity ? 183 : 133 }}
       >
         <div className='flex flex-col gap-2'>
           <h2 className='text-xl font-medium'>Buy product</h2>
@@ -77,7 +75,10 @@ export function AddCart({ id }: AddCartProps) {
             </motion.div>
           ) : (
             <motion.div
-              {...setTransition({ direction: 'bottom', distance: 25 })}
+              {...setTransition({
+                direction: 'bottom',
+                distance: 25
+              })}
               key={quantity}
             >
               <Button
@@ -89,7 +90,7 @@ export function AddCart({ id }: AddCartProps) {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

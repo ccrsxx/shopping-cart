@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { formatCurrency, RiStarSFill } from '../../../utils';
 
-interface ProductProps {
+interface ProductCardProps {
   id: number;
   title: string;
   image: string;
@@ -12,13 +12,13 @@ interface ProductProps {
   };
 }
 
-export function Product({
+export function ProductCard({
   id,
   title,
   image,
   price,
   rating: { count, rate }
-}: ProductProps) {
+}: ProductCardProps) {
   return (
     <Link
       to={`/product/${id}`}

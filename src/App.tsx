@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Routes, Route, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useLocalStorage as useStore } from './hooks';
 import { ShoppingCartContext } from './contexts';
 import { Navbar, Cart } from './components';
-import { Home, Store, Product, About } from './pages';
+import { Home, Store, Product, About, NotFound } from './pages';
 import { getAllProducts } from './api';
 import { formatPathname } from './utils';
 import type { IProduct, ICart } from './types';
@@ -45,8 +45,8 @@ export function App() {
   }, [location]);
 
   useEffect(() => {
-    if (isCartOpen) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = '';
+    if (isCartOpen) document.documentElement.style.overflow = 'hidden';
+    else document.documentElement.style.overflow = '';
   }, [isCartOpen]);
 
   const addProduct = (productId: number) => () => {
@@ -97,10 +97,9 @@ export function App() {
   const clearCart = () => setCurrentCart([]);
   const toggleCart = () => setIsCartOpen(!isCartOpen);
 
-  const [cartProducts, cartLength, totalPrice] = useMemo(
+  const [cartProducts, totalPrice] = useMemo(
     () => [
       currentCart.reduce((acc, { quantity }) => acc + quantity, 0),
-      currentCart.length,
       currentCart.reduce(
         (acc, { price, quantity }) => acc + price * quantity,
         0
@@ -126,7 +125,6 @@ export function App() {
       <AnimatePresence exitBeforeEnter>
         {isCartOpen && (
           <Cart
-            cartLength={cartLength}
             totalPrice={totalPrice}
             clearCart={clearCart}
             toggleCart={toggleCart}
@@ -145,6 +143,7 @@ export function App() {
             element={<Product isFetching={isFetching} isError={isError} />}
           />
           <Route path='about' element={<About />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </AnimatePresence>
     </ShoppingCartContext.Provider>
