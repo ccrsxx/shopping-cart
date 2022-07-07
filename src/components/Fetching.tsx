@@ -1,10 +1,14 @@
 import { motion } from 'framer-motion';
 import { setTransition, VscLoading } from '../utils';
 
-export function Fetching() {
+interface FetchingProps {
+  className?: string;
+}
+
+export function Fetching({ className }: FetchingProps) {
   return (
     <motion.main
-      className='flex w-full items-center justify-center'
+      className={`${className} flex w-full items-center justify-center`}
       {...setTransition({ direction: 'top' })}
     >
       <i className='animate-spin'>

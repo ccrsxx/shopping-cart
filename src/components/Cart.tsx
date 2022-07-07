@@ -45,8 +45,8 @@ export function Cart({ totalPrice, clearCart, toggleCart }: CartProps) {
             />
           </div>
           <ul
-            className='relative -mx-8 -mr-6 flex flex-1 flex-col gap-4 
-                       overflow-y-auto overflow-x-hidden rounded-lg px-8 pr-6'
+            className='relative -mx-8 -my-1 -mr-6 flex flex-1 flex-col gap-4 overflow-y-auto
+                       overflow-x-hidden py-1 px-8 pr-6'
           >
             <AnimatePresence>
               {currentCart.map((cartProduct, index) => (
@@ -60,13 +60,14 @@ export function Cart({ totalPrice, clearCart, toggleCart }: CartProps) {
             </AnimatePresence>
           </ul>
           <div className='flex items-center justify-between'>
-            <p className='text-lg font-bold text-grayish'>
-              Total: {formatCurrency(totalPrice)}
+            <p className='text-lg'>
+              Total:{' '}
+              <span className='font-bold'>{formatCurrency(totalPrice)}</span>
             </p>
             <Button
               Icon={MdArrowForward}
               label='Checkout'
-              className='text-xl normal-case hover:!bg-inherit hover:text-pink-400'
+              className='text-xl normal-case hover:!bg-inherit hover:text-accent'
               flipped
             />
           </div>

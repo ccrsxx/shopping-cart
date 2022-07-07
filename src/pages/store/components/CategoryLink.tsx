@@ -8,6 +8,10 @@ interface CategoryLinkProps {
 
 export function CategoryLink({ category }: CategoryLinkProps) {
   const { parameter } = useContext(ShoppingCartContext);
+
+  const searchParam = parameter.get('search');
+  const searchQuery = searchParam ? `?search=${searchParam}` : '';
+
   const isActive =
     category === 'all'
       ? !parameter.get('category')
@@ -16,7 +20,11 @@ export function CategoryLink({ category }: CategoryLinkProps) {
   return (
     <Link
       className={`${isActive && 'text-white'} transition hover:brightness-125`}
-      to={category === 'all' ? '/store' : `/store?category=${category}`}
+      to={
+        category === 'all'
+          ? `/store${searchQuery}`
+          : `/store${searchQuery}${searchQuery ? '&' : '?'}category=${category}`
+      }
     >
       {category}
     </Link>

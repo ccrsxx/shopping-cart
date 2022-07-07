@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require('tailwindcss/colors');
+const { blue } = require('tailwindcss/colors');
 
 module.exports = {
   content: ['./src/**/*.tsx', './public/index.html'],
@@ -9,10 +9,22 @@ module.exports = {
         roboto: ['Roboto', 'sans-serif']
       },
       colors: {
-        accent: colors.pink['400'],
+        accent: blue['400'],
         dark: '#1a1a1a',
-        grayish: '#b6bbb6',
-        darkgray: 'hsla(0, 0%, 100%, 0.9)'
+        grayish: '#b6bbb6'
+      },
+      animation: {
+        fade: 'fade 300ms ease-in-out'
+      },
+      keyframes: {
+        fade: {
+          from: {
+            opacity: 0
+          },
+          to: {
+            opacity: 1
+          }
+        }
       }
     }
   },

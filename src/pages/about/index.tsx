@@ -8,7 +8,7 @@ export function About() {
       {...setTransition({ direction: 'right' })}
     >
       <h1 className='text-3xl'>About</h1>
-      <p className='text-darkgray'>
+      <p className='text-grayish'>
         This is a simple React app that demonstrates the use of React Router.
       </p>
     </motion.main>

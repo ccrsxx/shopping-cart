@@ -14,8 +14,8 @@ export function Aside() {
   return (
     <motion.aside
       style={{ zIndex: isCartOpen ? -1 : 'auto' }}
-      className='sticky top-28 flex w-full max-w-sm flex-col gap-4
-                 self-start rounded-lg border border-neutral-700 p-4'
+      className='sticky top-28 hidden w-full max-w-sm flex-col gap-4 self-start
+                 rounded-lg border border-neutral-700 p-4 md:flex'
       {...setTransition({ direction: 'left' })}
     >
       <div>

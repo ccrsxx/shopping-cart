@@ -1,4 +1,4 @@
-import type { Location } from 'react-router-dom';
+import type { Location, NavigateFunction } from 'react-router-dom';
 import type { IProduct } from './IProduct';
 import type { ICart } from './ICart';
 
@@ -8,6 +8,7 @@ export interface IShoppingCartContext {
   isCartOpen: boolean;
   parameter: URLSearchParams;
   location: Location;
+  navigate: NavigateFunction;
   addProduct: (productId: number) => () => void;
   deleteProduct: (productId: number) => () => void;
   handleProductQuantity: (

@@ -51,7 +51,7 @@ export function AddCart({ id }: AddCartProps) {
                 />
                 <input
                   className='flex-1 rounded-lg border bg-dark px-2 py-1
-                             text-center transition focus:ring-2 focus:ring-pink-400
+                             text-center transition focus:ring-2 focus:ring-accent
                              focus:ring-offset-4 focus:ring-offset-dark'
                   type='number'
                   min={1}

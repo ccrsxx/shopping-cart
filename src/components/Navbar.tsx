@@ -1,50 +1,73 @@
 import { NavLink } from 'react-router-dom';
+import { motion, useAnimation } from 'framer-motion';
 import { Button } from './Button';
-import { MdShoppingCart } from '../utils';
+import { MdSearch, MdShoppingCart } from '../utils';
 
 interface NavbarProps {
+  searchInput: string;
   cartProducts: number;
   toggleCart: () => void;
+  handleChange: ({
+    target: { value }
+  }: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export function Navbar({ cartProducts, toggleCart }: NavbarProps) {
+export function Navbar({
+  searchInput,
+  cartProducts,
+  toggleCart,
+  handleChange,
+  handleSubmit
+}: NavbarProps) {
+  const controls = useAnimation();
+
+  const setMaxWidth = (maxWidth: number) => () => {
+    controls.start({
+      maxWidth
+    });
+  };
+
   return (
     <nav
       className='fixed z-10 flex w-full items-center justify-between
                  border-b-2 border-b-neutral-700 bg-dark px-8 py-4'
     >
-      <ul className='text flex gap-6 text-2xl text-grayish'>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              `${isActive && 'text-white'} tab hover:brightness-125`
-            }
-            to='/'
-          >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              `${isActive && 'text-white'} tab hover:brightness-125`
-            }
-            to='store'
-          >
-            Store
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              `${isActive && 'text-white'} tab hover:brightness-125`
-            }
-            to='about'
-          >
-            About
-          </NavLink>
-        </li>
+      <ul className='flex gap-6 text-2xl text-grayish'>
+        {[
+          ['Home', '/'],
+          ['Store', 'store'],
+          ['About', 'about']
+        ].map(([link, url]) => (
+          <li key={url}>
+            <NavLink
+              className={({ isActive }) =>
+                `${isActive && 'text-white'} tab hover:brightness-125`
+              }
+              to={url}
+            >
+              {link}
+            </NavLink>
+          </li>
+        ))}
       </ul>
+      <motion.form
+        className='flex w-full items-center gap-2 focus-within:max-w-sm'
+        initial={{ maxWidth: 300 }}
+        animate={controls}
+        onSubmit={handleSubmit}
+      >
+        <input
+          type='text'
+          className='tab w-full rounded-lg border border-neutral-700 bg-inherit px-2 py-1'
+          placeholder='Search product...'
+          onFocus={setMaxWidth(500)}
+          onBlur={setMaxWidth(300)}
+          onChange={handleChange}
+          value={searchInput}
+        />
+        <Button type='submit' className='!p-2 text-2xl' Icon={MdSearch} />
+      </motion.form>
       <Button className='relative !rounded-full !p-2' onClick={toggleCart}>
         <MdShoppingCart size={24} />
         <span

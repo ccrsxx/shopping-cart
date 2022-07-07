@@ -1,5 +1,13 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { formatCurrency, RiStarSFill } from '../../../utils';
+import { ShoppingCartContext } from '../../../contexts';
+import { Button } from '../../../components';
+import {
+  formatCurrency,
+  RiStarSFill,
+  MdAddShoppingCart,
+  MdRemoveShoppingCart
+} from '../../../utils';
 
 interface ProductCardProps {
   id: number;
@@ -19,11 +27,26 @@ export function ProductCard({
   price,
   rating: { count, rate }
 }: ProductCardProps) {
+  const { currentCart, addProduct, deleteProduct } =
+    useContext(ShoppingCartContext);
+
+  const { quantity } =
+    currentCart.find(({ id: cartId }) => cartId === id) ?? {};
+
+  const { label, Icon, onClick } = quantity
+    ? { label: 'Remove', Icon: MdRemoveShoppingCart, onClick: deleteProduct }
+    : { label: 'Add', Icon: MdAddShoppingCart, onClick: addProduct };
+
+  const handleClick = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
+    onClick(id)();
+  };
+
   return (
     <Link
       to={`/product/${id}`}
-      className='rounded-lg border border-neutral-700'
-      key={id}
+      className='relative rounded-lg border border-neutral-700
+                 transition duration-300 hover:brightness-110'
     >
       <div className='flex h-[230px] items-center justify-center rounded-t-lg bg-white'>
         <img
@@ -51,6 +74,15 @@ export function ProductCard({
             {rate} | Sold {count}
           </p>
         </div>
+      </div>
+      <div className='absolute bottom-2 right-2'>
+        <Button
+          className='animate-fade font-medium capitalize'
+          label={label}
+          Icon={Icon}
+          onClick={handleClick}
+          key={label}
+        />
       </div>
     </Link>
   );

@@ -1,5 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useLocation, useSearchParams, Routes, Route } from 'react-router-dom';
+import {
+  useSearchParams,
+  useLocation,
+  useNavigate,
+  Routes,
+  Route
+} from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useLocalStorage as useStore } from './hooks';
 import { ShoppingCartContext } from './contexts';
@@ -12,12 +18,13 @@ import type { IProduct, ICart } from './types';
 export function App() {
   const [allProducts, setAllProducts] = useStore<IProduct[]>('allProducts', []);
   const [currentCart, setCurrentCart] = useStore<ICart[]>('currentCart', []);
+  const [searchInput, setSearchInput] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const [parameter, setParameter] = useSearchParams();
-  const location = useLocation();
+  const [location, navigate] = [useLocation(), useNavigate()];
+  const [parameter] = useSearchParams();
 
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -37,6 +44,8 @@ export function App() {
       setIsFetching(false);
     };
 
+    setSearchInput(parameter.get('search') ?? '');
+
     if (!allProducts.length) fetchAllProducts();
   }, []);
 
@@ -45,8 +54,7 @@ export function App() {
   }, [location]);
 
   useEffect(() => {
-    if (isCartOpen) document.documentElement.style.overflow = 'hidden';
-    else document.documentElement.style.overflow = '';
+    document.body.style.overflow = isCartOpen ? 'hidden' : '';
   }, [isCartOpen]);
 
   const addProduct = (productId: number) => () => {
@@ -84,7 +92,7 @@ export function App() {
             ? {
                 ...cartProduct,
                 quantity:
-                  inputValue ||
+                  inputValue ??
                   (type === 'increment'
                     ? cartProduct.quantity + 1
                     : cartProduct.quantity - 1)
@@ -93,6 +101,22 @@ export function App() {
         )
       );
     };
+
+  const handleChange = ({
+    target: { value }
+  }: React.ChangeEvent<HTMLInputElement>) => setSearchInput(value);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const categoryParam = parameter.get('category');
+
+    navigate(
+      `/store?search=${searchInput}${
+        categoryParam ? `&category=${categoryParam}` : ''
+      }`
+    );
+  };
 
   const clearCart = () => setCurrentCart([]);
   const toggleCart = () => setIsCartOpen(!isCartOpen);
@@ -116,12 +140,19 @@ export function App() {
         isCartOpen,
         parameter,
         location,
+        navigate,
         addProduct,
         deleteProduct,
         handleProductQuantity
       }}
     >
-      <Navbar cartProducts={cartProducts} toggleCart={toggleCart} />
+      <Navbar
+        searchInput={searchInput}
+        cartProducts={cartProducts}
+        toggleCart={toggleCart}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
       <AnimatePresence exitBeforeEnter>
         {isCartOpen && (
           <Cart

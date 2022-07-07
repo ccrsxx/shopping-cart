@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @layer components {
   .tab {
     @apply rounded-lg transition focus:ring-offset-dark focus-visible:outline-none
-           focus-visible:ring focus-visible:ring-accent focus-visible:ring-offset-2;
+           focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
   }
 }
