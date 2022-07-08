@@ -30,7 +30,7 @@ export function NotFound({ productId }: NotFoundProps) {
     return () => clearTimeout(timeoutId);
   }, []);
 
-  const currentPage = productId || useMemo(() => pathname, []);
+  const currentPage = productId ?? useMemo(() => pathname, []);
 
   return (
     <motion.main

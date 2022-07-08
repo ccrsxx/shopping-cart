@@ -67,7 +67,6 @@
     "prettier-plugin-tailwindcss": "^0.1.11",
     "tailwindcss": "^3.1.4"
   },
-  "homepage": "https://ccrsxx.github.io/shopping-cart",
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   }

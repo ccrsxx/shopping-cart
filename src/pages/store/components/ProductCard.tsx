@@ -27,7 +27,7 @@ export function ProductCard({
   price,
   rating: { count, rate }
 }: ProductCardProps) {
-  const { currentCart, addProduct, deleteProduct } =
+  const { currentCart, clearInput, addProduct, deleteProduct } =
     useContext(ShoppingCartContext);
 
   const { quantity } =
@@ -47,6 +47,7 @@ export function ProductCard({
       to={`/product/${id}`}
       className='relative rounded-lg border border-neutral-700
                  transition duration-300 hover:brightness-110'
+      onClick={clearInput}
     >
       <div className='flex h-[230px] items-center justify-center rounded-t-lg bg-white'>
         <img

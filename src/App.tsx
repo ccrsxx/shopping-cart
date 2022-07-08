@@ -26,6 +26,8 @@ export function App() {
   const [location, navigate] = [useLocation(), useNavigate()];
   const [parameter] = useSearchParams();
 
+  const searchParam = parameter.get('search');
+
   useEffect(() => {
     const fetchAllProducts = async () => {
       setIsFetching(true);
@@ -44,8 +46,6 @@ export function App() {
       setIsFetching(false);
     };
 
-    setSearchInput(parameter.get('search') ?? '');
-
     if (!allProducts.length) fetchAllProducts();
   }, []);
 
@@ -56,6 +56,10 @@ export function App() {
   useEffect(() => {
     document.body.style.overflow = isCartOpen ? 'hidden' : '';
   }, [isCartOpen]);
+
+  useEffect(() => {
+    if (typeof searchParam === 'string') setSearchInput(searchParam);
+  }, [searchParam]);
 
   const addProduct = (productId: number) => () => {
     const inCart = currentCart.find(({ id }) => id === productId);
@@ -111,13 +115,15 @@ export function App() {
 
     const categoryParam = parameter.get('category');
 
-    navigate(
-      `/store?search=${searchInput}${
-        categoryParam ? `&category=${categoryParam}` : ''
-      }`
-    );
+    const searchParams = new URLSearchParams({
+      search: searchInput,
+      ...(categoryParam && { category: categoryParam })
+    });
+
+    navigate(`/store?${searchParams}`);
   };
 
+  const clearInput = () => setSearchInput('');
   const clearCart = () => setCurrentCart([]);
   const toggleCart = () => setIsCartOpen(!isCartOpen);
 
@@ -141,6 +147,7 @@ export function App() {
         parameter,
         location,
         navigate,
+        clearInput,
         addProduct,
         deleteProduct,
         handleProductQuantity

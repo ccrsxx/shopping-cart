@@ -9,6 +9,7 @@ export interface IShoppingCartContext {
   parameter: URLSearchParams;
   location: Location;
   navigate: NavigateFunction;
+  clearInput: () => void;
   addProduct: (productId: number) => () => void;
   deleteProduct: (productId: number) => () => void;
   handleProductQuantity: (

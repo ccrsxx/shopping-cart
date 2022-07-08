@@ -10,7 +10,11 @@ export function CategoryLink({ category }: CategoryLinkProps) {
   const { parameter } = useContext(ShoppingCartContext);
 
   const searchParam = parameter.get('search');
-  const searchQuery = searchParam ? `?search=${searchParam}` : '';
+
+  const newParameter = new URLSearchParams({
+    ...(searchParam && { search: searchParam }),
+    ...(category !== 'all' && { category })
+  });
 
   const isActive =
     category === 'all'
@@ -20,11 +24,7 @@ export function CategoryLink({ category }: CategoryLinkProps) {
   return (
     <Link
       className={`${isActive && 'text-white'} transition hover:brightness-125`}
-      to={
-        category === 'all'
-          ? `/store${searchQuery}`
-          : `/store${searchQuery}${searchQuery ? '&' : '?'}category=${category}`
-      }
+      to={`/store?${newParameter}`}
     >
       {category}
     </Link>

@@ -30,8 +30,13 @@ export function CartItem({
   quantity,
   toggleCart
 }: CartItemProps) {
-  const { deleteProduct, handleProductQuantity } =
+  const { clearInput, deleteProduct, handleProductQuantity } =
     useContext(ShoppingCartContext);
+
+  const handleClick = () => {
+    clearInput();
+    toggleCart();
+  };
 
   return (
     <motion.li
@@ -45,10 +50,10 @@ export function CartItem({
     >
       <div className='flex rounded-lg border border-neutral-700'>
         <Link
-          className='hidden h-[108px] w-[108px] shrink-0 items-center justify-center
+          className='hidden h-[110px] w-[110px] shrink-0 items-center justify-center
                      rounded-l-lg bg-white transition hover:brightness-110 md:flex'
           to={`/product/${id}`}
-          onClick={toggleCart}
+          onClick={handleClick}
         >
           <img className='h-full w-full p-4' src={image} alt={title} />
         </Link>
@@ -59,7 +64,7 @@ export function CartItem({
                          duration-300 [display:-webkit-box] [-webkit-line-clamp:1] 
                          [-webkit-box-orient:vertical] hover:brightness-100'
               to={`/product/${id}`}
-              onClick={toggleCart}
+              onClick={handleClick}
             >
               {title}
             </Link>
