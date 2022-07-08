@@ -10,6 +10,7 @@ export function Listing() {
     parameter,
     location: { pathname }
   } = useContext(ShoppingCartContext);
+
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -33,17 +34,12 @@ export function Listing() {
       filterMatch(title, searchQuery)
     );
 
-  // TODO: fix animation when not in all category
-  // ! currently only works when in all category, but not in other categories
-  const listKey = useMemo(
-    () => currentCategory ?? searchQuery,
-    [currentCategory, searchQuery]
-  );
+  const key = useMemo(() => Math.random(), [currentCategory, searchQuery]);
 
   return (
     <motion.div
       className='grid w-full gap-x-4 gap-y-6 [grid-template-columns:repeat(auto-fill,minmax(230px,1fr))]'
-      key={listKey}
+      key={key}
       {...setTransition({ direction: 'bottom' })}
     >
       {filteredProducts.map((product) => (

@@ -30,8 +30,8 @@ export function Navbar({
 
   return (
     <nav
-      className='fixed z-10 flex w-full items-center justify-between
-                 border-b-2 border-b-neutral-700 bg-dark px-8 py-4'
+      className='fixed z-10 flex w-full items-center justify-between border-b-2
+                 border-b-neutral-700 bg-dark/75 px-8 py-4 backdrop-blur-md'
     >
       <ul className='flex gap-6 text-2xl text-grayish'>
         {[
@@ -59,7 +59,7 @@ export function Navbar({
       >
         <input
           type='text'
-          className='tab w-full rounded-lg border border-neutral-700 bg-inherit px-2 py-1'
+          className='tab w-full rounded-lg border border-neutral-500 bg-inherit px-2 py-1'
           placeholder='Search product...'
           onFocus={setMaxWidth(500)}
           onBlur={setMaxWidth(300)}
