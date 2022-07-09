@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
+import { useShoppingCart } from '../contexts';
 import { MdShoppingCart } from '../utils';
 import { SearchBar } from './SearchBar';
 import { Button } from './Button';
-import { useShoppingCart } from '../contexts';
 
 const NavLinks = [
   ['Home', '/'],
