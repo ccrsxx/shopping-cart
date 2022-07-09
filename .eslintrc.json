@@ -45,7 +45,7 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "sibling", "parent", "index", "type"]
+        "groups": ["builtin", "external", "parent", "sibling", "index", "type"]
       }
     ]
   }

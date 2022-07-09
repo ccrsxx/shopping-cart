@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCartContext } from '../../../contexts';
+import { useShoppingCart } from '../../../contexts';
 
 interface CategoryLinkProps {
   category: string;
 }
 
 export function CategoryLink({ category }: CategoryLinkProps) {
-  const { parameter } = useContext(ShoppingCartContext);
+  const { parameter } = useShoppingCart();
 
   const searchParam = parameter.get('search');
 

@@ -1,14 +1,13 @@
-import { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { CategoryLink } from './CategoryLink';
-import { ShoppingCartContext } from '../../../contexts';
+import { useShoppingCart } from '../../../contexts';
 import { setTransition } from '../../../utils';
+import { CategoryLink } from './CategoryLink';
 
 // prettier-ignore
 const categories = ['electronics', 'jewelery', 'men\'s clothing', 'women\'s clothing'];
 
 export function Aside() {
-  const { isCartOpen, parameter } = useContext(ShoppingCartContext);
+  const { isCartOpen, parameter } = useShoppingCart();
   const currentCategory = parameter.get('category') ?? 'All';
 
   return (

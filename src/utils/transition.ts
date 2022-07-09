@@ -29,11 +29,11 @@ export function setTransition({
   const rawDirection = directions[direction];
 
   const directionProp =
-    direction !== 'none'
-      ? Object.entries(rawDirection).reduce(
-          (acc, [key, value]) => ({
+    direction !== 'none' && distance === 'full'
+      ? Object.keys(rawDirection).reduce(
+          (acc, key) => ({
             ...acc,
-            [key]: distance === 'full' ? '100%' : value
+            [key]: '100%'
           }),
           {}
         )

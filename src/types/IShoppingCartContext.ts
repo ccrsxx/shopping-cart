@@ -3,13 +3,18 @@ import type { IProduct } from './IProduct';
 import type { ICart } from './ICart';
 
 export interface IShoppingCartContext {
+  cartProducts: number;
   allProducts: IProduct[];
   currentCart: ICart[];
+  totalPrice: number;
   isCartOpen: boolean;
+  isFetching: boolean;
   parameter: URLSearchParams;
   location: Location;
+  isError: boolean;
   navigate: NavigateFunction;
-  clearInput: () => void;
+  clearCart: () => void;
+  toggleCart: () => void;
   addProduct: (productId: number) => () => void;
   deleteProduct: (productId: number) => () => void;
   handleProductQuantity: (

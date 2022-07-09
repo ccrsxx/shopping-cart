@@ -1,6 +1,7 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ShoppingCartContext } from '../../contexts';
+import { useShoppingCart } from '../../contexts';
 import { setTransition } from '../../utils';
 
 interface NotFoundProps {
@@ -9,9 +10,10 @@ interface NotFoundProps {
 
 export function NotFound({ productId }: NotFoundProps) {
   const {
-    location: { pathname },
-    navigate
-  } = useContext(ShoppingCartContext);
+    location: { pathname }
+  } = useShoppingCart();
+
+  const navigate = useNavigate();
 
   const { title, navigateTo, targetPage } = productId
     ? {

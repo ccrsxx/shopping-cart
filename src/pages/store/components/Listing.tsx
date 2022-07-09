@@ -1,15 +1,15 @@
-import { useState, useEffect, useContext, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { ProductCard } from './ProductCard';
-import { ShoppingCartContext } from '../../../contexts';
+import { useShoppingCart } from '../../../contexts';
 import { filterMatch, setTransition } from '../../../utils';
+import { ProductCard } from './ProductCard';
 
 export function Listing() {
   const {
     allProducts,
     parameter,
     location: { pathname }
-  } = useContext(ShoppingCartContext);
+  } = useShoppingCart();
 
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');

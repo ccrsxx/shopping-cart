@@ -1,8 +1,6 @@
-import { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Button } from './Button';
-import { ShoppingCartContext } from '../contexts';
+import { useShoppingCart } from '../contexts';
 import {
   formatCurrency,
   setTransition,
@@ -10,6 +8,7 @@ import {
   MdRemove,
   MdDelete
 } from '../utils';
+import { Button } from './Button';
 
 interface CartItemProps {
   id: number;
@@ -30,13 +29,9 @@ export function CartItem({
   quantity,
   toggleCart
 }: CartItemProps) {
-  const { clearInput, deleteProduct, handleProductQuantity } =
-    useContext(ShoppingCartContext);
+  const { deleteProduct, handleProductQuantity } = useShoppingCart();
 
-  const handleClick = () => {
-    clearInput();
-    toggleCart();
-  };
+  const handleClick = () => toggleCart();
 
   return (
     <motion.li

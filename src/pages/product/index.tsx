@@ -1,17 +1,11 @@
-import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { Image, Details, AddCart } from './components';
 import { Fetching } from '../../components';
 import { NotFound } from '../404';
-import { ShoppingCartContext } from '../../contexts';
+import { useShoppingCart } from '../../contexts';
+import { Image, Details, AddCart } from './components';
 
-interface ProductProps {
-  isFetching: boolean;
-  isError: boolean;
-}
-
-export function Product({ isFetching, isError }: ProductProps) {
-  const { allProducts } = useContext(ShoppingCartContext);
+export function Product() {
+  const { allProducts, isFetching, isError } = useShoppingCart();
   const { productId } = useParams();
 
   const product = allProducts.find(({ id }) => id === parseInt(productId!, 10));

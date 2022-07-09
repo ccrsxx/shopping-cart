@@ -1,6 +1,5 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCartContext } from '../../../contexts';
+import { useShoppingCart } from '../../../contexts';
 import { Button } from '../../../components';
 import {
   formatCurrency,
@@ -27,8 +26,7 @@ export function ProductCard({
   price,
   rating: { count, rate }
 }: ProductCardProps) {
-  const { currentCart, clearInput, addProduct, deleteProduct } =
-    useContext(ShoppingCartContext);
+  const { currentCart, addProduct, deleteProduct } = useShoppingCart();
 
   const { quantity } =
     currentCart.find(({ id: cartId }) => cartId === id) ?? {};
@@ -47,7 +45,6 @@ export function ProductCard({
       to={`/product/${id}`}
       className='relative rounded-lg border border-neutral-700
                  transition duration-300 hover:brightness-110'
-      onClick={clearInput}
     >
       <div className='flex h-[230px] items-center justify-center rounded-t-lg bg-white'>
         <img

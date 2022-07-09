@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ShoppingCartContext } from '../../../contexts';
+import { useShoppingCart } from '../../../contexts';
 import { Button } from '../../../components';
 import {
-  MdAddShoppingCart,
-  MdRemoveShoppingCart,
   MdAdd,
   MdRemove,
-  setTransition
+  setTransition,
+  MdAddShoppingCart,
+  MdRemoveShoppingCart
 } from '../../../utils';
 
 interface AddCartProps {
@@ -16,7 +15,7 @@ interface AddCartProps {
 
 export function AddCart({ id }: AddCartProps) {
   const { currentCart, addProduct, deleteProduct, handleProductQuantity } =
-    useContext(ShoppingCartContext);
+    useShoppingCart();
 
   const { quantity } =
     currentCart.find(({ id: cartId }) => cartId === id) ?? {};

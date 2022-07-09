@@ -1,12 +1,10 @@
-import { Aside, Listing } from './components';
 import { Fetching } from '../../components';
+import { useShoppingCart } from '../../contexts';
+import { Aside, Listing } from './components';
 
-interface StoreProps {
-  isFetching: boolean;
-  isError: boolean;
-}
+export function Store() {
+  const { isFetching, isError } = useShoppingCart();
 
-export function Store({ isFetching, isError }: StoreProps) {
   return (
     <main className='flex gap-8 px-8 py-6 pt-28'>
       <Aside />

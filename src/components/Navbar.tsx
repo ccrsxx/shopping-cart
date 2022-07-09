@@ -1,32 +1,17 @@
 import { NavLink } from 'react-router-dom';
-import { motion, useAnimation } from 'framer-motion';
+import { MdShoppingCart } from '../utils';
+import { SearchBar } from './SearchBar';
 import { Button } from './Button';
-import { MdSearch, MdShoppingCart } from '../utils';
+import { useShoppingCart } from '../contexts';
 
-interface NavbarProps {
-  searchInput: string;
-  cartProducts: number;
-  toggleCart: () => void;
-  handleChange: ({
-    target: { value }
-  }: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
+const NavLinks = [
+  ['Home', '/'],
+  ['Store', '/store'],
+  ['About', '/about']
+];
 
-export function Navbar({
-  searchInput,
-  cartProducts,
-  toggleCart,
-  handleChange,
-  handleSubmit
-}: NavbarProps) {
-  const controls = useAnimation();
-
-  const setMaxWidth = (maxWidth: number) => () => {
-    controls.start({
-      maxWidth
-    });
-  };
+export function Navbar() {
+  const { cartProducts, toggleCart } = useShoppingCart();
 
   return (
     <nav
@@ -34,11 +19,7 @@ export function Navbar({
                  border-b-neutral-700 bg-dark/75 px-8 py-4 backdrop-blur-md'
     >
       <ul className='flex gap-6 text-2xl text-grayish'>
-        {[
-          ['Home', '/'],
-          ['Store', 'store'],
-          ['About', 'about']
-        ].map(([link, url]) => (
+        {NavLinks.map(([link, url]) => (
           <li key={url}>
             <NavLink
               className={({ isActive }) =>
@@ -51,23 +32,7 @@ export function Navbar({
           </li>
         ))}
       </ul>
-      <motion.form
-        className='flex w-full items-center gap-2 focus-within:max-w-sm'
-        initial={{ maxWidth: 300 }}
-        animate={controls}
-        onSubmit={handleSubmit}
-      >
-        <input
-          type='text'
-          className='tab w-full rounded-lg border border-neutral-500 bg-inherit px-2 py-1'
-          placeholder='Search product...'
-          onFocus={setMaxWidth(500)}
-          onBlur={setMaxWidth(300)}
-          onChange={handleChange}
-          value={searchInput}
-        />
-        <Button type='submit' className='!p-2 text-2xl' Icon={MdSearch} />
-      </motion.form>
+      <SearchBar />
       <Button className='relative !rounded-full !p-2' onClick={toggleCart}>
         <MdShoppingCart size={24} />
         <span
