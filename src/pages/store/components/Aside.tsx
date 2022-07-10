@@ -13,16 +13,18 @@ export function Aside() {
   return (
     <motion.aside
       style={{ zIndex: isCartOpen ? -1 : 'auto' }}
-      className='sticky top-28 hidden w-full max-w-sm flex-col gap-4 self-start
-                 rounded-lg border border-neutral-700 p-4 md:flex'
+      className='top-28 flex w-full max-w-none flex-col gap-4 self-start rounded-lg
+                 border border-neutral-700 p-4 md:sticky md:max-w-sm'
       {...setTransition({ direction: 'left' })}
     >
-      <div>
+      <div className='flex flex-wrap items-center justify-center gap-2 text-center md:block md:text-left'>
         <h1 className='text-xl'>Store /</h1>
-        <p className='text-4xl font-bold capitalize'>{currentCategory}</p>
+        <p className='text-2xl font-bold capitalize md:text-4xl'>
+          {currentCategory}
+        </p>
       </div>
       <hr />
-      <ul className='[&>*]:text-lg [&>*]:capitalize [&>*]:text-grayish'>
+      <ul className='flex flex-wrap justify-center gap-2 md:block [&>*]:text-lg [&>*]:capitalize [&>*]:text-grayish'>
         <li>
           <CategoryLink category='all' />
         </li>

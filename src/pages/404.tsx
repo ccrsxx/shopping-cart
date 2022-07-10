@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useShoppingCart } from '../../contexts';
-import { setTransition } from '../../utils';
+import { useShoppingCart } from '../contexts';
+import { setTransition } from '../utils';
 
 interface NotFoundProps {
   productId?: string;
@@ -36,7 +36,7 @@ export function NotFound({ productId }: NotFoundProps) {
 
   return (
     <motion.main
-      className='flex h-screen flex-col items-center justify-center px-8 py-6 pt-28'
+      className='flex h-screen flex-col items-center justify-center px-8 py-6 pt-36 md:pt-28'
       {...setTransition({ direction: 'top', distance: 100 })}
     >
       <div

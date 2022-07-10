@@ -13,7 +13,7 @@ export function Cart() {
   return (
     <AnimatePresence exitBeforeEnter>
       {isCartOpen ? (
-        <div className='fixed inset-0 z-10' key={cartLength}>
+        <div className='fixed inset-0 z-10'>
           <motion.div
             className='fixed h-screen w-screen bg-black bg-opacity-80'
             onClick={toggleCart}
@@ -21,7 +21,7 @@ export function Cart() {
           />
           <motion.div
             className='fixed top-0 -right-4 h-screen w-[500px] max-w-[90vw]
-                   rounded-l-lg bg-dark p-8 pr-12'
+                       rounded-l-lg bg-dark p-8 pr-12'
             {...setTransition({
               direction: 'right',
               distance: 'full',
@@ -42,8 +42,8 @@ export function Cart() {
                 />
               </div>
               <ul
-                className='relative -mx-8 -my-1 -mr-6 flex flex-1 flex-col gap-4 overflow-y-auto
-                       overflow-x-hidden py-1 px-8 pr-6'
+                className='relative order-1 -mx-8 -my-1 -mr-6 flex flex-1 flex-col gap-4
+                           overflow-y-auto overflow-x-hidden py-1 px-8 pr-6'
               >
                 <AnimatePresence>
                   {currentCart.map((cartProduct, index) => (
@@ -56,7 +56,7 @@ export function Cart() {
                   ))}
                 </AnimatePresence>
               </ul>
-              <div className='flex items-center justify-between'>
+              <div className='flex items-center justify-between md:order-2'>
                 <p className='text-lg'>
                   Total:{' '}
                   <span className='font-bold'>

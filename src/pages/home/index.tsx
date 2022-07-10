@@ -4,7 +4,7 @@ import { setTransition } from '../../utils';
 export function Home() {
   return (
     <motion.main
-      className='px-8 py-6 pt-28'
+      className='px-8 py-6 pt-36 md:pt-28'
       {...setTransition({ direction: 'left' })}
     >
       <h1 className='text-3xl'>Home</h1>

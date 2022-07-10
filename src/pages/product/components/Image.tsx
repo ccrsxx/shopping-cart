@@ -9,10 +9,11 @@ interface ImageProps {
 export function Image({ image, title }: ImageProps) {
   return (
     <motion.div
-      className='flex h-[300px] w-[300px] shrink-0 items-center justify-center rounded-lg bg-white'
+      className='flex h-full w-auto shrink-0 items-center justify-center 
+                 rounded-lg bg-white sm:w-[300px]'
       {...setTransition({ direction: 'left' })}
     >
-      <img className='h-full w-full p-4' src={image} alt={title} />
+      <img className='aspect-square w-full p-4' src={image} alt={title} />
     </motion.div>
   );
 }

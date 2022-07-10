@@ -20,7 +20,8 @@ export function Details({
 }: DetailsProps) {
   return (
     <motion.div
-      className='flex w-full max-w-xl flex-col gap-4 self-start rounded-lg border border-neutral-700 p-4'
+      className='flex w-full max-w-xl shrink flex-col gap-4 
+                 self-start rounded-lg border border-neutral-700 p-4'
       {...setTransition({ direction: 'bottom' })}
     >
       <div className='flex flex-col gap-4'>

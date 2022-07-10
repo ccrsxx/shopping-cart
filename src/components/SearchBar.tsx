@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAnimation, motion } from 'framer-motion';
+import { useWindowSize } from '../hooks';
 import { useShoppingCart } from '../contexts';
 import { MdSearch } from '../utils';
 import { Button } from './Button';
@@ -12,10 +13,14 @@ export function SearchBar() {
   } = useShoppingCart();
 
   const [searchInput, setSearchInput] = useState('');
+  const [width] = useWindowSize();
+
   const controls = useAnimation();
 
   useEffect(() => {
-    if (pathname !== '/store') setSearchInput('');
+    const searchParams = parameter.get('search');
+    if (!searchParams) setSearchInput('');
+    else setSearchInput(searchParams);
   }, [pathname]);
 
   const setMaxWidth = (maxWidth: number) => () => {
@@ -33,17 +38,22 @@ export function SearchBar() {
 
     const categoryParam = parameter.get('category');
 
-    const searchParams = new URLSearchParams({
+    const newParameter = new URLSearchParams({
       search: searchInput,
       ...(categoryParam && { category: categoryParam })
     });
 
-    navigate(`/store?${searchParams}`);
+    navigate(`/store?${newParameter}`);
   };
+
+  const isMobile = width < 768;
 
   return (
     <motion.form
-      className='flex w-full items-center gap-2 focus-within:max-w-sm'
+      className={`${
+        isMobile && '!max-w-full'
+      } flex w-full flex-1 items-center gap-2 focus-within:max-w-sm
+        md:flex-initial lg:-translate-x-[25%]`}
       initial={{ maxWidth: 300 }}
       animate={controls}
       onSubmit={handleSubmit}

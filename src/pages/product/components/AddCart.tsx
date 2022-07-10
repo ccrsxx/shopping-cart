@@ -22,7 +22,7 @@ export function AddCart({ id }: AddCartProps) {
 
   return (
     <motion.div
-      className='w-full max-w-xs'
+      className='w-full shrink-[1.25] lg:max-w-none xl:max-w-xs'
       {...setTransition({ direction: 'right' })}
     >
       <motion.div

@@ -43,10 +43,13 @@ export function ProductCard({
   return (
     <Link
       to={`/product/${id}`}
-      className='relative rounded-lg border border-neutral-700
-                 transition duration-300 hover:brightness-110'
+      className='group relative rounded-lg ring-2 ring-neutral-700 
+                 transition duration-300 hover:ring hover:ring-accent'
     >
-      <div className='flex h-[230px] items-center justify-center rounded-t-lg bg-white'>
+      <div
+        className='flex h-[230px] items-center justify-center rounded-t-lg bg-white transition
+                   duration-300 group-hover:brightness-95'
+      >
         <img
           className='h-full w-auto rounded-t-lg p-4'
           src={image}
@@ -75,7 +78,8 @@ export function ProductCard({
       </div>
       <div className='absolute bottom-2 right-2'>
         <Button
-          className='animate-fade font-medium capitalize'
+          className='animate-fade border border-transparent font-medium capitalize
+                     transition-colors duration-300 group-hover:border-neutral-500'
           label={label}
           Icon={Icon}
           onClick={handleClick}

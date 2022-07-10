@@ -15,8 +15,8 @@ export function App() {
         <Routes location={location} key={location.pathname}>
           <Route path='/' element={<Home />} />
           <Route path='/store' element={<Store />} />
-          <Route path='/about' element={<About />} />
           <Route path='/product/:productId' element={<Product />} />
+          <Route path='/about' element={<About />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </AnimatePresence>
