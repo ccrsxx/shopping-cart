@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { ShoppingCartProvider } from './contexts';
-import { Navbar, Cart } from './components';
+import { Navbar, Cart, Footer } from './components';
 import { Home, Store, Product, About, NotFound } from './pages';
 
 export function App() {
@@ -20,6 +20,7 @@ export function App() {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </AnimatePresence>
+      <Footer />
     </ShoppingCartProvider>
   );
 }

@@ -1,16 +1,14 @@
 import { motion } from 'framer-motion';
 import { setTransition } from '../../utils';
+import { Carousel } from './components';
 
 export function Home() {
   return (
     <motion.main
-      className='px-8 py-6 pt-36 md:pt-28'
+      className='flex flex-col items-center'
       {...setTransition({ direction: 'left' })}
     >
-      <h1 className='text-3xl'>Home</h1>
-      <p className='text-grayish'>
-        This is a simple React app that demonstrates the use of React Router.
-      </p>
+      <Carousel />
     </motion.main>
   );
 }

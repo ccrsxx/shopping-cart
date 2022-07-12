@@ -10,11 +10,10 @@ const ShoppingCartContext = createContext<IShoppingCartContext | null>(null);
 export function useShoppingCart() {
   const context = useContext(ShoppingCartContext);
 
-  if (!context) {
+  if (!context)
     throw new Error(
       'useShoppingCart must be used within a ShoppingCartContext'
     );
-  }
 
   return context;
 }
@@ -65,7 +64,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const addProduct = (productId: number) => () => {
     const inCart = currentCart.find(({ id }) => id === productId);
 
-    if (inCart) {
+    if (inCart)
       setCurrentCart(
         currentCart.map((cartProduct) =>
           cartProduct.id === productId
@@ -73,7 +72,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
             : cartProduct
         )
       );
-    } else {
+    else {
       const product = allProducts.find(({ id }) => id === productId);
       setCurrentCart([{ ...product, quantity: 1 } as ICart, ...currentCart]);
     }

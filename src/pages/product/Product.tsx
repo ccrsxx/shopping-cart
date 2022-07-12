@@ -23,13 +23,9 @@ export function Product() {
   return isFetching ? (
     <Fetching className='min-h-screen justify-center pt-28' />
   ) : id ? (
-    <main
-      className='flex min-h-screen flex-col justify-center gap-4 px-8
-                 py-6 pt-36 sm:flex-row md:gap-6 md:pt-28 lg:gap-8'
-    >
+    <main className='flex flex-col justify-center gap-4 sm:flex-row md:gap-6 lg:gap-8'>
       <Image image={image} title={title} />
-      <div className='flex flex-col gap-4 md:gap-6 lg:flex-row-reverse lg:gap-8'>
-        <AddCart id={id} />
+      <div className='flex w-full max-w-4xl flex-col-reverse gap-4 md:gap-6 lg:flex-row lg:gap-8'>
         <Details
           title={title}
           count={count}
@@ -38,6 +34,7 @@ export function Product() {
           category={category}
           description={description}
         />
+        <AddCart id={id} />
       </div>
     </main>
   ) : (

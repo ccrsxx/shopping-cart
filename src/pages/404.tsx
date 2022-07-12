@@ -33,10 +33,11 @@ export function NotFound({ productId }: NotFoundProps) {
   }, []);
 
   const currentPage = productId ?? useMemo(() => pathname, []);
+  const truncatedPage = currentPage.replace(/(.{10}).+/, '$1…');
 
   return (
     <motion.main
-      className='flex h-screen flex-col items-center justify-center px-8 py-6 pt-36 md:pt-28'
+      className='flex min-h-screen flex-col items-center justify-center'
       {...setTransition({ direction: 'top', distance: 100 })}
     >
       <div
@@ -45,9 +46,10 @@ export function NotFound({ productId }: NotFoundProps) {
       >
         <div className='flex flex-col items-center gap-4 p-8'>
           <h1 className='text-8xl font-bold text-accent'>404</h1>
-          <p className='text-2xl font-medium'>
-            {title} <span className='font-semibold'>{currentPage}</span> not
-            found
+          <p className='text-center text-2xl font-medium'>
+            {title}{' '}
+            <span className='font-semibold text-red-400'>{truncatedPage}</span>{' '}
+            not found.
           </p>
         </div>
         <div className='flex w-full flex-col items-center gap-4'>

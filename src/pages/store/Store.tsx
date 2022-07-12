@@ -6,7 +6,7 @@ export function Store() {
   const { isFetching, isError } = useShoppingCart();
 
   return (
-    <main className='flex flex-col gap-6 px-8 py-6 pt-36 md:flex-row md:gap-8 md:pt-28'>
+    <main className='flex flex-col items-start gap-6 md:flex-row md:gap-8'>
       <Aside />
       {isFetching ? <Fetching /> : <Listing />}
     </main>

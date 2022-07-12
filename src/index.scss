@@ -2,8 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+a,
+button {
   -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  @apply flex min-h-screen flex-col;
+}
+
+nav,
+footer {
+  @apply px-8 py-4;
+}
+
+main {
+  @apply flex-1 px-8 py-6 pt-36 md:pt-28;
 }
 
 @layer components {

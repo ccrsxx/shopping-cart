@@ -9,7 +9,7 @@ interface ImageProps {
 export function Image({ image, title }: ImageProps) {
   return (
     <motion.div
-      className='flex h-full w-auto shrink-0 items-center justify-center 
+      className='flex h-full w-full shrink-0 items-center justify-center 
                  rounded-lg bg-white sm:w-[300px]'
       {...setTransition({ direction: 'left' })}
     >

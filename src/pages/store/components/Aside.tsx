@@ -1,14 +1,24 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useShoppingCart } from '../../../contexts';
 import { setTransition } from '../../../utils';
+import { categories } from '../../../data';
 import { CategoryLink } from './CategoryLink';
 
-// prettier-ignore
-const categories = ['electronics', 'jewelery', 'men\'s clothing', 'women\'s clothing'];
-
 export function Aside() {
-  const { isCartOpen, parameter } = useShoppingCart();
+  const {
+    isCartOpen,
+    parameter,
+    location: { pathname }
+  } = useShoppingCart();
+
   const currentCategory = parameter.get('category') ?? 'All';
+
+  const [savedCategory, setSavedCategory] = useState(currentCategory);
+
+  useEffect(() => {
+    if (pathname === '/store') setSavedCategory(currentCategory);
+  }, [currentCategory]);
 
   return (
     <motion.aside
@@ -20,7 +30,7 @@ export function Aside() {
       <div className='flex flex-wrap items-center justify-center gap-2 text-center md:block md:text-left'>
         <h1 className='text-xl'>Store /</h1>
         <p className='text-2xl font-bold capitalize md:text-4xl'>
-          {currentCategory}
+          {savedCategory}
         </p>
       </div>
       <hr />

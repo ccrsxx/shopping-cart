@@ -18,7 +18,11 @@ export function SearchBar() {
   const controls = useAnimation();
 
   useEffect(() => {
+    if (pathname.includes('/product'))
+      setTimeout(() => window.scrollTo(0, 0), 300);
+
     const searchParams = parameter.get('search');
+
     if (!searchParams) setSearchInput('');
     else setSearchInput(searchParams);
   }, [pathname]);

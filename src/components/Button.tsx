@@ -7,6 +7,7 @@ interface ButtonProps {
   label?: string;
   flipped?: boolean;
   disabled?: boolean;
+  tabIndex?: number;
   children?: React.ReactNode;
   className?: string;
   onClick?: () => void;
@@ -19,6 +20,7 @@ export function Button({
   label,
   flipped,
   disabled,
+  tabIndex,
   children,
   className,
   onClick
@@ -33,6 +35,7 @@ export function Button({
                   enabled:hover:bg-accent disabled:cursor-not-allowed disabled:brightness-50`}
       type={type ?? 'button'}
       onClick={onClick}
+      tabIndex={tabIndex}
       disabled={disabled}
     >
       {Icon && !flipped && <Icon />}
