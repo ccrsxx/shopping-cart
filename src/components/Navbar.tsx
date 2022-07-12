@@ -27,7 +27,7 @@ export function Navbar() {
           </li>
         ))}
       </ul>
-      <div className='stick sticky flex justify-between gap-2 md:gap-0'>
+      <div className='flex justify-between gap-2 md:gap-0'>
         <SearchBar />
         <Button className='relative !p-2' onClick={toggleCart}>
           <MdShoppingCart size={24} />

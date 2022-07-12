@@ -1,17 +1,19 @@
-import { RiGithubFill } from '../utils';
+import { RiGithubFill, MdApi } from '../utils';
 
 export function Footer() {
   return (
-    <footer className='flex w-full justify-between text-lg font-medium'>
-      <a
-        className='flex items-center gap-2 text-grayish transition-colors hover:text-white'
-        href='https://github.com/ccrsxx'
-        target='_blank'
-        rel='noreferrer'
-      >
+    <footer
+      className='flex justify-between text-lg font-medium text-grayish 
+                 [&>*]:flex [&>*]:items-center [&>*]:gap-2 [&>*]:transition-colors
+                 hover:[&>*]:text-white'
+    >
+      <a href='https://github.com/ccrsxx' target='_blank' rel='noreferrer'>
         <RiGithubFill /> ccrsxx
       </a>
-      <p className='text-grayish'>Fake Store API</p>
+      <a href='https://fakestoreapi.com' target='_blank' rel='noreferrer'>
+        <MdApi />
+        Fake Store API
+      </a>
     </footer>
   );
 }

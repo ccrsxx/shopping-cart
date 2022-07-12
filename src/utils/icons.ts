@@ -1,4 +1,5 @@
 export {
+  MdApi,
   MdAdd,
   MdRemove,
   MdDelete,
@@ -10,5 +11,5 @@ export {
   MdAddShoppingCart,
   MdRemoveShoppingCart
 } from 'react-icons/md';
-export { VscLoading } from 'react-icons/vsc';
 export { RiStarSFill, RiGithubFill } from 'react-icons/ri';
+export { VscLoading } from 'react-icons/vsc';
