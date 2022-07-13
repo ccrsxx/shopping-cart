@@ -36,7 +36,7 @@ export function Carousel() {
 
   const setIndexByTimeout = () => {
     timeoutId.current = setTimeout(
-      () => setCurrentIndex((prevIndex) => prevIndex + 1),
+      () => setCurrentIndex(currentIndex + 1),
       5 * 1000
     );
   };
@@ -61,8 +61,8 @@ export function Carousel() {
   const setIndex = (index: number) => () => setCurrentIndex(index);
   const flipHover = (hover?: boolean) => () => setIsHovered(!!hover);
 
-  const nextIndex = () => setCurrentIndex((prevIndex) => prevIndex + 1);
-  const backIndex = () => setCurrentIndex((prevIndex) => prevIndex - 1);
+  const nextIndex = () => setCurrentIndex(currentIndex + 1);
+  const backIndex = () => setCurrentIndex(currentIndex - 1);
   const resetTimeout = () => clearTimeout(timeoutId.current);
 
   const categoryVariants = {
@@ -74,7 +74,7 @@ export function Carousel() {
   return (
     <motion.div
       ref={carousel}
-      className='group relative flex max-w-4xl items-center justify-center overflow-hidden rounded-lg'
+      className='group relative flex w-full max-w-4xl items-center justify-center overflow-hidden rounded-lg'
       onMouseEnter={flipHover(true)}
       onMouseLeave={flipHover()}
       {...setTransition({ direction: 'left' })}
