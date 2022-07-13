@@ -23,7 +23,7 @@ export function CategoryLink({ category }: CategoryLinkProps) {
   return (
     <Link
       className={`${
-        isActive && 'text-white'
+        isActive && 'text-primary'
       } tab transition hover:brightness-125`}
       to={`/store?${newParameter}`}
     >

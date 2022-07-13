@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useShoppingCart } from '../contexts';
 import { formatCurrency, setTransition, MdArrowForward } from '../utils';
@@ -12,16 +13,16 @@ export function Cart() {
 
   return (
     <AnimatePresence exitBeforeEnter>
-      {isCartOpen ? (
+      {isCartOpen && (
         <div className='fixed inset-0 z-10'>
           <motion.div
-            className='fixed h-screen w-screen bg-black bg-opacity-80'
+            className='fixed h-screen w-screen bg-black/80'
             onClick={toggleCart}
             {...setTransition({ direction: 'none' })}
           />
           <motion.div
             className='fixed top-0 -right-4 h-screen w-[500px] max-w-[90vw]
-                       rounded-l-lg bg-dark p-8 pr-12'
+                       rounded-l-lg bg-background p-8 pr-12'
             {...setTransition({
               direction: 'right',
               distance: 'full',
@@ -36,7 +37,7 @@ export function Cart() {
                     : 'No product added'}
                 </h2>
                 <Button
-                  className='!justify-end !p-0 text-xl normal-case text-grayish hover:scale-100 hover:!bg-inherit'
+                  className='!justify-end !p-0 text-xl normal-case text-secondary hover:scale-100 hover:!bg-inherit'
                   label='Clear'
                   onClick={clearCart}
                 />
@@ -56,24 +57,26 @@ export function Cart() {
                   ))}
                 </AnimatePresence>
               </ul>
-              <div className='flex items-center justify-between md:order-2'>
+              <div className='flex flex-wrap items-center justify-between md:order-2'>
                 <p className='text-lg'>
                   Total:{' '}
                   <span className='font-bold'>
                     {formatCurrency(totalPrice)}
                   </span>
                 </p>
-                <Button
-                  Icon={MdArrowForward}
-                  label='Checkout'
-                  className='text-xl normal-case hover:!bg-inherit hover:text-accent'
-                  flipped
-                />
+                <Link to='/checkout' tabIndex={-1} onClick={toggleCart}>
+                  <Button
+                    Icon={MdArrowForward}
+                    label='Checkout'
+                    className='text-xl normal-case hover:!bg-inherit hover:text-accent'
+                    flipped
+                  />
+                </Link>
               </div>
             </div>
           </motion.div>
         </div>
-      ) : null}
+      )}
     </AnimatePresence>
   );
 }

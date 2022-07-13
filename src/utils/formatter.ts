@@ -1,3 +1,5 @@
+import { allPages } from '../data';
+
 export function formatCurrency(number: number) {
   return number.toLocaleString(undefined, {
     style: 'currency',
@@ -7,9 +9,12 @@ export function formatCurrency(number: number) {
 
 export function formatPathname(pathname: string) {
   const formattedPath = pathname.replace(/[^a-z]/gi, '');
-  return formattedPath
+  const currentPath = formattedPath
     ? formattedPath[0].toUpperCase() + formattedPath.slice(1)
     : 'Home';
+  return allPages.some((path) => currentPath.toLocaleLowerCase().includes(path))
+    ? currentPath
+    : 'Not Found';
 }
 
 export function filterMatch(target: string, filter: string) {

@@ -4,12 +4,18 @@ export {
   MdRemove,
   MdDelete,
   MdSearch,
+  MdWarning,
   MdArrowForward,
   MdArrowBackIos,
-  MdArrowForwardIos,
   MdShoppingCart,
+  MdArrowForwardIos,
   MdAddShoppingCart,
   MdRemoveShoppingCart
 } from 'react-icons/md';
-export { RiStarSFill, RiGithubFill } from 'react-icons/ri';
+export {
+  RiRobotFill,
+  RiStarSFill,
+  RiGithubFill,
+  RiCustomerServiceFill
+} from 'react-icons/ri';
 export { VscLoading } from 'react-icons/vsc';

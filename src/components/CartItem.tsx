@@ -43,10 +43,10 @@ export function CartItem({
         durationOut: 0.25
       })}
     >
-      <div className='flex rounded-lg border border-neutral-700'>
+      <div className='flex rounded-lg border border-border-primary'>
         <Link
           className='hidden h-[110px] w-[110px] shrink-0 items-center justify-center
-                     rounded-l-lg bg-white transition hover:brightness-110 md:flex'
+                     rounded-l-lg bg-white transition hover:brightness-90 md:flex'
           to={`/product/${id}`}
           onClick={handleClick}
         >
@@ -55,9 +55,9 @@ export function CartItem({
         <div className='flex w-full flex-col justify-between py-2 px-4'>
           <div>
             <Link
-              className='overflow-hidden text-ellipsis font-medium brightness-90 transition
+              className='overflow-hidden text-ellipsis font-medium text-white/90 transition
                          duration-300 [display:-webkit-box] [-webkit-line-clamp:1] 
-                         [-webkit-box-orient:vertical] hover:brightness-100'
+                         [-webkit-box-orient:vertical] hover:text-white'
               to={`/product/${id}`}
               onClick={handleClick}
             >
@@ -69,7 +69,7 @@ export function CartItem({
             <div className='flex gap-1'>
               <p>Quantity: </p>
               <input
-                className='max-w-[60px] rounded-lg bg-dark px-1 transition hover:ring-2 hover:ring-accent
+                className='max-w-[60px] rounded-lg bg-background px-1 transition hover:ring-2 hover:ring-accent
                            focus:outline-none focus:ring-2 focus:ring-accent'
                 type='number'
                 min={1}
@@ -86,7 +86,7 @@ export function CartItem({
             </p>
           </div>
         </div>
-        <div className='grid border-l border-neutral-700 [&>*]:rounded-none'>
+        <div className='grid border-l border-border-primary [&>*]:rounded-none'>
           <Button
             className='!rounded-tr-lg disabled:text-gray-600 disabled:!brightness-100'
             Icon={MdAdd}
@@ -94,7 +94,7 @@ export function CartItem({
             disabled={quantity >= 10_000}
           />
           <Button
-            className='border-y border-neutral-700 disabled:text-gray-600 disabled:!brightness-100'
+            className='border-y border-border-primary disabled:text-gray-600 disabled:!brightness-100'
             Icon={MdRemove}
             onClick={handleProductQuantity(id, 'decrement')}
             disabled={quantity <= 1}

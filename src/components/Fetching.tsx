@@ -7,13 +7,13 @@ interface FetchingProps {
 
 export function Fetching({ className }: FetchingProps) {
   return (
-    <motion.main
-      className={`${className} flex w-full items-center justify-center`}
+    <motion.div
+      className={`${className} flex w-full flex-1 items-center justify-center self-center`}
       {...setTransition({ direction: 'top' })}
     >
       <i className='animate-spin'>
         <VscLoading size={72} />
       </i>
-    </motion.main>
+    </motion.div>
   );
 }

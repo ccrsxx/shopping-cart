@@ -32,34 +32,39 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [location, navigate] = [useLocation(), useNavigate()];
   const [parameter] = useSearchParams();
 
+  const { pathname } = location;
+
   useEffect(() => {
-    const fetchAllProducts = async () => {
-      setIsFetching(true);
-
-      try {
-        const products = await getAllProducts();
-        setAllProducts(products);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error);
-        setIsFetching(false);
-        setIsError(true);
-        return;
-      }
-
-      setIsFetching(false);
-    };
-
-    if (!allProducts.length) fetchAllProducts();
+    if (!allProducts.length) fetchAllProducts()();
   }, []);
 
   useEffect(() => {
+    setTimeout(() => window.scrollTo(0, 0), 300);
     document.title = `Shopping Cart | ${formatPathname(location.pathname)}`;
-  }, [location]);
+  }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = isCartOpen ? 'hidden' : '';
+    document.documentElement.style.overflow = isCartOpen ? 'hidden' : '';
   }, [isCartOpen]);
+
+  const fetchAllProducts = (retry?: boolean) => async () => {
+    if (retry) setIsError(false);
+
+    setIsFetching(true);
+
+    try {
+      const products = await getAllProducts();
+      setAllProducts(products);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+      setIsFetching(false);
+      setIsError(true);
+      return;
+    }
+
+    setIsFetching(false);
+  };
 
   const addProduct = (productId: number) => () => {
     const inCart = currentCart.find(({ id }) => id === productId);
@@ -138,6 +143,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         toggleCart,
         addProduct,
         deleteProduct,
+        fetchAllProducts,
         handleProductQuantity
       }}
     >

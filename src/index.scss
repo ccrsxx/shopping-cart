@@ -9,6 +9,10 @@ button {
 
 #root {
   @apply flex min-h-screen flex-col;
+
+  & > main {
+    @apply flex-1 px-8 py-6 pt-36 md:pt-28;
+  }
 }
 
 nav,
@@ -16,13 +20,9 @@ footer {
   @apply px-8 py-4;
 }
 
-main {
-  @apply flex-1 px-8 py-6 pt-36 md:pt-28;
-}
-
 @layer components {
   .tab {
-    @apply rounded-lg transition focus:ring-offset-dark focus-visible:outline-none
+    @apply rounded-lg transition focus:ring-offset-background focus-visible:outline-none
            focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2;
   }
 }

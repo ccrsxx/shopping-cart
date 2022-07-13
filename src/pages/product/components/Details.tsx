@@ -21,7 +21,7 @@ export function Details({
   return (
     <motion.div
       className='flex w-full shrink flex-col gap-4 self-start rounded-lg
-                 border border-neutral-700 p-4 lg:max-w-none xl:max-w-xl'
+                 border border-border-primary p-4 lg:max-w-none xl:max-w-xl'
       {...setTransition({ direction: 'bottom' })}
     >
       <div className='flex flex-col gap-4'>
@@ -45,7 +45,7 @@ export function Details({
       <hr />
       <div className='flex flex-col gap-2'>
         <div>
-          <p className='text-grayish'>
+          <p className='text-secondary'>
             Category: <span className='capitalize text-white'>{category}</span>
           </p>
         </div>

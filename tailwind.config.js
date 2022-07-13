@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const { blue } = require('tailwindcss/colors');
+const { red, blue, neutral } = require('tailwindcss/colors');
 
 module.exports = {
   content: ['./src/**/*.tsx', './public/index.html'],
@@ -10,21 +10,12 @@ module.exports = {
       },
       colors: {
         accent: blue['400'],
-        dark: '#1a1a1a',
-        grayish: '#b6bbb6'
-      },
-      animation: {
-        fade: 'fade 500ms ease-in-out'
-      },
-      keyframes: {
-        fade: {
-          from: {
-            opacity: 0
-          },
-          to: {
-            opacity: 1
-          }
-        }
+        primary: 'white',
+        secondary: '#b6bbb6',
+        background: '#1a1a1a',
+        'main-red': red['400'],
+        'border-primary': neutral['700'],
+        'border-secondary': neutral['400']
       }
     }
   },

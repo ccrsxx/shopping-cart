@@ -17,6 +17,7 @@ export interface IShoppingCartContext {
   toggleCart: () => void;
   addProduct: (productId: number) => () => void;
   deleteProduct: (productId: number) => () => void;
+  fetchAllProducts: (retry?: boolean) => () => void;
   handleProductQuantity: (
     productId: number,
     type?: 'increment' | 'decrement'
