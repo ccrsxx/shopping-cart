@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { carouselImages } from '../../../data';
 import { Button } from '../../../components';
-import { MdArrowBackIos, MdArrowForwardIos } from '../../../utils';
+import {
+  MdArrowBackIos,
+  MdArrowForwardIos,
+  setTransition
+} from '../../../utils';
 import type { PanInfo } from 'framer-motion';
-
-const duration = 3;
 
 const MotionLink = motion(Link);
 
@@ -35,7 +37,7 @@ export function Carousel() {
   const setIndexByTimeout = () => {
     timeoutId.current = setTimeout(
       () => setCurrentIndex((prevIndex) => prevIndex + 1),
-      duration * 1000
+      5 * 1000
     );
   };
 
@@ -70,27 +72,21 @@ export function Carousel() {
   };
 
   return (
-    <div
+    <motion.div
       ref={carousel}
       className='group relative flex w-full max-w-4xl items-center justify-center overflow-hidden rounded-lg'
       onMouseEnter={flipHover(true)}
       onMouseLeave={flipHover()}
+      {...setTransition({ direction: 'left' })}
     >
       <Button
-        className='absolute left-2 z-10 translate-x-10 !rounded-full !p-2 text-xl text-white/80 opacity-0
+        className='absolute left-2 z-10 translate-x-10 !rounded-full !p-2 text-xl text-primary/80 opacity-0
                    duration-300 hover:!bg-black/40 group-hover:translate-x-0 group-hover:opacity-100'
         tabIndex={isHovered ? undefined : -1}
         onClick={backIndex}
       >
         <MdArrowBackIos className='translate-x-0.5' />
       </Button>
-      <Button
-        Icon={MdArrowForwardIos}
-        className='absolute right-2 z-10 -translate-x-10 !rounded-full !p-2 text-xl text-white/80 opacity-0
-                   duration-300 hover:!bg-black/40 group-hover:translate-x-0 group-hover:opacity-100'
-        tabIndex={isHovered ? undefined : -1}
-        onClick={nextIndex}
-      />
       <motion.div
         className='flex cursor-grab active:cursor-grabbing'
         initial={{ x: 0 }}
@@ -113,27 +109,36 @@ export function Carousel() {
             <AnimatePresence exitBeforeEnter>
               {index === currentIndex && (
                 <MotionLink
+                  className='absolute bottom-10 w-fit'
                   to={`/store?category=${alt}`}
-                  className='tab absolute bottom-10 w-fit rounded-lg bg-black/40 px-1 
-                             text-lg capitalize text-white/90 transition-colors duration-300
-                             hover:bg-accent hover:text-white sm:text-xl'
+                  tabIndex={-1}
                   variants={categoryVariants}
                   initial='initial'
                   animate='enter'
                   exit='exit'
                 >
-                  {alt}
+                  <Button
+                    className='bg-black/40 !p-0 !px-1 text-lg font-normal capitalize
+                               text-primary/90 hover:bg-accent hover:text-primary sm:text-xl'
+                    label={alt}
+                  />
                 </MotionLink>
               )}
             </AnimatePresence>
           </div>
         ))}
       </motion.div>
-      <div className='absolute bottom-3 flex gap-2'>
+      <Button
+        Icon={MdArrowForwardIos}
+        className='absolute right-2 z-10 -translate-x-10 !rounded-full !p-2 text-xl text-primary/80 opacity-0
+                   duration-300 hover:!bg-black/40 group-hover:translate-x-0 group-hover:opacity-100'
+        tabIndex={isHovered ? undefined : -1}
+        onClick={nextIndex}
+      />
+      <div className='[&>*]:tab absolute bottom-3 flex gap-2 [&>*]:h-4 [&>*]:w-4 [&>*]:cursor-pointer [&>*]:rounded-full'>
         {carouselImages.map((_, index) => (
           <motion.button
-            className='tab h-4 w-4 cursor-pointer rounded-full bg-black/40 
-                       transition hover:bg-black/60 focus:ring-offset-black/60'
+            className='bg-black/40 transition hover:bg-black/60 focus:ring-offset-black/60'
             animate={{ scale: +(currentIndex !== index) }}
             transition={{ duration: 0.25 }}
             onClick={setIndex(index)}
@@ -141,11 +146,11 @@ export function Carousel() {
           />
         ))}
         <motion.button
-          className='tab absolute h-4 w-4 cursor-pointer rounded-full bg-accent/80 transition-none'
+          className='absolute bg-accent/80 !transition-none'
           animate={{ x: currentIndex * 24 }}
           transition={{ duration: 0.5 }}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useShoppingCart } from '../../../contexts';
 import { filterMatch, setTransition } from '../../../utils';
 import { ProductCard } from './ProductCard';
+import { Empty } from './Empty';
 
 export function Listing() {
   const {
@@ -34,17 +35,27 @@ export function Listing() {
       filterMatch(title, searchQuery)
     );
 
+  const productsIsEmpty = filteredProducts.length === 0;
+
   const key = useMemo(() => Math.random(), [currentCategory, searchQuery]);
 
   return (
     <motion.div
-      className='grid w-full gap-x-4 gap-y-6 [grid-template-columns:repeat(auto-fill,minmax(230px,1fr))]'
+      className={`${
+        !productsIsEmpty
+          ? '[grid-template-columns:repeat(auto-fill,minmax(230px,1fr))]'
+          : 'justify-center'
+      } grid w-full gap-x-4 gap-y-6`}
       key={key}
       {...setTransition({ direction: 'bottom' })}
     >
-      {filteredProducts.map((product) => (
-        <ProductCard {...product} key={product.id} />
-      ))}
+      {!productsIsEmpty ? (
+        filteredProducts.map((product) => (
+          <ProductCard {...product} key={product.id} />
+        ))
+      ) : (
+        <Empty searchQuery={searchQuery} />
+      )}
     </motion.div>
   );
 }

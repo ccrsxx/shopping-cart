@@ -27,7 +27,7 @@ export function AddCart({ id }: AddCartProps) {
     >
       <motion.div
         className='flex flex-col gap-6 self-start overflow-hidden 
-                   rounded-lg border border-neutral-700 p-4'
+                   rounded-lg border border-border-primary p-4'
         animate={{ height: quantity ? 183 : 133 }}
       >
         <div className='flex flex-col gap-2'>
@@ -41,7 +41,7 @@ export function AddCart({ id }: AddCartProps) {
               {...setTransition({ direction: 'top', distance: 25 })}
               key={id}
             >
-              <div className='flex items-center justify-center gap-4'>
+              <div className='flex items-center justify-center gap-4 [&>*]:border-neutral-400'>
                 <Button
                   Icon={MdRemove}
                   className='rounded-full border !p-1'
@@ -49,9 +49,9 @@ export function AddCart({ id }: AddCartProps) {
                   disabled={quantity <= 1}
                 />
                 <input
-                  className='flex-1 rounded-lg border bg-dark px-2 py-1
+                  className='flex-1 rounded-lg border bg-background px-2 py-1
                              text-center transition focus:ring-2 focus:ring-accent
-                             focus:ring-offset-4 focus:ring-offset-dark'
+                             focus:ring-offset-4 focus:ring-offset-background'
                   type='number'
                   min={1}
                   max={10_000}
@@ -67,7 +67,7 @@ export function AddCart({ id }: AddCartProps) {
               </div>
               <Button
                 Icon={MdRemoveShoppingCart}
-                className='rounded-lg border'
+                className='rounded-lg border border-neutral-400'
                 onClick={deleteProduct(id!)}
                 label='Remove from cart'
               />
@@ -82,7 +82,7 @@ export function AddCart({ id }: AddCartProps) {
             >
               <Button
                 Icon={MdAddShoppingCart}
-                className='w-full rounded-lg border'
+                className='w-full rounded-lg border border-neutral-400'
                 onClick={addProduct(id!)}
                 label='Add to cart'
               />

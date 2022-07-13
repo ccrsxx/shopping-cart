@@ -37,23 +37,23 @@ export function NotFound({ productId }: NotFoundProps) {
 
   return (
     <motion.main
-      className='flex min-h-screen flex-col items-center justify-center'
+      className='flex flex-col items-center justify-center'
       {...setTransition({ direction: 'top', distance: 100 })}
     >
       <div
         className='flex w-full max-w-md flex-col items-center gap-8
-                   rounded-lg border border-neutral-700'
+                   rounded-lg border border-border-primary'
       >
         <div className='flex flex-col items-center gap-4 p-8'>
           <h1 className='text-8xl font-bold text-accent'>404</h1>
           <p className='text-center text-2xl font-medium'>
             {title}{' '}
-            <span className='font-semibold text-red-400'>{truncatedPage}</span>{' '}
+            <span className='font-semibold text-main-red'>{truncatedPage}</span>{' '}
             not found.
           </p>
         </div>
         <div className='flex w-full flex-col items-center gap-4'>
-          <h2 className='text-lg font-light text-grayish'>
+          <h2 className='text-lg font-light text-secondary'>
             Redirecting to {targetPage}...
           </h2>
           <motion.span

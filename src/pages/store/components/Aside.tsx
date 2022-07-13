@@ -23,8 +23,8 @@ export function Aside() {
   return (
     <motion.aside
       style={{ zIndex: isCartOpen ? -1 : 'auto' }}
-      className='top-28 flex w-full max-w-none flex-col gap-4 self-start rounded-lg
-                 border border-neutral-700 p-4 md:sticky md:max-w-sm'
+      className='top-28 flex w-full max-w-none flex-col gap-4 self-start
+                 rounded-lg border border-border-primary p-4 md:sticky md:max-w-sm'
       {...setTransition({ direction: 'left' })}
     >
       <div className='flex flex-wrap items-center justify-center gap-2 text-center md:block md:text-left'>
@@ -34,7 +34,7 @@ export function Aside() {
         </p>
       </div>
       <hr />
-      <ul className='flex flex-wrap justify-center gap-2 md:block [&>*]:text-lg [&>*]:capitalize [&>*]:text-grayish'>
+      <ul className='flex flex-wrap justify-center gap-2 md:block [&>*]:text-lg [&>*]:capitalize [&>*]:text-secondary'>
         <li>
           <CategoryLink category='all' />
         </li>
