@@ -74,7 +74,7 @@ export function Carousel() {
   return (
     <motion.div
       ref={carousel}
-      className='group relative flex w-full max-w-4xl items-center justify-center overflow-hidden rounded-lg'
+      className='group relative flex max-w-4xl items-center justify-center overflow-hidden rounded-lg'
       onMouseEnter={flipHover(true)}
       onMouseLeave={flipHover()}
       {...setTransition({ direction: 'left' })}
@@ -88,7 +88,7 @@ export function Carousel() {
         <MdArrowBackIos className='translate-x-0.5' />
       </Button>
       <motion.div
-        className='flex cursor-grab active:cursor-grabbing'
+        className='flex w-full cursor-grab active:cursor-grabbing'
         initial={{ x: 0 }}
         animate={carouselControls}
         transition={{ duration: 0.6 }}
