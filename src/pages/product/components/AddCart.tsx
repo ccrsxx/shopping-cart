@@ -13,7 +13,7 @@ interface AddCartProps {
   id?: number;
 }
 
-export function AddCart({ id }: AddCartProps) {
+export function AddCart({ id }: AddCartProps): JSX.Element {
   const { currentCart, addProduct, deleteProduct, handleProductQuantity } =
     useShoppingCart();
 

@@ -5,7 +5,7 @@ interface FetchingProps {
   className?: string;
 }
 
-export function Fetching({ className }: FetchingProps) {
+export function Fetching({ className }: FetchingProps): JSX.Element {
   return (
     <motion.div
       className={`${className} flex w-full flex-1 items-center justify-center self-center`}

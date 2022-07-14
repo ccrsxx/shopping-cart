@@ -17,7 +17,7 @@ export function Details({
   price,
   category,
   description
-}: DetailsProps) {
+}: DetailsProps): JSX.Element {
   return (
     <motion.div
       className='flex w-full shrink flex-col gap-4 self-start rounded-lg

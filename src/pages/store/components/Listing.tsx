@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useShoppingCart } from '../../../contexts';
 import { filterMatch, setTransition } from '../../../utils';
 import { ProductCard } from './ProductCard';
 import { Empty } from './Empty';
 
-export function Listing() {
+export function Listing(): JSX.Element {
   const {
     allProducts,
     parameter,

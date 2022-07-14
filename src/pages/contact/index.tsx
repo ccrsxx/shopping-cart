@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { setTransition, RiCustomerServiceFill, RiRobotFill } from '../../utils';
 import { ContactCard } from './components';
 
-export function Contact() {
+export function Contact(): JSX.Element {
   return (
     <main className='flex flex-col items-center gap-6 md:gap-8'>
       <motion.h1

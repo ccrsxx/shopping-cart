@@ -16,7 +16,7 @@ export function ContactCard({
   subtitle,
   navigateTo,
   buttonTitle
-}: ContactCardProps) {
+}: ContactCardProps): JSX.Element {
   return (
     <div
       className='flex w-full max-w-md flex-col items-center justify-between

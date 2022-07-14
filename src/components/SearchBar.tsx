@@ -5,7 +5,7 @@ import { useShoppingCart } from '../contexts';
 import { MdSearch } from '../utils';
 import { Button } from './Button';
 
-export function SearchBar() {
+export function SearchBar(): JSX.Element {
   const {
     parameter,
     location: { pathname },
@@ -24,17 +24,19 @@ export function SearchBar() {
     else setSearchInput(searchParams);
   }, [pathname]);
 
-  const setMaxWidth = (maxWidth: number) => () => {
-    controls.start({
-      maxWidth
-    });
-  };
+  const setMaxWidth =
+    (maxWidth: number): (() => void) =>
+    () => {
+      controls.start({
+        maxWidth
+      });
+    };
 
   const handleChange = ({
     target: { value }
-  }: React.ChangeEvent<HTMLInputElement>) => setSearchInput(value);
+  }: React.ChangeEvent<HTMLInputElement>): void => setSearchInput(value);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     const categoryParam = parameter.get('category');

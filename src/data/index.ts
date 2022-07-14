@@ -1,4 +1,4 @@
-export * from './navbar';
-export * from './aside';
-export * from './carousel';
+export * from './navLinks';
+export * from './categories';
+export * from './carouselImages';
 export * from './allPages';

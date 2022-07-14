@@ -7,17 +7,17 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+nav,
+footer {
+  @apply px-8 py-4;
+}
+
 #root {
   @apply flex min-h-screen flex-col;
 
   & > main {
     @apply flex-1 px-8 py-6 pt-36 md:pt-28;
   }
-}
-
-nav,
-footer {
-  @apply px-8 py-4;
 }
 
 @layer components {

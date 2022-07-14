@@ -5,7 +5,7 @@ import { navLinks } from '../data';
 import { SearchBar } from './SearchBar';
 import { Button } from './Button';
 
-export function Navbar() {
+export function Navbar(): JSX.Element {
   const { cartProducts, toggleCart } = useShoppingCart();
 
   return (
@@ -17,7 +17,7 @@ export function Navbar() {
         {navLinks.map(([link, url]) => (
           <li key={url}>
             <NavLink
-              className={({ isActive }) =>
+              className={({ isActive }): string =>
                 `${isActive && 'text-primary'} tab hover:brightness-125`
               }
               to={url}

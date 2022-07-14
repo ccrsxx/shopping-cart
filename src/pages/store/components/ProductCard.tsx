@@ -25,7 +25,7 @@ export function ProductCard({
   image,
   price,
   rating: { count, rate }
-}: ProductCardProps) {
+}: ProductCardProps): JSX.Element {
   const { currentCart, addProduct, deleteProduct } = useShoppingCart();
 
   const { quantity } =
@@ -35,7 +35,7 @@ export function ProductCard({
     ? { label: 'Remove', Icon: MdRemoveShoppingCart, onClick: deleteProduct }
     : { label: 'Add', Icon: MdAddShoppingCart, onClick: addProduct };
 
-  const handleClick = (e?: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e?: React.MouseEvent<HTMLButtonElement>): void => {
     e?.preventDefault();
     onClick(id)();
   };

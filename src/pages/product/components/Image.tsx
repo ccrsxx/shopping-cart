@@ -6,7 +6,7 @@ interface ImageProps {
   title?: string;
 }
 
-export function Image({ image, title }: ImageProps) {
+export function Image({ image, title }: ImageProps): JSX.Element {
   return (
     <motion.div
       className='flex h-full w-full shrink-0 items-center justify-center 

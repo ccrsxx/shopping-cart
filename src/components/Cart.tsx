@@ -5,7 +5,7 @@ import { formatCurrency, setTransition, MdArrowForward } from '../utils';
 import { CartItem } from './CartItem';
 import { Button } from './Button';
 
-export function Cart() {
+export function Cart(): JSX.Element {
   const { currentCart, totalPrice, isCartOpen, clearCart, toggleCart } =
     useShoppingCart();
 

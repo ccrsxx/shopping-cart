@@ -28,10 +28,10 @@ export function CartItem({
   price,
   quantity,
   toggleCart
-}: CartItemProps) {
+}: CartItemProps): JSX.Element {
   const { deleteProduct, handleProductQuantity } = useShoppingCart();
 
-  const handleClick = () => toggleCart();
+  const handleClick = (): void => toggleCart();
 
   return (
     <motion.li
