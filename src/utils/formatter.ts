@@ -12,7 +12,7 @@ export function formatPathname(pathname: string): string {
   const currentPath = formattedPath
     ? formattedPath[0].toUpperCase() + formattedPath.slice(1)
     : 'Home';
-  return allPages.some((path) => currentPath.toLocaleLowerCase().includes(path))
+  return allPages.some((path) => currentPath.toLowerCase().includes(path))
     ? currentPath
     : 'Not Found';
 }
