@@ -35,15 +35,17 @@ export function Product(): JSX.Element {
         isFetching ? 'items-center' : 'items-start'
       } flex flex-col justify-center gap-4 sm:flex-row md:gap-6 lg:gap-8`}
     >
-      <motion.div className='absolute scale-0' {...setTransition({})} />
       {isFetching || isError ? (
-        <AnimatePresence exitBeforeEnter>
-          {isFetching ? (
-            <Fetching key={randomKey} />
-          ) : (
-            <Error key={randomKey} />
-          )}
-        </AnimatePresence>
+        <>
+          <motion.div className='absolute scale-0' {...setTransition({})} />
+          <AnimatePresence exitBeforeEnter>
+            {isFetching ? (
+              <Fetching key={randomKey} />
+            ) : (
+              <Error key={randomKey} />
+            )}
+          </AnimatePresence>
+        </>
       ) : (
         <>
           <Image image={image} title={title} />

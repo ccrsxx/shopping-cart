@@ -36,14 +36,14 @@ export function ShoppingCartProvider({
   ];
 
   useEffect(() => {
-    isFirstRender.current = true;
     if (!allProducts.length) fetchAllProducts()();
+
+    isFirstRender.current = true;
   }, []);
 
   useEffect(() => {
     if (isFirstRender.current) isFirstRender.current = false;
-    else if (!isFirstRender.current)
-      setTimeout(() => window.scrollTo(0, 0), 300);
+    else setTimeout(() => window.scrollTo(0, 0), 300);
 
     document.title = `Shopping Cart | ${formatPathname(pathname)}`;
   }, [pathname]);
