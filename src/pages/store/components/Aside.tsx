@@ -6,11 +6,7 @@ import { categories } from '../../../data';
 import { CategoryLink } from './CategoryLink';
 
 export function Aside(): JSX.Element {
-  const {
-    isCartOpen,
-    parameter,
-    location: { pathname }
-  } = useShoppingCart();
+  const { isCartOpen, parameter, pathname } = useShoppingCart();
 
   const currentCategory = parameter.get('category') ?? 'All';
 

@@ -6,11 +6,7 @@ import { MdSearch } from '../utils';
 import { Button } from './Button';
 
 export function SearchBar(): JSX.Element {
-  const {
-    parameter,
-    location: { pathname },
-    navigate
-  } = useShoppingCart();
+  const { parameter, pathname, navigate } = useShoppingCart();
 
   const [searchInput, setSearchInput] = useState('');
   const [width] = useWindowSize();

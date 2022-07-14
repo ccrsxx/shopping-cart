@@ -8,10 +8,7 @@ interface NotFoundProps {
 }
 
 export function NotFound({ productId }: NotFoundProps): JSX.Element {
-  const {
-    location: { pathname },
-    navigate
-  } = useShoppingCart();
+  const { pathname, navigate } = useShoppingCart();
 
   const { title, navigateTo, targetPage } = productId
     ? {
