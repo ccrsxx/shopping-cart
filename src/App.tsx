@@ -4,7 +4,7 @@ import { ShoppingCartProvider } from './contexts';
 import { Navbar, Cart, Footer } from './components';
 import { Home, Store, Product, Contact, NotFound } from './pages';
 
-export function App() {
+export function App(): JSX.Element {
   const location = useLocation();
 
   return (

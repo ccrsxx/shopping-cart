@@ -4,7 +4,7 @@ import { useShoppingCart } from '../../contexts';
 import { Fetching, Error } from '../../components';
 import { Aside, Listing } from './components';
 
-export function Store() {
+export function Store(): JSX.Element {
   const {
     isFetching,
     isError,

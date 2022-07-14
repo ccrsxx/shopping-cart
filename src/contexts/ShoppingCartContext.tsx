@@ -7,22 +7,13 @@ import type { IProduct, ICart, IShoppingCartContext } from '../types';
 
 const ShoppingCartContext = createContext<IShoppingCartContext | null>(null);
 
-export function useShoppingCart() {
-  const context = useContext(ShoppingCartContext);
-
-  if (!context)
-    throw new Error(
-      'useShoppingCart must be used within a ShoppingCartContext'
-    );
-
-  return context;
-}
-
 interface ShoppingCartProviderProps {
   children: React.ReactNode;
 }
 
-export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
+export function ShoppingCartProvider({
+  children
+}: ShoppingCartProviderProps): JSX.Element {
   const [allProducts, setAllProducts] = useStore<IProduct[]>('allProducts', []);
   const [currentCart, setCurrentCart] = useStore<ICart[]>('currentCart', []);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -40,55 +31,58 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   useEffect(() => {
     setTimeout(() => window.scrollTo(0, 0), 300);
-    document.title = `Shopping Cart | ${formatPathname(location.pathname)}`;
+    document.title = `Shopping Cart | ${formatPathname(pathname)}`;
   }, [pathname]);
 
   useEffect(() => {
     document.documentElement.style.overflow = isCartOpen ? 'hidden' : '';
   }, [isCartOpen]);
 
-  const fetchAllProducts = (retry?: boolean) => async () => {
-    if (retry) setIsError(false);
+  const fetchAllProducts =
+    (retry?: boolean): (() => void) =>
+    async () => {
+      if (retry) setIsError(false);
 
-    setIsFetching(true);
+      setIsFetching(true);
 
-    try {
-      const products = await getAllProducts();
-      setAllProducts(products);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
+      try {
+        const products = await getAllProducts();
+        setAllProducts(products);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+        setIsError(true);
+      }
+
       setIsFetching(false);
-      setIsError(true);
-      return;
-    }
+    };
 
-    setIsFetching(false);
-  };
+  const addProduct =
+    (productId: number): (() => void) =>
+    () => {
+      const inCart = currentCart.find(({ id }) => id === productId);
 
-  const addProduct = (productId: number) => () => {
-    const inCart = currentCart.find(({ id }) => id === productId);
+      if (inCart)
+        setCurrentCart(
+          currentCart.map((cartProduct) =>
+            cartProduct.id === productId
+              ? { ...cartProduct, quantity: cartProduct.quantity + 1 }
+              : cartProduct
+          )
+        );
+      else {
+        const product = allProducts.find(({ id }) => id === productId);
+        setCurrentCart([{ ...product, quantity: 1 } as ICart, ...currentCart]);
+      }
+    };
 
-    if (inCart)
-      setCurrentCart(
-        currentCart.map((cartProduct) =>
-          cartProduct.id === productId
-            ? { ...cartProduct, quantity: cartProduct.quantity + 1 }
-            : cartProduct
-        )
-      );
-    else {
-      const product = allProducts.find(({ id }) => id === productId);
-      setCurrentCart([{ ...product, quantity: 1 } as ICart, ...currentCart]);
-    }
-  };
-
-  const deleteProduct = (productId: number) => () => {
-    setCurrentCart(currentCart.filter(({ id }) => id !== productId));
-  };
+  const deleteProduct =
+    (productId: number): (() => void) =>
+    () =>
+      setCurrentCart(currentCart.filter(({ id }) => id !== productId));
 
   const handleProductQuantity =
-    (productId: number, type?: 'increment' | 'decrement') =>
+    (productId: number, type?: 'increment' | 'decrement'): (() => void) =>
     (e?: React.ChangeEvent<HTMLInputElement>) => {
       let inputValue = !type ? parseInt(e!.target.value, 10) : null;
 
@@ -111,8 +105,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       );
     };
 
-  const clearCart = () => setCurrentCart([]);
-  const toggleCart = () => setIsCartOpen(!isCartOpen);
+  const clearCart = (): void => setCurrentCart([]);
+  const toggleCart = (): void => setIsCartOpen(!isCartOpen);
 
   const [cartProducts, totalPrice] = useMemo(
     () =>
@@ -150,4 +144,15 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       {children}
     </ShoppingCartContext.Provider>
   );
+}
+
+export function useShoppingCart(): IShoppingCartContext {
+  const context = useContext(ShoppingCartContext);
+
+  if (!context)
+    throw new Error(
+      'useShoppingCart must be used within a ShoppingCartContext'
+    );
+
+  return context;
 }

@@ -24,14 +24,14 @@ export function Button({
   children,
   className,
   onClick
-}: ButtonProps) {
+}: ButtonProps): JSX.Element {
   return (
     <button
       id={id}
       className={`${className} tab flex select-none items-center justify-center gap-2 rounded-lg
-                   bg-transparent py-2 px-3 text-sm font-medium transition-all duration-300
+                  bg-transparent py-2 px-3 text-sm font-medium transition-all duration-300
                   hover:text-primary active:scale-90 active:duration-150 enabled:hover:bg-accent
-                   disabled:cursor-not-allowed disabled:brightness-50`}
+                  disabled:cursor-not-allowed disabled:brightness-50`}
       type={type ?? 'button'}
       onClick={onClick}
       tabIndex={tabIndex}

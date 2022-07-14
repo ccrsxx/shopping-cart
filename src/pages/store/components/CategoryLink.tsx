@@ -5,7 +5,7 @@ interface CategoryLinkProps {
   category: string;
 }
 
-export function CategoryLink({ category }: CategoryLinkProps) {
+export function CategoryLink({ category }: CategoryLinkProps): JSX.Element {
   const { parameter } = useShoppingCart();
 
   const searchParam = parameter.get('search');

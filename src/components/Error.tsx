@@ -3,7 +3,7 @@ import { useShoppingCart } from '../contexts';
 import { MdWarning, setTransition } from '../utils';
 import { Button } from './Button';
 
-export function Error() {
+export function Error(): JSX.Element {
   const { fetchAllProducts } = useShoppingCart();
 
   return (

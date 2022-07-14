@@ -12,7 +12,7 @@ import type { PanInfo } from 'framer-motion';
 
 const MotionLink = motion(Link);
 
-export function Carousel() {
+export function Carousel(): JSX.Element {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -31,17 +31,21 @@ export function Carousel() {
     return resetTimeout;
   }, [currentIndex]);
 
-  const animateCarousel = () =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const animateCarousel = (): Promise<any> =>
     carouselControls.start({ x: `${-currentIndex * 100}%` });
 
-  const setIndexByTimeout = () => {
+  const setIndexByTimeout = (): void => {
     timeoutId.current = setTimeout(
       () => setCurrentIndex(currentIndex + 1),
       5 * 1000
     );
   };
 
-  const setIndexByDragging = (_unusedEvent: MouseEvent, info: PanInfo) => {
+  const setIndexByDragging = (
+    _unusedEvent: MouseEvent,
+    info: PanInfo
+  ): void => {
     const {
       offset: { x }
     } = info;
@@ -58,18 +62,19 @@ export function Carousel() {
     }
   };
 
-  const setIndex = (index: number) => () => setCurrentIndex(index);
-  const flipHover = (hover?: boolean) => () => setIsHovered(!!hover);
+  const setIndex =
+    (index: number): (() => void) =>
+    () =>
+      setCurrentIndex(index);
 
-  const nextIndex = () => setCurrentIndex(currentIndex + 1);
-  const backIndex = () => setCurrentIndex(currentIndex - 1);
-  const resetTimeout = () => clearTimeout(timeoutId.current);
+  const flipHover =
+    (hover?: boolean): (() => void) =>
+    () =>
+      setIsHovered(!!hover);
 
-  const categoryVariants = {
-    initial: { opacity: 0, y: -20 },
-    enter: { opacity: 1, y: 0, transition: { duration: 0.75 } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.25 } }
-  };
+  const nextIndex = (): void => setCurrentIndex(currentIndex + 1);
+  const backIndex = (): void => setCurrentIndex(currentIndex - 1);
+  const resetTimeout = (): void => clearTimeout(timeoutId.current);
 
   return (
     <motion.div
@@ -91,7 +96,7 @@ export function Carousel() {
         className='flex w-full cursor-grab active:cursor-grabbing'
         initial={{ x: 0 }}
         animate={carouselControls}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
         drag='x'
         onDragStart={resetTimeout}
         onDragEnd={setIndexByDragging}
@@ -102,20 +107,25 @@ export function Carousel() {
             key={index}
           >
             <img
-              className='h-full w-full object-cover [-webkit-user-drag:none]'
+              className='h-full w-full object-cover'
               src={src}
               alt={alt}
+              draggable={false}
             />
             <AnimatePresence exitBeforeEnter>
               {index === currentIndex && (
                 <MotionLink
-                  className='absolute bottom-10 w-fit'
+                  className='absolute bottom-10 w-max'
                   to={`/store?category=${alt}`}
                   tabIndex={-1}
-                  variants={categoryVariants}
-                  initial='initial'
-                  animate='enter'
-                  exit='exit'
+                  {...setTransition({
+                    typeIn: 'tween',
+                    typeOut: 'tween',
+                    distance: 20,
+                    direction: 'top',
+                    durationIn: 0.75,
+                    durationOut: 0.25
+                  })}
                 >
                   <Button
                     className='bg-black/40 !p-0 !px-1 text-lg font-normal capitalize

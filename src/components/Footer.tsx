@@ -1,6 +1,6 @@
 import { RiGithubFill, MdApi } from '../utils';
 
-export function Footer() {
+export function Footer(): JSX.Element {
   return (
     <footer
       className='[&>*]:tab flex justify-between text-lg font-medium

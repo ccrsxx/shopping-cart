@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '../../../components';
 import { setTransition } from '../../../utils';
 
-export function Greeting() {
+export function Greeting(): JSX.Element {
   return (
     <motion.div
       className='flex max-w-xl flex-col gap-4 text-center'

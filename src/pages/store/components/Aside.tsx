@@ -5,7 +5,7 @@ import { setTransition } from '../../../utils';
 import { categories } from '../../../data';
 import { CategoryLink } from './CategoryLink';
 
-export function Aside() {
+export function Aside(): JSX.Element {
   const {
     isCartOpen,
     parameter,

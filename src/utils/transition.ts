@@ -1,8 +1,12 @@
+import type { ITransition } from '../types';
+
 interface SetTransitionProps {
   delay?: boolean;
   layout?: boolean;
   direction?: 'left' | 'right' | 'top' | 'bottom' | 'none';
   distance?: 'full' | number;
+  typeIn?: 'tween' | 'spring' | 'inertia';
+  typeOut?: 'tween' | 'spring' | 'inertia';
   delayIn?: number;
   delayOut?: number;
   durationIn?: number;
@@ -13,11 +17,13 @@ export function setTransition({
   layout = false,
   direction = 'none',
   distance = 50,
+  typeIn,
+  typeOut,
   delayIn,
   delayOut,
   durationIn,
   durationOut
-}: SetTransitionProps) {
+}: SetTransitionProps): ITransition {
   const directions = {
     left: { x: -distance },
     right: { x: distance },
@@ -40,13 +46,13 @@ export function setTransition({
       : rawDirection;
 
   const transitionIn = {
-    type: 'spring',
+    type: typeIn ?? 'spring',
     delay: delayIn,
     duration: durationIn
   };
 
   const transitionOut = {
-    type: 'normal',
+    type: typeOut ?? 'tween',
     delay: delayOut,
     duration: durationOut
   };
