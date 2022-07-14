@@ -45,7 +45,7 @@ export function CartItem({
     >
       <div className='flex rounded-lg border border-border-primary'>
         <Link
-          className='hidden h-[110px] w-[110px] shrink-0 items-center justify-center
+          className='hidden h-[108px] w-[110px] shrink-0 items-center justify-center
                      rounded-l-lg bg-white transition hover:brightness-90 md:flex'
           to={`/product/${id}`}
           onClick={handleClick}

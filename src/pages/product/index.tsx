@@ -8,12 +8,7 @@ import { useShoppingCart } from '../../contexts';
 import { Image, Details, AddCart } from './components';
 
 export function Product(): JSX.Element {
-  const {
-    allProducts,
-    isFetching,
-    isError,
-    location: { pathname }
-  } = useShoppingCart();
+  const { allProducts, isFetching, isError, pathname } = useShoppingCart();
 
   const { productId } = useParams();
 

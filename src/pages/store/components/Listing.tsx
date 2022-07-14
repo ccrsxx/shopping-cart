@@ -1,16 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useShoppingCart } from '../../../contexts';
 import { filterMatch, setTransition } from '../../../utils';
 import { ProductCard } from './ProductCard';
 import { Empty } from './Empty';
 
 export function Listing(): JSX.Element {
-  const {
-    allProducts,
-    parameter,
-    location: { pathname }
-  } = useShoppingCart();
+  const { allProducts, parameter, pathname } = useShoppingCart();
 
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -47,7 +43,7 @@ export function Listing(): JSX.Element {
           : 'justify-center'
       } grid w-full gap-x-4 gap-y-6`}
       key={key}
-      {...setTransition({ direction: 'bottom' })}
+      {...setTransition({ direction: 'right' })}
     >
       {!productsIsEmpty ? (
         filteredProducts.map((product) => (

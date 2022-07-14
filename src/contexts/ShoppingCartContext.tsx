@@ -1,4 +1,11 @@
-import { useState, useEffect, useMemo, useContext, createContext } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useContext,
+  createContext
+} from 'react';
 import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import { useLocalStorage as useStore } from '../hooks';
 import { getAllProducts } from '../api';
@@ -20,22 +27,29 @@ export function ShoppingCartProvider({
   const [isFetching, setIsFetching] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const [location, navigate] = [useLocation(), useNavigate()];
-  const [parameter] = useSearchParams();
+  const isFirstRender = useRef<boolean | null>(null);
 
-  const { pathname } = location;
+  const [{ pathname }, [parameter], navigate] = [
+    useLocation(),
+    useSearchParams(),
+    useNavigate()
+  ];
 
   useEffect(() => {
+    isFirstRender.current = true;
     if (!allProducts.length) fetchAllProducts()();
   }, []);
 
   useEffect(() => {
-    setTimeout(() => window.scrollTo(0, 0), 300);
+    if (isFirstRender.current) isFirstRender.current = false;
+    else if (!isFirstRender.current)
+      setTimeout(() => window.scrollTo(0, 0), 300);
+
     document.title = `Shopping Cart | ${formatPathname(pathname)}`;
   }, [pathname]);
 
   useEffect(() => {
-    document.documentElement.style.overflow = isCartOpen ? 'hidden' : '';
+    document.documentElement.style.overflowY = isCartOpen ? 'hidden' : '';
   }, [isCartOpen]);
 
   const fetchAllProducts =
@@ -130,7 +144,7 @@ export function ShoppingCartProvider({
         isCartOpen,
         isFetching,
         parameter,
-        location,
+        pathname,
         isError,
         navigate,
         clearCart,

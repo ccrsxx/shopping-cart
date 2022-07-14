@@ -5,11 +5,7 @@ import { Fetching, Error } from '../../components';
 import { Aside, Listing } from './components';
 
 export function Store(): JSX.Element {
-  const {
-    isFetching,
-    isError,
-    location: { pathname }
-  } = useShoppingCart();
+  const { isFetching, isError, pathname } = useShoppingCart();
 
   const randomKey =
     isFetching || isError
