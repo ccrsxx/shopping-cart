@@ -44,7 +44,7 @@ export function AddCart({ id }: AddCartProps): JSX.Element {
               <div className='flex items-center justify-center gap-4 [&>*]:border-neutral-400'>
                 <Button
                   Icon={MdRemove}
-                  className='rounded-full border !p-1'
+                  className='rounded-full border !p-1 text-sm'
                   onClick={handleProductQuantity(id!, 'decrement')}
                   disabled={quantity <= 1}
                 />
@@ -60,14 +60,14 @@ export function AddCart({ id }: AddCartProps): JSX.Element {
                 />
                 <Button
                   Icon={MdAdd}
-                  className='rounded-full border !p-1'
+                  className='rounded-full border !p-1 text-sm'
                   onClick={handleProductQuantity(id!, 'increment')}
                   disabled={quantity >= 10_000}
                 />
               </div>
               <Button
                 Icon={MdRemoveShoppingCart}
-                className='border border-neutral-400'
+                className='border border-neutral-400 text-sm'
                 onClick={deleteProduct(id!)}
                 label='Remove from cart'
               />
@@ -82,7 +82,7 @@ export function AddCart({ id }: AddCartProps): JSX.Element {
             >
               <Button
                 Icon={MdAddShoppingCart}
-                className='w-full border border-neutral-400'
+                className='w-full border border-neutral-400 text-sm'
                 onClick={addProduct(id!)}
                 label='Add to cart'
               />

@@ -20,7 +20,7 @@ export function Greeting(): JSX.Element {
       <div className='mx-auto mt-1'>
         <Link to='/store' tabIndex={-1}>
           <Button
-            className='border border-border-secondary sm:text-base'
+            className='border border-border-secondary text-sm sm:text-base'
             label='Start Shopping'
           />
         </Link>

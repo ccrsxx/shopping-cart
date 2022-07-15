@@ -78,8 +78,7 @@ export function ProductCard({
       </div>
       <div className='absolute bottom-2 right-2'>
         <Button
-          className='border border-transparent transition duration-300 
-                     group-hover:border-border-secondary'
+          className='border border-transparent text-sm group-hover:border-border-secondary'
           label={label}
           Icon={Icon}
           onClick={handleClick}

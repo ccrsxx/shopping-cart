@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { useShoppingCart } from '../context';
-import { setTransition } from '../utils';
-import { MdWarning } from '../assets';
+import { useShoppingCart } from '../../context';
+import { setTransition } from '../../utils';
+import { MdWarning } from '../../assets';
 import { Button } from './Button';
 
 export function Error(): JSX.Element {

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useAnimation, motion } from 'framer-motion';
-import { useWindowSize } from '../hooks';
-import { useShoppingCart } from '../context';
-import { MdSearch } from '../assets';
-import { Button } from './Button';
+import { useWindowSize } from '../../hooks';
+import { useShoppingCart } from '../../context';
+import { MdSearch } from '../../assets';
+import { Button } from '../ui';
 
 export function SearchBar(): JSX.Element {
   const { parameter, pathname, navigate } = useShoppingCart();

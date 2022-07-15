@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { navLinks } from '../data';
-import { SearchBar } from './SearchBar';
-import { Cart } from './Cart';
+import { SearchBar, Cart } from './core';
 
 export function Navbar(): JSX.Element {
   return (

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useShoppingCart } from '../context';
-import { formatCurrency, setTransition } from '../utils';
-import { MdShoppingCart, MdArrowForward } from '../assets';
+import { useShoppingCart } from '../../context';
+import { formatCurrency, setTransition } from '../../utils';
+import { MdShoppingCart, MdArrowForward } from '../../assets';
+import { Button } from '../ui';
 import { CartItem } from './CartItem';
-import { Button } from './Button';
 
 export function Cart(): JSX.Element {
   const { cartProducts, currentCart, totalPrice, clearCart } =
@@ -27,7 +27,7 @@ export function Cart(): JSX.Element {
         <MdShoppingCart size={24} />
         <span
           className='absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center justify-center 
-                       rounded-full bg-main-red p-1 text-xs'
+                     rounded-full bg-main-red p-1 text-xs'
         >
           {cartProducts}
         </span>
@@ -42,7 +42,7 @@ export function Cart(): JSX.Element {
             />
             <motion.div
               className='fixed top-0 -right-4 h-screen w-[500px] max-w-[90vw]
-                       rounded-l-lg bg-background p-8 pr-12'
+                         rounded-l-lg bg-background p-8 pr-12'
               {...setTransition({
                 direction: 'right',
                 distance: 'full',

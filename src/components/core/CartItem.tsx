@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useShoppingCart } from '../context';
-import { formatCurrency, setTransition } from '../utils';
-import { MdAdd, MdRemove, MdDelete } from '../assets';
-import { Button } from './Button';
+import { useShoppingCart } from '../../context';
+import { formatCurrency, setTransition } from '../../utils';
+import { MdAdd, MdRemove, MdDelete } from '../../assets';
+import { Button } from '../ui';
 
 interface CartItemProps {
   id: number;
@@ -26,21 +26,23 @@ export function CartItem({
 }: CartItemProps): JSX.Element {
   const { deleteProduct, handleProductQuantity } = useShoppingCart();
 
+  const toProduct = `/product/${id}`;
+
   return (
     <motion.li
-      key={id}
       {...setTransition({
         layout: true,
         delayIn: index * 0.02,
         direction: 'right',
         durationOut: 0.25
       })}
+      key={id}
     >
       <div className='flex rounded-lg border border-border-primary'>
         <Link
-          className='hidden h-[108px] w-[110px] shrink-0 items-center justify-center
-                     rounded-l-lg bg-white transition hover:brightness-90 md:flex'
-          to={`/product/${id}`}
+          className='tab hidden h-[108px] w-[110px] shrink-0 items-center justify-center
+                     rounded-none rounded-l-lg bg-white transition hover:brightness-90 md:flex'
+          to={toProduct}
           onClick={toggleCart}
         >
           <img className='h-full w-full p-4' src={image} alt={title} />
@@ -48,10 +50,10 @@ export function CartItem({
         <div className='flex w-full flex-col justify-between py-2 px-4'>
           <div>
             <Link
-              className='overflow-hidden text-ellipsis font-medium text-white/90 transition
-                         duration-300 [display:-webkit-box] [-webkit-line-clamp:1] 
+              className='tab overflow-hidden text-ellipsis font-medium text-white/90
+                         transition duration-300 [display:-webkit-box] [-webkit-line-clamp:1]
                          [-webkit-box-orient:vertical] hover:text-white'
-              to={`/product/${id}`}
+              to={toProduct}
               onClick={toggleCart}
             >
               {title}
@@ -79,7 +81,7 @@ export function CartItem({
             </p>
           </div>
         </div>
-        <div className='grid border-l border-border-primary [&>*]:rounded-none'>
+        <div className='grid border-l border-border-primary text-sm [&>*]:rounded-none'>
           <Button
             className='!rounded-tr-lg disabled:text-gray-600 disabled:!brightness-100'
             Icon={MdAdd}

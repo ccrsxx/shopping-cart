@@ -31,7 +31,7 @@ export function ContactCard({
       </div>
       <Link className='w-full' to={navigateTo} tabIndex={-1}>
         <Button
-          className='w-full border border-border-secondary font-medium normal-case'
+          className='w-full border border-border-secondary text-sm font-medium normal-case'
           label={buttonTitle}
         />
       </Link>

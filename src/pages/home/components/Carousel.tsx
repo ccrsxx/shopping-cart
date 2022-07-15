@@ -80,7 +80,7 @@ export function Carousel(): JSX.Element {
         tabIndex={isHovered ? undefined : -1}
         onClick={backIndex}
       >
-        <MdArrowBackIos className='translate-x-0.5' />
+        <MdArrowBackIos className='translate-x-[3px]' />
       </Button>
       <motion.div
         className='flex w-full cursor-grab active:cursor-grabbing'
