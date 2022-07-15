@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useShoppingCart } from '../../context';
@@ -13,8 +13,16 @@ export function Cart(): JSX.Element {
 
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+  const isMobile = useRef(false);
+
   useEffect(() => {
-    document.body.style.overflowY = isCartOpen ? 'hidden' : '';
+    if (isMobile.current && !isCartOpen)
+      document.documentElement.style.overflow = '';
+
+    isMobile.current = window.innerWidth < 768;
+
+    document[isMobile.current ? 'documentElement' : 'body'].style.overflowY =
+      isCartOpen ? 'hidden' : '';
   }, [isCartOpen]);
 
   const toggleCart = (): void => setIsCartOpen(!isCartOpen);
@@ -88,7 +96,7 @@ export function Cart(): JSX.Element {
                     <Button
                       Icon={MdArrowForward}
                       label='Checkout'
-                      className='text-xl normal-case hover:!bg-inherit hover:text-accent'
+                      className='text-xl normal-case hover:!bg-inherit hover:!text-accent'
                       flipped
                     />
                   </Link>
