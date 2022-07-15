@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { carouselImages } from '../../../data';
 import { Button } from '../../../components';
-import {
-  MdArrowBackIos,
-  MdArrowForwardIos,
-  setTransition
-} from '../../../utils';
+import { setTransition } from '../../../utils';
+import { MdArrowBackIos, MdArrowForwardIos } from '../../../assets';
 import type { PanInfo } from 'framer-motion';
 
 const MotionLink = motion(Link);
@@ -19,7 +16,7 @@ export function Carousel(): JSX.Element {
   const carousel = useRef<HTMLDivElement>(null!);
   const timeoutId = useRef<NodeJS.Timeout>(null!);
 
-  const carouselControls = useAnimation();
+  const controls = useAnimation();
 
   useEffect(() => {
     animateCarousel();
@@ -31,9 +28,9 @@ export function Carousel(): JSX.Element {
     return resetTimeout;
   }, [currentIndex]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const animateCarousel = (): Promise<any> =>
-    carouselControls.start({ x: `${-currentIndex * 100}%` });
+  const animateCarousel = (): void => {
+    controls.start({ x: `${-currentIndex * 100}%` });
+  };
 
   const setIndexByTimeout = (): void => {
     timeoutId.current = setTimeout(
@@ -62,15 +59,8 @@ export function Carousel(): JSX.Element {
     }
   };
 
-  const setIndex =
-    (index: number): (() => void) =>
-    () =>
-      setCurrentIndex(index);
-
-  const flipHover =
-    (hover?: boolean): (() => void) =>
-    () =>
-      setIsHovered(!!hover);
+  const setIndex = (index: number) => (): void => setCurrentIndex(index);
+  const flipHover = (hover?: boolean) => (): void => setIsHovered(!!hover);
 
   const nextIndex = (): void => setCurrentIndex(currentIndex + 1);
   const backIndex = (): void => setCurrentIndex(currentIndex - 1);
@@ -95,7 +85,7 @@ export function Carousel(): JSX.Element {
       <motion.div
         className='flex w-full cursor-grab active:cursor-grabbing'
         initial={{ x: 0 }}
-        animate={carouselControls}
+        animate={controls}
         transition={{ duration: 0.5 }}
         drag='x'
         onDragStart={resetTimeout}
@@ -145,7 +135,7 @@ export function Carousel(): JSX.Element {
         tabIndex={isHovered ? undefined : -1}
         onClick={nextIndex}
       />
-      <div className='[&>*]:tab absolute bottom-3 flex gap-2 [&>*]:h-4 [&>*]:w-4 [&>*]:cursor-pointer [&>*]:rounded-full'>
+      <div className='[&>*]:tab absolute bottom-3 flex gap-2 [&>*]:h-4 [&>*]:w-4 [&>*]:rounded-full'>
         {carouselImages.map((_, index) => (
           <motion.button
             className='bg-black/40 transition hover:bg-black/60 focus:ring-offset-black/60'
@@ -156,9 +146,10 @@ export function Carousel(): JSX.Element {
           />
         ))}
         <motion.button
-          className='absolute bg-accent/80 !transition-none'
+          className='absolute cursor-not-allowed bg-accent/80 !transition-none'
           animate={{ x: currentIndex * 24 }}
           transition={{ duration: 0.5 }}
+          disabled
         />
       </div>
     </motion.div>

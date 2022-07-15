@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useShoppingCart } from '../../../contexts';
+import { useShoppingCart } from '../../../context';
 import { Button } from '../../../components';
+import { formatCurrency } from '../../../utils';
 import {
-  formatCurrency,
   RiStarSFill,
   MdAddShoppingCart,
   MdRemoveShoppingCart
-} from '../../../utils';
+} from '../../../assets';
 
 interface ProductCardProps {
   id: number;

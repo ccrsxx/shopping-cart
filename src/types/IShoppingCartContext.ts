@@ -7,14 +7,12 @@ export interface IShoppingCartContext {
   allProducts: IProduct[];
   currentCart: ICart[];
   totalPrice: number;
-  isCartOpen: boolean;
   isFetching: boolean;
   parameter: URLSearchParams;
   pathname: string;
   isError: boolean;
   navigate: NavigateFunction;
   clearCart: () => void;
-  toggleCart: () => void;
   addProduct: (productId: number) => () => void;
   deleteProduct: (productId: number) => () => void;
   fetchAllProducts: (retry?: boolean) => () => void;

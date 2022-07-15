@@ -1,4 +1,4 @@
-import { getAllProducts } from '../api';
+import { getAllProducts } from '..';
 
 describe('api test', () => {
   it('gets all the products', async () => {

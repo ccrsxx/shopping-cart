@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Error, Fetching } from '../../components';
 import { NotFound } from '../404';
 import { setTransition } from '../../utils';
-import { useShoppingCart } from '../../contexts';
+import { useShoppingCart } from '../../context';
 import { Image, Details, AddCart } from './components';
 
 export function Product(): JSX.Element {

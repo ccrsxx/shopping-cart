@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { formatCurrency, RiStarSFill, setTransition } from '../../../utils';
+import { formatCurrency, setTransition } from '../../../utils';
+import { RiStarSFill } from '../../../assets';
 
 interface DetailsProps {
   title?: string;

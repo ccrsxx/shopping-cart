@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { useShoppingCart } from '../../../contexts';
+import { useShoppingCart } from '../../../context';
 import { filterMatch, setTransition } from '../../../utils';
 import { ProductCard } from './ProductCard';
 import { Empty } from './Empty';
@@ -42,8 +42,8 @@ export function Listing(): JSX.Element {
           ? '[grid-template-columns:repeat(auto-fill,minmax(230px,1fr))]'
           : 'justify-center'
       } grid w-full gap-x-4 gap-y-6`}
-      key={key}
       {...setTransition({ direction: 'right' })}
+      key={key}
     >
       {!productsIsEmpty ? (
         filteredProducts.map((product) => (

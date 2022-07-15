@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { setTransition, VscLoading } from '../utils';
+import { setTransition } from '../utils';
+import { VscLoading } from '../assets';
 
 interface FetchingProps {
   className?: string;

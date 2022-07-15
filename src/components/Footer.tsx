@@ -1,4 +1,4 @@
-import { RiGithubFill, MdApi } from '../utils';
+import { RiGithubFill, MdApi } from '../assets';
 
 export function Footer(): JSX.Element {
   return (

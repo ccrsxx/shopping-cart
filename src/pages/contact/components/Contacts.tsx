@@ -1,9 +1,6 @@
 import { motion } from 'framer-motion';
-import {
-  setTransition,
-  RiCustomerServiceFill,
-  RiRobotFill
-} from '../../../utils';
+import { setTransition } from '../../../utils';
+import { RiCustomerServiceFill, RiRobotFill } from '../../../assets';
 import { ContactCard } from './ContactCard';
 
 export function Contacts(): JSX.Element {

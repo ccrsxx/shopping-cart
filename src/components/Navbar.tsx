@@ -1,13 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import { useShoppingCart } from '../contexts';
-import { MdShoppingCart } from '../utils';
 import { navLinks } from '../data';
 import { SearchBar } from './SearchBar';
-import { Button } from './Button';
+import { Cart } from './Cart';
 
 export function Navbar(): JSX.Element {
-  const { cartProducts, toggleCart } = useShoppingCart();
-
   return (
     <nav
       className='fixed z-10 grid w-full gap-2 border-b-2 border-b-border-primary 
@@ -29,15 +25,7 @@ export function Navbar(): JSX.Element {
       </ul>
       <div className='flex justify-between gap-2 md:gap-0'>
         <SearchBar />
-        <Button className='relative !p-2' onClick={toggleCart}>
-          <MdShoppingCart size={24} />
-          <span
-            className='absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center justify-center 
-                       rounded-full bg-main-red p-1 text-xs'
-          >
-            {cartProducts}
-          </span>
-        </Button>
+        <Cart />
       </div>
     </nav>
   );

@@ -1,13 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useShoppingCart } from '../contexts';
-import {
-  formatCurrency,
-  setTransition,
-  MdAdd,
-  MdRemove,
-  MdDelete
-} from '../utils';
+import { useShoppingCart } from '../context';
+import { formatCurrency, setTransition } from '../utils';
+import { MdAdd, MdRemove, MdDelete } from '../assets';
 import { Button } from './Button';
 
 interface CartItemProps {
@@ -31,8 +26,6 @@ export function CartItem({
 }: CartItemProps): JSX.Element {
   const { deleteProduct, handleProductQuantity } = useShoppingCart();
 
-  const handleClick = (): void => toggleCart();
-
   return (
     <motion.li
       key={id}
@@ -48,7 +41,7 @@ export function CartItem({
           className='hidden h-[108px] w-[110px] shrink-0 items-center justify-center
                      rounded-l-lg bg-white transition hover:brightness-90 md:flex'
           to={`/product/${id}`}
-          onClick={handleClick}
+          onClick={toggleCart}
         >
           <img className='h-full w-full p-4' src={image} alt={title} />
         </Link>
@@ -59,7 +52,7 @@ export function CartItem({
                          duration-300 [display:-webkit-box] [-webkit-line-clamp:1] 
                          [-webkit-box-orient:vertical] hover:text-white'
               to={`/product/${id}`}
-              onClick={handleClick}
+              onClick={toggleCart}
             >
               {title}
             </Link>

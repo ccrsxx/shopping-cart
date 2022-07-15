@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { useShoppingCart } from '../contexts';
+import { useShoppingCart } from '../context';
 import { setTransition } from '../utils';
 
 interface NotFoundProps {

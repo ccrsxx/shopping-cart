@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useShoppingCart } from '../../../contexts';
+import { useShoppingCart } from '../../../context';
 import { setTransition } from '../../../utils';
 import { categories } from '../../../data';
 import { CategoryLink } from './CategoryLink';
 
 export function Aside(): JSX.Element {
-  const { isCartOpen, parameter, pathname } = useShoppingCart();
+  const { parameter, pathname } = useShoppingCart();
 
   const currentCategory = parameter.get('category') ?? 'All';
 
@@ -18,7 +18,6 @@ export function Aside(): JSX.Element {
 
   return (
     <motion.aside
-      style={{ zIndex: isCartOpen ? -1 : 'auto' }}
       className='top-28 flex w-full max-w-none flex-col gap-4 self-start
                  rounded-lg border border-border-primary p-4 md:sticky md:max-w-sm'
       {...setTransition({ direction: 'left' })}

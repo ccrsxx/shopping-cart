@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { useShoppingCart } from '../../contexts';
+import { useShoppingCart } from '../../context';
 import { Fetching, Error } from '../../components';
 import { Aside, Listing } from './components';
 

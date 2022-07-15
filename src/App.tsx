@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { ShoppingCartProvider } from './contexts';
-import { Navbar, Cart, Footer } from './components';
+import { ShoppingCartProvider } from './context';
+import { Navbar, Footer } from './components';
 import { Home, Store, Product, Contact, NotFound } from './pages';
 
 export function App(): JSX.Element {
@@ -10,7 +10,6 @@ export function App(): JSX.Element {
   return (
     <ShoppingCartProvider>
       <Navbar />
-      <Cart />
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>
           <Route path='/' element={<Home />} />

@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useShoppingCart } from '../../../contexts';
+import { useShoppingCart } from '../../../context';
 import { Button } from '../../../components';
+import { setTransition } from '../../../utils';
 import {
   MdAdd,
   MdRemove,
-  setTransition,
   MdAddShoppingCart,
   MdRemoveShoppingCart
-} from '../../../utils';
+} from '../../../assets';
 
 interface AddCartProps {
   id?: number;
@@ -67,7 +67,7 @@ export function AddCart({ id }: AddCartProps): JSX.Element {
               </div>
               <Button
                 Icon={MdRemoveShoppingCart}
-                className='rounded-lg border border-neutral-400'
+                className='border border-neutral-400'
                 onClick={deleteProduct(id!)}
                 label='Remove from cart'
               />
@@ -82,7 +82,7 @@ export function AddCart({ id }: AddCartProps): JSX.Element {
             >
               <Button
                 Icon={MdAddShoppingCart}
-                className='w-full rounded-lg border border-neutral-400'
+                className='w-full border border-neutral-400'
                 onClick={addProduct(id!)}
                 label='Add to cart'
               />

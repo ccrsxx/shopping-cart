@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useShoppingCart } from '../../../contexts';
+import { useShoppingCart } from '../../../context';
 
 interface CategoryLinkProps {
   category: string;

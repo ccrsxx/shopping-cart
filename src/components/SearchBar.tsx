@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useAnimation, motion } from 'framer-motion';
 import { useWindowSize } from '../hooks';
-import { useShoppingCart } from '../contexts';
-import { MdSearch } from '../utils';
+import { useShoppingCart } from '../context';
+import { MdSearch } from '../assets';
 import { Button } from './Button';
 
 export function SearchBar(): JSX.Element {
@@ -20,13 +20,11 @@ export function SearchBar(): JSX.Element {
     else setSearchInput(searchParams);
   }, [pathname]);
 
-  const setMaxWidth =
-    (maxWidth: number): (() => void) =>
-    () => {
-      controls.start({
-        maxWidth
-      });
-    };
+  const setMaxWidth = (maxWidth: number) => (): void => {
+    controls.start({
+      maxWidth
+    });
+  };
 
   const handleChange = ({
     target: { value }
