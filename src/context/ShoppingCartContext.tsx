@@ -76,20 +76,8 @@ export function ShoppingCartProvider({
   };
 
   const addProduct = (productId: number) => (): void => {
-    const inCart = currentCart.find(({ id }) => id === productId);
-
-    if (inCart)
-      setCurrentCart(
-        currentCart.map((cartProduct) =>
-          cartProduct.id === productId
-            ? { ...cartProduct, quantity: cartProduct.quantity + 1 }
-            : cartProduct
-        )
-      );
-    else {
-      const product = allProducts.find(({ id }) => id === productId);
-      setCurrentCart([{ ...product, quantity: 1 } as ICart, ...currentCart]);
-    }
+    const product = allProducts.find(({ id }) => id === productId);
+    setCurrentCart([{ ...product, quantity: 1 } as ICart, ...currentCart]);
   };
 
   const deleteProduct = (productId: number) => (): void =>
