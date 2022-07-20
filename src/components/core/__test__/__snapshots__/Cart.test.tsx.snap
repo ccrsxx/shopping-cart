@@ -33,8 +33,7 @@ exports[`test Cart renders correctly 1`] = `
     />
   </svg>
   <span
-    className="absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center justify-center 
- rounded-full bg-main-red p-1 text-xs"
+    className="absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center  justify-center rounded-full bg-main-red p-1 text-xs"
   >
     6
   </span>
