@@ -42,7 +42,7 @@ jest.mock('../../../context', () => ({
   })
 }));
 
-jest.mock('../cartItem', () => ({
+jest.mock('../CartItem', () => ({
   CartItem: (): JSX.Element => <div data-testid='cart-item' />
 }));
 

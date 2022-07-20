@@ -14,7 +14,8 @@ exports[`test CartItem renders correctly 1`] = `
     className="flex rounded-lg border border-border-primary"
   >
     <a
-      className="tab hidden h-[108px] w-[110px] shrink-0 items-center justify-center rounded-none rounded-l-lg bg-white transition hover:brightness-90 md:flex"
+      className="tab hidden h-[108px] w-[110px] shrink-0 items-center justify-center
+ rounded-none rounded-l-lg bg-white transition hover:brightness-90 md:flex"
       href="/product/24"
       onClick={[Function]}
     >
@@ -29,7 +30,9 @@ exports[`test CartItem renders correctly 1`] = `
     >
       <div>
         <a
-          className="tab overflow-hidden text-ellipsis font-medium text-white/90 transition duration-300 [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] hover:text-white"
+          className="tab overflow-hidden text-ellipsis font-medium text-white/90
+ transition duration-300 [display:-webkit-box] [-webkit-line-clamp:1]
+ [-webkit-box-orient:vertical] hover:text-white"
           href="/product/24"
           onClick={[Function]}
         >
@@ -51,7 +54,8 @@ exports[`test CartItem renders correctly 1`] = `
             Quantity: 
           </p>
           <input
-            className="max-w-[60px] rounded-lg bg-background px-1 transition hover:ring-2 hover:ring-accent focus:outline-none focus:ring-2 focus:ring-accent"
+            className="max-w-[60px] rounded-lg bg-background px-1 transition hover:ring-2 hover:ring-accent
+ focus:outline-none focus:ring-2 focus:ring-accent"
             max={10000}
             min={1}
             onChange={[Function]}
