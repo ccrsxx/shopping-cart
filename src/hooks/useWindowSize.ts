@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 
-type WindowSize = [number, number];
+export type WindowSize = [number, number];
 
 export function useWindowSize(): WindowSize {
   const [windowSize, setWindowSize]: [

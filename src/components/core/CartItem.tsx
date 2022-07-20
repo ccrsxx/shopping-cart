@@ -64,8 +64,8 @@ export function CartItem({
             <div className='flex gap-1'>
               <p>Quantity: </p>
               <input
-                className='max-w-[60px] rounded-lg bg-background px-1 transition hover:ring-2 hover:ring-accent
-                           focus:outline-none focus:ring-2 focus:ring-accent'
+                className='max-w-[60px] rounded-lg bg-background px-1 transition hover:ring-2 
+                           hover:ring-accent focus:outline-none focus:ring-2 focus:ring-accent'
                 type='number'
                 min={1}
                 max={10_000}
@@ -84,18 +84,21 @@ export function CartItem({
         <div className='grid border-l border-border-primary text-sm [&>*]:rounded-none'>
           <Button
             className='!rounded-tr-lg disabled:text-gray-600 disabled:!brightness-100'
+            ariaLabel='Increase'
             Icon={MdAdd}
             onClick={handleProductQuantity(id, 'increment')}
             disabled={quantity >= 10_000}
           />
           <Button
             className='border-y border-border-primary disabled:text-gray-600 disabled:!brightness-100'
+            ariaLabel='Decrease'
             Icon={MdRemove}
             onClick={handleProductQuantity(id, 'decrement')}
             disabled={quantity <= 1}
           />
           <Button
             className='!rounded-br-lg'
+            ariaLabel='Delete'
             Icon={MdDelete}
             onClick={deleteProduct(id)}
           />

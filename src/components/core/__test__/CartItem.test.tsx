@@ -1,0 +1,160 @@
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import renderer from 'react-test-renderer';
+import '@testing-library/jest-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { CartItem } from '../CartItem';
+
+interface MockProps {
+  deleteProduct: (productId: number) => () => void;
+  handleProductQuantity: (
+    productId: number,
+    type?: 'increment' | 'decrement'
+  ) => (e?: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const mockToggleCart = jest.fn();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const mockDeleteProduct = jest.fn((productId: number) => (): void => {});
+
+const currentCart = {
+  id: 24,
+  index: 1,
+  title: 'emilia',
+  image: 'emilia.jpg',
+  price: 10,
+  quantity: 1,
+  toggleCart: mockToggleCart as () => void
+};
+
+const mockHandleProductQuantity =
+  (productId: number, type?: 'increment' | 'decrement') =>
+  (e?: React.ChangeEvent<HTMLInputElement>): void => {
+    let inputValue = !type ? parseInt(e!.target.value, 10) : null;
+
+    if (!type && !inputValue) inputValue = 1;
+    else if (inputValue && inputValue >= 10_000) inputValue = 10_000;
+
+    currentCart.quantity =
+      inputValue ??
+      (type === 'increment'
+        ? currentCart.quantity + 1
+        : currentCart.quantity - 1);
+  };
+
+jest.mock('../../../context', () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  useShoppingCart: (): MockProps => ({
+    deleteProduct: mockDeleteProduct,
+    handleProductQuantity: mockHandleProductQuantity
+  })
+}));
+
+let rerenderComponent: (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ui: React.ReactElement<any, string | React.JSXElementConstructor<any>>
+) => void;
+
+describe('test CartItem', () => {
+  beforeEach(() => {
+    const { rerender } = render(<CartItem {...currentCart} />, {
+      wrapper: BrowserRouter
+    });
+    rerenderComponent = rerender;
+  });
+
+  it('renders correctly', () => {
+    const tree = renderer
+      .create(
+        <BrowserRouter>
+          <CartItem {...currentCart} />
+        </BrowserRouter>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should call deleteProduct when delete button is clicked', () => {
+    const deleteButton = screen.getByRole('button', { name: /delete/i });
+
+    userEvent.click(deleteButton);
+
+    expect(mockDeleteProduct).toHaveBeenCalledWith(24);
+  });
+
+  it('shows the current quantity on the input', () => {
+    const input = screen.getByRole('spinbutton');
+
+    rerenderComponent(<CartItem {...currentCart} />);
+
+    expect(input).toHaveValue(1);
+  });
+
+  it('should call handleProductQuantity when input is changed', () => {
+    const input: HTMLInputElement = screen.getByRole('spinbutton');
+
+    userEvent.type(input, '200');
+
+    rerenderComponent(<CartItem {...currentCart} />);
+
+    expect(input).toHaveValue(1200);
+  });
+
+  it('should not surpass the minimum and maximum quantity with input', () => {
+    const input: HTMLInputElement = screen.getByRole('spinbutton');
+
+    userEvent.type(input, '-1');
+
+    rerenderComponent(<CartItem {...currentCart} />);
+
+    expect(input).toHaveValue(1);
+
+    userEvent.type(input, '20_000');
+
+    rerenderComponent(<CartItem {...currentCart} />);
+
+    expect(input).toHaveValue(10_000);
+  });
+
+  it('should not surpass the minimum and maximum quantity with button', () => {
+    currentCart.quantity = 1;
+
+    rerenderComponent(<CartItem {...currentCart} />);
+
+    const input = screen.getByRole('spinbutton');
+    const incrementButton = screen.getByRole('button', { name: /increase/i });
+    const decrementButton = screen.getByRole('button', { name: /decrease/i });
+
+    userEvent.click(decrementButton);
+
+    expect(decrementButton).toBeDisabled();
+    expect(currentCart.quantity).toBe(1);
+
+    userEvent.click(incrementButton);
+    userEvent.click(incrementButton);
+
+    rerenderComponent(<CartItem {...currentCart} />);
+
+    expect(input).toHaveValue(3);
+
+    currentCart.quantity = 10_000;
+
+    rerenderComponent(<CartItem {...currentCart} />);
+
+    userEvent.click(incrementButton);
+
+    rerenderComponent(<CartItem {...currentCart} />);
+
+    expect(incrementButton).toBeDisabled();
+    expect(input).toHaveValue(10_000);
+  });
+
+  it('should call mockToggleCart when clicking image or link', () => {
+    const links = screen.getAllByRole('link');
+
+    links.forEach((link) => userEvent.click(link));
+
+    expect(mockToggleCart).toHaveBeenCalledTimes(2);
+  });
+});
