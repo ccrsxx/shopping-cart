@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test SearcBar renders correctly 1`] = `
+<form
+  className="false flex w-full flex-1 items-center gap-2 focus-within:max-w-sm
+        md:flex-initial lg:-translate-x-[25%]"
+  onSubmit={[Function]}
+  style={
+    Object {
+      "maxWidth": "300px",
+    }
+  }
+>
+  <input
+    className="tab w-full rounded-lg border border-neutral-500 bg-inherit px-2 py-1"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    placeholder="Search product..."
+    type="text"
+    value=""
+  />
+  <button
+    className="!p-2 text-2xl tab flex select-none items-center justify-center gap-2 rounded-lg
+                  bg-transparent py-2 px-3 font-medium transition duration-300 hover:text-primary 
+                  active:scale-90 active:duration-150 enabled:hover:bg-accent disabled:cursor-not-allowed
+                  disabled:brightness-50"
+    type="submit"
+  >
+    <svg
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 0h24v24H0z"
+        fill="none"
+      />
+      <path
+        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+      />
+    </svg>
+  </button>
+</form>
+`;

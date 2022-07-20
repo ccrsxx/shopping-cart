@@ -31,7 +31,7 @@ export function Cart(): JSX.Element {
 
   return (
     <>
-      <Button className='relative !p-2' onClick={toggleCart}>
+      <Button className='relative !p-2' ariaLabel='Open' onClick={toggleCart}>
         <MdShoppingCart size={24} />
         <span
           className='absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center justify-center 

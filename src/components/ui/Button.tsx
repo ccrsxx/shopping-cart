@@ -2,6 +2,7 @@ import type { IconType } from 'react-icons';
 
 interface ButtonProps {
   Icon?: IconType;
+
   id?: string;
   type?: 'button' | 'submit' | 'reset';
   label?: string;
@@ -10,6 +11,7 @@ interface ButtonProps {
   tabIndex?: number;
   children?: React.ReactNode;
   className?: string;
+  ariaLabel?: string;
   onClick?: () => void;
 }
 
@@ -23,6 +25,7 @@ export function Button({
   tabIndex,
   children,
   className,
+  ariaLabel,
   onClick
 }: ButtonProps): JSX.Element {
   return (
@@ -32,6 +35,7 @@ export function Button({
                   bg-transparent py-2 px-3 font-medium transition duration-300 hover:text-primary 
                   active:scale-90 active:duration-150 enabled:hover:bg-accent disabled:cursor-not-allowed
                   disabled:brightness-50`}
+      aria-label={ariaLabel}
       type={type ?? 'button'}
       onClick={onClick}
       tabIndex={tabIndex}
