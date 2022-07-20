@@ -64,8 +64,8 @@ export function CartItem({
             <div className='flex gap-1'>
               <p>Quantity: </p>
               <input
-                className='max-w-[60px] rounded-lg bg-background px-1 transition hover:ring-2 hover:ring-accent
-                           focus:outline-none focus:ring-2 focus:ring-accent'
+                className='max-w-[60px] rounded-lg bg-background px-1 transition hover:ring-2 
+                           hover:ring-accent focus:outline-none focus:ring-2 focus:ring-accent'
                 type='number'
                 min={1}
                 max={10_000}

@@ -34,8 +34,8 @@ export function Cart(): JSX.Element {
       <Button className='relative !p-2' ariaLabel='Open' onClick={toggleCart}>
         <MdShoppingCart size={24} />
         <span
-          className='absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center justify-center 
-                     rounded-full bg-main-red p-1 text-xs'
+          className='absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center 
+                     justify-center rounded-full bg-main-red p-1 text-xs'
         >
           {cartProducts}
         </span>
@@ -72,7 +72,7 @@ export function Cart(): JSX.Element {
                 </div>
                 <ul
                   className='relative order-1 -mx-8 -my-1 -mr-6 flex flex-1 flex-col gap-4
-                           overflow-y-auto overflow-x-hidden py-1 px-8 pr-6'
+                             overflow-y-auto overflow-x-hidden py-1 px-8 pr-6'
                 >
                   <AnimatePresence>
                     {currentCart.map((cartProduct, index) => (
