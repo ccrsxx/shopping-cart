@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useShoppingCart } from '../../context';
 import { formatCurrency, setTransition } from '../../utils';
 import { MdAdd, MdRemove, MdDelete } from '../../assets';
-import { Button } from '../ui';
+import { Button, ImageLoader } from '../ui';
 
 interface CartItemProps {
   id: number;
@@ -40,18 +40,23 @@ export function CartItem({
     >
       <div className='flex rounded-lg border border-border-primary'>
         <Link
-          className='tab hidden h-[108px] w-[110px] shrink-0 items-center justify-center
-                     rounded-none rounded-l-lg bg-white transition hover:brightness-90 md:flex'
+          className='tab hidden rounded-r-none transition hover:brightness-90 
+                     focus-visible:brightness-90 md:block'
           to={toProduct}
           onClick={toggleCart}
         >
-          <img className='h-full w-full p-4' src={image} alt={title} />
+          <ImageLoader
+            divStyle='h-[108px] w-[110px] rounded-l-lg shrink-0 shrink-0 bg-white'
+            imageStyle='h-full w-full p-4'
+            src={image}
+            alt={title}
+          />
         </Link>
         <div className='flex w-full flex-col justify-between py-2 px-4'>
           <div>
             <Link
               className='tab overflow-hidden text-ellipsis font-medium text-white/90
-                         transition duration-300 [display:-webkit-box] [-webkit-line-clamp:1]
+                         transition [display:-webkit-box] [-webkit-line-clamp:1]
                          [-webkit-box-orient:vertical] hover:text-white'
               to={toProduct}
               onClick={toggleCart}
@@ -81,7 +86,7 @@ export function CartItem({
             </p>
           </div>
         </div>
-        <div className='grid border-l border-border-primary text-sm [&>*]:rounded-none'>
+        <div className='grid border-l border-border-primary text-sm inner:rounded-none'>
           <Button
             className='!rounded-tr-lg disabled:text-gray-600 disabled:!brightness-100'
             ariaLabel='Increase'

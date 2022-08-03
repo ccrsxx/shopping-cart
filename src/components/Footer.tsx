@@ -3,9 +3,9 @@ import { RiGithubFill, MdApi } from '../assets';
 export function Footer(): JSX.Element {
   return (
     <footer
-      className='[&>*]:tab flex justify-between text-lg font-medium
-                 text-secondary [&>*]:flex [&>*]:items-center [&>*]:gap-2
-                 [&>*]:transition-colors hover:[&>*]:text-primary'
+      className='inner:tab flex justify-between text-lg font-medium
+                 text-secondary inner:flex inner:items-center inner:gap-2
+                 inner:transition-colors hover:inner:text-primary'
     >
       <a href='https://github.com/ccrsxx' target='_blank' rel='noreferrer'>
         <RiGithubFill /> ccrsxx

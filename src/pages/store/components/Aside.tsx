@@ -29,7 +29,7 @@ export function Aside(): JSX.Element {
         </p>
       </div>
       <hr />
-      <ul className='flex flex-wrap justify-center gap-2 md:block [&>*]:text-lg [&>*]:capitalize [&>*]:text-secondary'>
+      <ul className='flex flex-wrap justify-center gap-2 inner:text-lg inner:capitalize inner:text-secondary md:block'>
         <li>
           <CategoryLink category='all' />
         </li>

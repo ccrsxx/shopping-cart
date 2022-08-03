@@ -41,7 +41,7 @@ export function AddCart({ id }: AddCartProps): JSX.Element {
               {...setTransition({ direction: 'top', distance: 25 })}
               key={id}
             >
-              <div className='flex items-center justify-center gap-4 [&>*]:border-neutral-400'>
+              <div className='flex items-center justify-center gap-4 inner:border-neutral-400'>
                 <Button
                   Icon={MdRemove}
                   className='rounded-full border !p-1 text-sm'

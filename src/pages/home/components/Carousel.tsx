@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { carouselImages } from '../../../data';
-import { Button } from '../../../components';
+import { ImageLoader, Button } from '../../../components';
 import { setTransition } from '../../../utils';
 import { MdArrowBackIos, MdArrowForwardIos } from '../../../assets';
 import type { PanInfo } from 'framer-motion';
@@ -92,16 +92,14 @@ export function Carousel(): JSX.Element {
         onDragEnd={setIndexByDragging}
       >
         {carouselImages.map(({ src, alt }, index) => (
-          <div
-            className='flex h-60 min-w-full justify-center sm:h-80'
+          <ImageLoader
+            divStyle='flex h-60 min-w-full justify-center sm:h-80'
+            imageStyle='h-full w-full object-cover'
+            src={src}
+            alt={alt}
+            draggable={false}
             key={index}
           >
-            <img
-              className='h-full w-full object-cover'
-              src={src}
-              alt={alt}
-              draggable={false}
-            />
             <AnimatePresence exitBeforeEnter>
               {index === currentIndex && (
                 <MotionLink
@@ -125,7 +123,7 @@ export function Carousel(): JSX.Element {
                 </MotionLink>
               )}
             </AnimatePresence>
-          </div>
+          </ImageLoader>
         ))}
       </motion.div>
       <Button
@@ -135,7 +133,7 @@ export function Carousel(): JSX.Element {
         tabIndex={isHovered ? undefined : -1}
         onClick={nextIndex}
       />
-      <div className='[&>*]:tab absolute bottom-3 flex gap-2 [&>*]:h-4 [&>*]:w-4 [&>*]:rounded-full'>
+      <div className='inner:tab absolute bottom-3 flex gap-2 inner:h-4 inner:w-4 inner:rounded-full'>
         {carouselImages.map((_, index) => (
           <motion.button
             className='bg-black/40 transition hover:bg-black/60 focus:ring-offset-black/60'

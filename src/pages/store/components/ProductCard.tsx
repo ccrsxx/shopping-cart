@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useShoppingCart } from '../../../context';
-import { Button } from '../../../components';
+import { Button, ImageLoader } from '../../../components';
 import { formatCurrency } from '../../../utils';
 import {
   RiStarSFill,
@@ -46,15 +46,12 @@ export function ProductCard({
       className='tab group relative rounded-lg ring-2 ring-border-primary
                  transition duration-300 hover:ring hover:ring-accent'
     >
-      <div
-        className='flex h-[230px] items-center justify-center rounded-t-lg bg-primary transition
-                   duration-300 group-hover:brightness-95'
-      >
-        <img
-          className='h-full w-auto rounded-t-lg p-4'
+      <div className='transition duration-300 group-hover:brightness-90 group-focus-visible:brightness-90'>
+        <ImageLoader
+          divStyle='flex h-[230px] items-center justify-center rounded-t-lg bg-primary'
+          imageStyle='h-full w-auto rounded-t-lg p-4'
           src={image}
           alt={title}
-          loading='lazy'
         />
       </div>
       <div className='flex flex-col gap-1 p-2'>
