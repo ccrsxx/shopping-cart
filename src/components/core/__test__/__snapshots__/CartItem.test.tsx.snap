@@ -14,22 +14,28 @@ exports[`test CartItem renders correctly 1`] = `
     className="flex rounded-lg border border-border-primary"
   >
     <a
-      className="tab hidden h-[108px] w-[110px] shrink-0 items-center justify-center rounded-none rounded-l-lg bg-white transition hover:brightness-90 md:flex"
+      className="tab hidden rounded-r-none transition hover:brightness-90  focus-visible:brightness-90 md:block"
       href="/product/24"
       onClick={[Function]}
     >
-      <img
-        alt="emilia"
-        className="h-full w-full p-4"
-        src="emilia.jpg"
-      />
+      <div
+        className="animate-pulse !bg-white h-[108px] w-[110px] rounded-l-lg shrink-0 shrink-0 bg-white transition-colors"
+      >
+        <img
+          alt="emilia"
+          className="opacity-0 h-full w-full p-4 transition-opacity"
+          loading="lazy"
+          onLoad={[Function]}
+          src="emilia.jpg"
+        />
+      </div>
     </a>
     <div
       className="flex w-full flex-col justify-between py-2 px-4"
     >
       <div>
         <a
-          className="tab overflow-hidden text-ellipsis font-medium text-white/90 transition duration-300 [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] hover:text-white"
+          className="tab overflow-hidden text-ellipsis font-medium text-white/90 transition [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] hover:text-white"
           href="/product/24"
           onClick={[Function]}
         >
@@ -71,7 +77,7 @@ exports[`test CartItem renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="grid border-l border-border-primary text-sm [&>*]:rounded-none"
+      className="grid border-l border-border-primary text-sm inner:rounded-none"
     >
       <button
         aria-label="Increase"
