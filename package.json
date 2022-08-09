@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "npx prettier --check . && next lint",
+    "format": "prettier --check .",
+    "lint": "next lint",
     "prepare": "husky install"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "framer-motion": "^7.0.0",
     "next": "12.2.4",
     "react": "18.2.0",
