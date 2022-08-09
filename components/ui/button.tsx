@@ -1,6 +1,7 @@
+import cn from 'clsx';
 import type { IconType } from 'react-icons';
 
-interface ButtonProps {
+type ButtonProps = {
   Icon?: IconType;
   id?: string;
   type?: 'button' | 'submit' | 'reset';
@@ -12,7 +13,7 @@ interface ButtonProps {
   className?: string;
   ariaLabel?: string;
   onClick?: () => void;
-}
+};
 
 export function Button({
   Icon,
@@ -30,12 +31,12 @@ export function Button({
   return (
     <button
       id={id}
-      className={`${
-        className ?? ''
-      } tab flex select-none items-center justify-center gap-2 rounded-lg
-        bg-transparent py-2 px-3 font-medium transition duration-300 hover:text-primary 
-        active:scale-90 active:duration-150 enabled:hover:bg-accent disabled:cursor-not-allowed
-        disabled:brightness-50`}
+      className={cn(
+        `tab flex select-none items-center justify-center gap-2 rounded-lg bg-transparent py-2 px-3 
+         font-medium transition duration-300 hover:text-primary active:scale-90 active:duration-150 
+         enabled:hover:bg-accent disabled:cursor-not-allowed disabled:brightness-50`,
+        className
+      )}
       aria-label={ariaLabel}
       type={type ?? 'button'}
       onClick={onClick}
