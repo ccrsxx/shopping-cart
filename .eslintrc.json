@@ -1,7 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "tsconfig.json"
+    "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint"],
   "extends": [
@@ -23,6 +23,7 @@
     "curly": ["error", "multi"],
     "quotes": ["error", "single", { "avoidEscape": true }],
     "jsx-quotes": ["error", "prefer-single"],
+    "linebreak-style": ["error", "unix"],
     "no-console": "warn",
     "comma-dangle": "error",
     "no-unused-expressions": "error",

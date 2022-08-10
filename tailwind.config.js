@@ -16,6 +16,19 @@ module.exports = {
         'main-red': red['400'],
         'border-primary': neutral['700'],
         'border-secondary': neutral['400']
+      },
+      animation: {
+        fade: 'fade 300ms ease-in-out'
+      },
+      keyframes: {
+        fade: {
+          from: {
+            opacity: 0
+          },
+          to: {
+            opacity: 1
+          }
+        }
       }
     }
   },
