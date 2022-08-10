@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
-import { useShoppingCart } from '@lib/context/useShoppingCart';
+import { useShoppingCart } from '@lib/context/shopping-cart';
 import { Aside } from '@components/store/aside';
 import { Listing } from '@components/store/listing';
 import { Fetching } from '@components/ui/fetching';

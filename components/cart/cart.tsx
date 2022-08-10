@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MdShoppingCart, MdArrowForward } from '@assets/icons';
 import { Button } from '@components/ui/button';
-import { useShoppingCart } from '@lib/context/useShoppingCart';
+import { useShoppingCart } from '@lib/context/shopping-cart';
 import { formatCurrency } from '@lib/currency';
 import { setTransition } from '@lib/transition';
 import { CartItem } from './cart-item';
@@ -12,9 +12,16 @@ export function Cart(): JSX.Element {
   const { cartProducts, currentCart, totalPrice, clearCart } =
     useShoppingCart();
 
+  const [totalProducts, setTotalProducts] = useState(0);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const isMobile = useRef(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => setTotalProducts(cartProducts), 500);
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (isMobile.current && !isCartOpen)
@@ -38,7 +45,7 @@ export function Cart(): JSX.Element {
           className='absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center
                      justify-center rounded-full bg-main-red p-1 text-xs'
         >
-          {cartProducts}
+          {totalProducts}
         </span>
       </Button>
       <AnimatePresence exitBeforeEnter>

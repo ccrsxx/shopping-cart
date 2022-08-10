@@ -1,11 +1,11 @@
-import { Footer } from './footer';
 import { Navbar } from './navbar';
+import { Footer } from './footer';
 
-type LayoutProps = {
+type AppLayoutProps = {
   children: React.ReactNode;
 };
 
-export function Layout({ children }: LayoutProps): JSX.Element {
+export function AppLayout({ children }: AppLayoutProps): JSX.Element {
   return (
     <>
       <Navbar />

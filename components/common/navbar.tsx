@@ -12,6 +12,8 @@ const navLinks = [
 export function Navbar(): JSX.Element {
   const { pathname } = useRouter();
 
+  const inStore = pathname === '/store';
+
   return (
     <header
       className='fixed z-10 grid w-full gap-2 border-b-2 border-b-border-primary 
@@ -23,6 +25,7 @@ export function Navbar(): JSX.Element {
             href={url}
             linkName={linkName}
             pathname={pathname}
+            disableScroll={inStore}
             key={url}
           />
         ))}

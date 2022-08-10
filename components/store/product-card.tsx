@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useShoppingCart } from '@lib/context/useShoppingCart';
+import { useShoppingCart } from '@lib/context/shopping-cart';
 import { Button } from '@components/ui/button';
 import { ImageLoader } from '@components/ui/image-loader';
 import { formatCurrency } from '@lib/currency';
@@ -43,7 +43,7 @@ export function ProductCard({
   };
 
   return (
-    <Link href={`/product/${id}`}>
+    <Link href={`/product/${id}`} scroll={false}>
       <a
         className='tab group relative rounded-lg ring-2 ring-border-primary
                    transition duration-300 hover:ring hover:ring-accent'
@@ -51,9 +51,10 @@ export function ProductCard({
         <div className='transition duration-300 group-hover:brightness-90 group-focus-visible:brightness-90'>
           <ImageLoader
             divStyle='flex h-[230px] items-center justify-center rounded-t-lg bg-primary'
-            imageStyle='!h-full !w-auto !p-4'
-            src={image}
+            imageStyle='!p-4'
+            src={`${image}?${Math.random()}`}
             alt={title}
+            objectFit='contain'
           />
         </div>
         <div className='flex flex-col gap-1 p-2'>

@@ -2,12 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { setTransition } from '@lib/transition';
-import { MdArrowBackIos, MdArrowForwardIos } from '@assets/icons';
 import { Button } from '@components/ui/button';
 import { ImageLoader } from '@components/ui/image-loader';
+import { MdArrowBackIos, MdArrowForwardIos } from '@assets/icons';
 import type { PanInfo } from 'framer-motion';
 
-export const carouselImages = [
+const carouselImages = [
   {
     src: '/images/electronics.jpg',
     alt: 'Electronics'
@@ -41,8 +41,8 @@ export function Carousel(): JSX.Element {
     if (currentIndex >= carouselImages.length) setCurrentIndex(0);
     else if (currentIndex < 0) setCurrentIndex(carouselImages.length - 1);
 
-    setIndexByTimeout();
-    return resetTimeout;
+    // setIndexByTimeout();
+    // return resetTimeout;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
 
@@ -133,8 +133,8 @@ export function Carousel(): JSX.Element {
                     })}
                   >
                     <Button
-                      className='bg-black/40 !p-0 !px-1 text-lg font-normal capitalize
-                               text-primary/90 hover:bg-accent hover:text-primary sm:text-xl'
+                      className='!bg-black/40 !p-0 !px-1 text-lg font-normal capitalize
+                                 text-primary/90 hover:!bg-accent hover:text-primary sm:text-xl'
                       label={alt}
                     />
                   </motion.a>

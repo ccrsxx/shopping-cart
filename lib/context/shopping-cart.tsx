@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useContext, createContext } from 'react';
 import { useLocalStorage as useStore } from '@lib/hooks/useLocalStorage';
 import { getAllProducts } from '@lib/api/products';
-import type { ChangeEvent } from 'react';
+import type { MouseEvent, ChangeEvent } from 'react';
 import type { Product, Products } from '@lib/api/products';
 
 export type Cart = Product & { quantity: number };
@@ -17,7 +17,7 @@ export type ShoppingCartContext = {
   clearCart: () => void;
   addProduct: (productId: number) => () => void;
   deleteProduct: (productId: number) => () => void;
-  fetchAllProducts: (retry?: boolean) => () => void;
+  fetchAllProducts: (e?: MouseEvent<HTMLButtonElement>) => void;
   handleProductQuantity: (
     productId: number,
     type?: 'increment' | 'decrement'
@@ -44,18 +44,20 @@ type ShoppingCartProviderProps = {
 export function ShoppingCartProvider({
   children
 }: ShoppingCartProviderProps): JSX.Element {
-  const [allProducts, setAllProducts] = useStore<Products>('allProducts', []);
   const [currentCart, setCurrentCart] = useStore<Carts>('currentCart', []);
+  const [allProducts, setAllProducts] = useState<Products>([]);
   const [isFetching, setIsFetching] = useState(false);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (!allProducts.length) void fetchAllProducts()();
+    void fetchAllProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchAllProducts = (retry?: boolean) => async (): Promise<void> => {
-    if (retry) setIsError(false);
+  const fetchAllProducts = async (
+    e?: MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
+    if (e) setIsError(false);
 
     setIsFetching(true);
 

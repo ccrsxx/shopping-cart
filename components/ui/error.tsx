@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useShoppingCart } from '@lib/context/useShoppingCart';
+import { useShoppingCart } from '@lib/context/shopping-cart';
 import { setTransition } from '@lib/transition';
 import { MdWarning } from '@assets/icons';
 import { Button } from './button';
@@ -25,7 +25,7 @@ export function Error(): JSX.Element {
         <Button
           className='w-full border border-border-secondary'
           label='Reload'
-          onClick={fetchAllProducts(true)}
+          onClick={fetchAllProducts}
         />
       </div>
     </motion.div>

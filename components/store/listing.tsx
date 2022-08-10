@@ -2,16 +2,12 @@ import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import cn from 'clsx';
 import { motion } from 'framer-motion';
-import { useShoppingCart } from '@lib/context/useShoppingCart';
+import { useShoppingCart } from '@lib/context/shopping-cart';
 import { setTransition } from '@lib/transition';
 import { filterQuery } from '@lib/query';
 import { Empty } from '@components/ui/empty';
 import { ProductCard } from './product-card';
-import type { QueryType } from './category-link';
-
-export type ExtraQueryType = QueryType & {
-  pathname: string;
-};
+import type { QueryType } from './aside';
 
 export function Listing(): JSX.Element {
   const { allProducts } = useShoppingCart();
@@ -22,7 +18,7 @@ export function Listing(): JSX.Element {
   const {
     pathname,
     query: { search, category }
-  } = useRouter() as ExtraQueryType;
+  } = useRouter() as QueryType;
 
   useEffect(() => {
     if (typeof search === 'string') setSearchQuery(search);

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useShoppingCart } from '@lib/context/useShoppingCart';
+import { useShoppingCart } from '@lib/context/shopping-cart';
 import { formatCurrency } from '@lib/currency';
 import { setTransition } from '@lib/transition';
 import { MdAdd, MdRemove, MdDelete } from '@assets/icons';
@@ -47,7 +47,7 @@ export function CartItem({
             onClick={toggleCart}
           >
             <ImageLoader
-              divStyle='h-[108px] w-[110px] rounded-l-lg shrink-0 shrink-0 bg-white'
+              divStyle='h-[108px] w-[108px] rounded-l-lg shrink-0 shrink-0 bg-white'
               imageStyle='!p-4'
               src={image}
               alt={title}

@@ -6,20 +6,24 @@ import { useWindowSize } from '@lib/hooks/useWindowSize';
 import { MdSearch } from '@assets/icons';
 import { Button } from '@components/ui/button';
 import type { ChangeEvent, FormEvent } from 'react';
-import type { ExtraQueryType } from '@components/store/listing';
+import type { UrlObject } from 'url';
+import type { QueryType } from '@components/store/aside';
+
+export type ExtraQueryType = QueryType & {
+  push: (url: UrlObject | string) => Promise<boolean>;
+};
 
 export function SearchBar(): JSX.Element {
+  const {
+    pathname,
+    query: { search, category },
+    push
+  } = useRouter() as ExtraQueryType;
+
   const [searchInput, setSearchInput] = useState('');
   const [width] = useWindowSize();
 
   const controls = useAnimation();
-
-  const router = useRouter();
-
-  const {
-    pathname,
-    query: { search, category }
-  } = router as ExtraQueryType;
 
   useEffect(() => {
     if (!search) setSearchInput('');
@@ -39,7 +43,7 @@ export function SearchBar(): JSX.Element {
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    void router.push({
+    void push({
       pathname: '/store',
       query: {
         search: searchInput,

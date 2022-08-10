@@ -11,11 +11,18 @@ const categories = [
   "women's clothing"
 ];
 
+export type QueryType = {
+  pathname: string;
+  query: {
+    [queryName: string]: string | undefined;
+  };
+};
+
 export function Aside(): JSX.Element {
   const {
     pathname,
     query: { category }
-  } = useRouter();
+  } = useRouter() as QueryType;
 
   const currentCategory = category ?? 'All';
 

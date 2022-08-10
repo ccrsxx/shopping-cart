@@ -1,15 +1,10 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import cn from 'clsx';
+import type { QueryType } from './aside';
 
 type CategoryLinkProps = {
   categoryName: string;
-};
-
-export type QueryType = {
-  query: {
-    [queryName: string]: string | undefined;
-  };
 };
 
 export function CategoryLink({ categoryName }: CategoryLinkProps): JSX.Element {
