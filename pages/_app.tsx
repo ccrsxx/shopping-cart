@@ -1,8 +1,8 @@
-import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { Layout } from '@components/common/layout';
+import { AnimatePresence } from 'framer-motion';
 import { ShoppingCartProvider } from '@lib/context/useShoppingCart';
-import '../styles/globals.scss';
+import { Layout } from '@components/common/layout';
+import '@assets/main.scss';
 import type { AppProps } from 'next/app';
 
 export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
