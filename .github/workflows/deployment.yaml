@@ -21,7 +21,7 @@ jobs:
         run: npm run format
 
   eslint:
-    name: ⬣ ESLint
+    name: ✅ ESLint
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo
@@ -44,4 +44,4 @@ jobs:
         run: npm ci
 
       - name: 🔬 Test
-        run: npm run test
+        run: npm run test:ci
