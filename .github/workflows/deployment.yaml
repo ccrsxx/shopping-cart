@@ -21,7 +21,7 @@ jobs:
         run: npm run format
 
   eslint:
-    name: ✅ ESLint
+    name: ⬣ ESLint
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo
@@ -30,5 +30,18 @@ jobs:
       - name: 📥 Download deps
         run: npm ci
 
-      - name: 🔬 Lint
+      - name: 🪄 Lint
         run: npm run lint
+
+  jest:
+    name: 🃏 Jest
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 📥 Download deps
+        run: npm ci
+
+      - name: 🔬 Test
+        run: npm run test
