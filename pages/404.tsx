@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import Head from 'next/head';
 import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import cn from 'clsx';
@@ -56,6 +57,9 @@ export default function NotFound({ pid }: NotFoundProps): JSX.Element {
       className='flex flex-col items-center justify-center'
       {...setTransition({ direction: 'top', distance: 100 })}
     >
+      <Head>
+        <title>Shopping Cart | Not Found</title>
+      </Head>
       <div
         className='flex w-full max-w-md flex-col items-center gap-8
                    rounded-lg border border-border-primary'

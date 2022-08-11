@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import Head from 'next/head';
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -46,8 +47,6 @@ export default function Product(): JSX.Element {
     [isFetching, isError, pathname]
   );
 
-  console.log({ id, isFetching, isError });
-
   return id || isFetching || isError ? (
     <main
       className={`${
@@ -55,6 +54,9 @@ export default function Product(): JSX.Element {
       } flex flex-col gap-4 sm:flex-row md:gap-6 lg:justify-center lg:gap-8`}
       key={currentSlug}
     >
+      <Head>
+        <title>Shopping Cart | Product</title>
+      </Head>
       {isFetching || isError ? (
         <>
           <motion.div className='absolute scale-0' {...setTransition({})} />

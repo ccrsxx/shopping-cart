@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 import { ShoppingCartProvider } from '@lib/context/shopping-cart';
+import { AppHead } from '@components/common/app-head';
 import { AppLayout } from '@components/common/app-layout';
 import '@assets/main.scss';
 import type { AppProps } from 'next/app';
@@ -11,9 +11,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 
   return (
     <>
-      <Head>
-        <title>Shopping Cart</title>
-      </Head>
+      <AppHead />
       <ShoppingCartProvider>
         <AppLayout>
           <AnimatePresence exitBeforeEnter>

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
@@ -19,6 +20,9 @@ export default function Store(): JSX.Element {
 
   return (
     <main className='flex flex-col items-start gap-6 md:flex-row md:gap-8'>
+      <Head>
+        <title>Shopping Cart | Store</title>
+      </Head>
       <Aside />
       {isFetching || isError ? (
         <AnimatePresence exitBeforeEnter>

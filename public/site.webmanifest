@@ -1,7 +1,7 @@
 {
   "name": "Shopping Cart",
   "short_name": "Shopping Cart",
-  "description": "Shopping Cart -> https://shopping-cart-ccrsxx.vercel.app",
+  "description": "The One Stop Shop for All Your Shopping Needs.",
   "display": "standalone",
   "start_url": "/",
   "theme_color": "#fff",
