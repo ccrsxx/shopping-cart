@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test CartItem renders correctly 1`] = `
+<div>
+  <li
+    data-projection-id="1"
+    style="opacity: 0; transform: translateX(50px) translateZ(0);"
+  >
+    <div
+      class="flex rounded-lg border border-border-primary"
+    >
+      <a
+        class="tab hidden rounded-r-none transition hover:brightness-90 focus-visible:brightness-90 md:block"
+        href="/product/24"
+      >
+        <div
+          class="relative h-[108px] w-[108px] rounded-l-lg shrink-0 shrink-0 bg-white animate-pulse !bg-primary"
+        >
+          <span
+            style="box-sizing: border-box; display: block; overflow: hidden; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"
+          >
+            <img
+              alt="Emilia"
+              class="!p-4"
+              data-nimg="fill"
+              decoding="async"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+            />
+            <noscript />
+          </span>
+        </div>
+      </a>
+      <div
+        class="flex w-full flex-col justify-between py-2 px-4"
+      >
+        <div>
+          <a
+            class="tab overflow-hidden text-ellipsis font-medium text-white/90 transition [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical] hover:text-white"
+            href="/product/24"
+          >
+            Emilia
+          </a>
+          <p
+            class="font-bold"
+          >
+            $10.00
+          </p>
+        </div>
+        <div
+          class="flex flex-wrap justify-between text-sm font-light"
+        >
+          <div
+            class="flex gap-1"
+          >
+            <p>
+              Quantity: 
+            </p>
+            <input
+              class="max-w-[60px] rounded-lg bg-background px-1 transition hover:ring-2 hover:ring-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              max="10000"
+              min="1"
+              type="number"
+              value="1"
+            />
+          </div>
+          <p>
+            Total:
+             
+            <span
+              class="font-semibold"
+            >
+              $10.00
+            </span>
+          </p>
+        </div>
+      </div>
+      <div
+        class="grid border-l border-border-primary text-sm inner:rounded-none"
+      >
+        <button
+          aria-label="Increase"
+          class="tab flex select-none items-center justify-center gap-2 rounded-lg bg-transparent py-2 px-3 
+         font-medium transition duration-300 hover:text-primary active:scale-90 active:duration-150 
+         enabled:hover:bg-accent disabled:cursor-not-allowed disabled:brightness-50 !rounded-tr-lg disabled:text-gray-600 disabled:!brightness-100"
+          type="button"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+            />
+          </svg>
+        </button>
+        <button
+          aria-label="Decrease"
+          class="tab flex select-none items-center justify-center gap-2 rounded-lg bg-transparent py-2 px-3 
+         font-medium transition duration-300 hover:text-primary active:scale-90 active:duration-150 
+         enabled:hover:bg-accent disabled:cursor-not-allowed disabled:brightness-50 border-y border-border-primary disabled:text-gray-600 disabled:!brightness-100"
+          disabled=""
+          type="button"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M19 13H5v-2h14v2z"
+            />
+          </svg>
+        </button>
+        <button
+          aria-label="Delete"
+          class="tab flex select-none items-center justify-center gap-2 rounded-lg bg-transparent py-2 px-3 
+         font-medium transition duration-300 hover:text-primary active:scale-90 active:duration-150 
+         enabled:hover:bg-accent disabled:cursor-not-allowed disabled:brightness-50 !rounded-br-lg"
+          type="button"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </li>
+</div>
+`;

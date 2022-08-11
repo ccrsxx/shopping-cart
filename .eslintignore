@@ -1,2 +1,9 @@
+# next config
+next.config.js
+
+# tailwind config
 tailwind.config.js
 postcss.config.js
+
+# jest
+jest.config.js
