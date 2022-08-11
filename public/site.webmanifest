@@ -1,0 +1,22 @@
+{
+  "name": "Shopping Cart",
+  "short_name": "Shopping Cart",
+  "description": "Shopping Cart -> https://shopping-cart-ccrsxx.vercel.app",
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#fff",
+  "background_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

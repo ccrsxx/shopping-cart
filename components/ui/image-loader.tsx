@@ -25,20 +25,16 @@ export function ImageLoader({
 
   const handleLoad = (): void => setIsLoading(false);
 
-  const { div, image } = isLoading
-    ? {
-        div: 'animate-pulse !bg-white',
-        image: 'opacity-0'
-      }
-    : {
-        div: '',
-        image: 'opacity-100'
-      };
-
   return (
-    <div className={cn('relative transition-colors', div, divStyle)}>
+    <div
+      className={cn(
+        'relative',
+        divStyle,
+        isLoading && 'animate-pulse !bg-primary'
+      )}
+    >
       <Image
-        className={cn('transition-opacity', image, imageStyle)}
+        className={imageStyle}
         src={src}
         alt={alt}
         draggable={draggable}

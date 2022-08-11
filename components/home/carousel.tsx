@@ -41,8 +41,8 @@ export function Carousel(): JSX.Element {
     if (currentIndex >= carouselImages.length) setCurrentIndex(0);
     else if (currentIndex < 0) setCurrentIndex(carouselImages.length - 1);
 
-    // setIndexByTimeout();
-    // return resetTimeout;
+    setIndexByTimeout();
+    return resetTimeout;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
 

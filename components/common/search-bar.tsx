@@ -9,7 +9,7 @@ import type { ChangeEvent, FormEvent } from 'react';
 import type { UrlObject } from 'url';
 import type { QueryType } from '@components/store/aside';
 
-export type ExtraQueryType = QueryType & {
+type ExtraQueryType = QueryType & {
   push: (url: UrlObject | string) => Promise<boolean>;
 };
 
@@ -46,7 +46,7 @@ export function SearchBar(): JSX.Element {
     void push({
       pathname: '/store',
       query: {
-        search: searchInput,
+        ...(searchInput && { search: searchInput }),
         ...(category && { category })
       }
     });

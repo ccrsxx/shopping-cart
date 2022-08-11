@@ -18,10 +18,8 @@ export function Cart(): JSX.Element {
   const isMobile = useRef(false);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => setTotalProducts(cartProducts), 500);
-    return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setTotalProducts(cartProducts);
+  }, [cartProducts]);
 
   useEffect(() => {
     if (isMobile.current && !isCartOpen)

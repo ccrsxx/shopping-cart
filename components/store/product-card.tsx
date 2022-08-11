@@ -52,7 +52,7 @@ export function ProductCard({
           <ImageLoader
             divStyle='flex h-[230px] items-center justify-center rounded-t-lg bg-primary'
             imageStyle='!p-4'
-            src={`${image}?${Math.random()}`}
+            src={image}
             alt={title}
             objectFit='contain'
           />

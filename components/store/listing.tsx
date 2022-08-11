@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import cn from 'clsx';
@@ -21,12 +23,11 @@ export function Listing(): JSX.Element {
   } = useRouter() as QueryType;
 
   useEffect(() => {
-    if (typeof search === 'string') setSearchQuery(search);
+    if (pathname === '/store') setSearchQuery(search ?? '');
   }, [search]);
 
   useEffect(() => {
     if (pathname === '/store') setCurrentCategory(category ?? null);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   let filteredProducts = allProducts.filter(
@@ -40,7 +41,6 @@ export function Listing(): JSX.Element {
 
   const productsNotFound = filteredProducts.length === 0;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const key = useMemo(() => Math.random(), [currentCategory, searchQuery]);
 
   return (

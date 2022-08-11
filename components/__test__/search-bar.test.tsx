@@ -19,7 +19,7 @@ describe('test SearchBar', () => {
     render(<SearchBar />);
   });
 
-  it.only('renders correctly', () => {
+  it('renders correctly', () => {
     const { container } = render(<SearchBar />);
     expect(container).toMatchSnapshot();
   });
@@ -33,7 +33,7 @@ describe('test SearchBar', () => {
   it('can receive input value', () => {
     const input = screen.getByRole('textbox');
 
-    void userEvent.type(input, 'test');
+    userEvent.type(input, 'test');
 
     expect(input).toHaveValue('test');
   });
@@ -41,27 +41,40 @@ describe('test SearchBar', () => {
   it('can submit the form and navigate to input value', () => {
     const input = screen.getByRole('textbox');
 
-    void userEvent.type(input, 'test');
-    void userEvent.type(input, '{enter}');
+    userEvent.type(input, 'test');
+    userEvent.type(input, '{enter}');
 
-    expect(mockRouterPush).toHaveBeenCalledWith('/store?search=test');
+    expect(mockRouterPush).toHaveBeenCalledWith({
+      pathname: '/store',
+      query: {
+        search: 'test'
+      }
+    });
   });
 
   it('can submit with search button', () => {
     const input = screen.getByRole('textbox');
     const button = screen.getByRole('button');
 
-    void userEvent.type(input, 'test');
-    void userEvent.click(button);
+    userEvent.type(input, 'test');
+    userEvent.click(button);
 
-    expect(mockRouterPush).toHaveBeenCalledWith('/store?search=test');
+    expect(mockRouterPush).toHaveBeenCalledWith({
+      pathname: '/store',
+      query: {
+        search: 'test'
+      }
+    });
   });
 
   it('can submit empty value', () => {
     const button = screen.getByRole('button');
 
-    void userEvent.click(button);
+    userEvent.click(button);
 
-    expect(mockRouterPush).toHaveBeenCalledWith('/store?search=');
+    expect(mockRouterPush).toHaveBeenCalledWith({
+      pathname: '/store',
+      query: {}
+    });
   });
 });

@@ -46,20 +46,20 @@ export function ShoppingCartProvider({
 }: ShoppingCartProviderProps): JSX.Element {
   const [currentCart, setCurrentCart] = useStore<Carts>('currentCart', []);
   const [allProducts, setAllProducts] = useState<Products>([]);
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     void fetchAllProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchAllProducts = async (
     e?: MouseEvent<HTMLButtonElement>
   ): Promise<void> => {
-    if (e) setIsError(false);
-
-    setIsFetching(true);
+    if (e) {
+      setIsFetching(true);
+      setIsError(false);
+    }
 
     try {
       const products = await getAllProducts();

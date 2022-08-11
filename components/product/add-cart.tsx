@@ -11,9 +11,9 @@ import {
   MdRemoveShoppingCart
 } from '@assets/icons';
 
-interface AddCartProps {
+type AddCartProps = {
   id?: number;
-}
+};
 
 export function AddCart({ id }: AddCartProps): JSX.Element {
   const { currentCart, addProduct, deleteProduct, handleProductQuantity } =

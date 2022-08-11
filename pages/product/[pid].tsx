@@ -16,14 +16,14 @@ import type { QueryType } from '@components/store/aside';
 export default function Product(): JSX.Element {
   const {
     pathname,
-    query: { slug }
+    query: { pid }
   } = useRouter() as QueryType;
 
   const [currentSlug, setCurrentSlug] = useState<string | null>(null);
 
   useEffect(() => {
-    if (slug) setCurrentSlug(slug);
-  }, [slug]);
+    if (pid) setCurrentSlug(pid);
+  }, [pid]);
 
   const { allProducts, isFetching, isError } = useShoppingCart();
 
@@ -45,6 +45,8 @@ export default function Product(): JSX.Element {
     () => Math.random(),
     [isFetching, isError, pathname]
   );
+
+  console.log({ id, isFetching, isError });
 
   return id || isFetching || isError ? (
     <main
@@ -82,6 +84,6 @@ export default function Product(): JSX.Element {
       )}
     </main>
   ) : (
-    <NotFound slug={slug} />
+    <NotFound pid={pid} />
   );
 }

@@ -8,16 +8,16 @@ type NavLinkProps = {
   disableScroll?: boolean;
 };
 
+const delayScroll = (): void => {
+  setTimeout(() => window.scrollTo(0, 0), 500);
+};
+
 export function NavLink({
   href,
   linkName,
   pathname,
   disableScroll
 }: NavLinkProps): JSX.Element {
-  const delayScroll = (): void => {
-    setTimeout(() => window.scrollTo(0, 0), 500);
-  };
-
   return (
     <Link href={href} key={href} scroll={!disableScroll}>
       <a

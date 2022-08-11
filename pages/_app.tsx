@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 import { ShoppingCartProvider } from '@lib/context/shopping-cart';
@@ -9,12 +10,17 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const { pathname } = useRouter();
 
   return (
-    <ShoppingCartProvider>
-      <AppLayout>
-        <AnimatePresence exitBeforeEnter>
-          <Component {...pageProps} key={pathname} />
-        </AnimatePresence>
-      </AppLayout>
-    </ShoppingCartProvider>
+    <>
+      <Head>
+        <title>Shopping Cart</title>
+      </Head>
+      <ShoppingCartProvider>
+        <AppLayout>
+          <AnimatePresence exitBeforeEnter>
+            <Component {...pageProps} key={pathname} />
+          </AnimatePresence>
+        </AppLayout>
+      </ShoppingCartProvider>
+    </>
   );
 }

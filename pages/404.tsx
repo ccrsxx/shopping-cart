@@ -7,17 +7,21 @@ import { motion } from 'framer-motion';
 import { setTransition } from '@lib/transition';
 
 interface NotFoundProps {
-  slug?: string;
+  pid?: string;
 }
 
-export default function NotFound({ slug }: NotFoundProps): JSX.Element {
+export default function NotFound({ pid }: NotFoundProps): JSX.Element {
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
 
-  const { asPath, push } = useRouter();
+  const {
+    asPath,
+    query: { redirect },
+    push
+  } = useRouter();
 
   const { title, navigateTo, targetPage } = useMemo(
     () =>
-      slug
+      pid
         ? {
             title: 'Product',
             navigateTo: '/store',
@@ -37,9 +41,12 @@ export default function NotFound({ slug }: NotFoundProps): JSX.Element {
   }, []);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => setCurrentUrl(slug ?? asPath), 500);
+    const timeoutId = setTimeout(
+      () => setCurrentUrl(Array.isArray(redirect) ? asPath : pid ?? asPath),
+      500
+    );
     return () => clearTimeout(timeoutId);
-  }, [slug]);
+  }, [asPath, pid]);
 
   const currentPage = currentUrl ?? '...';
   const truncatedPage = currentPage?.replace(/(.{10}).+/, '$1…');
