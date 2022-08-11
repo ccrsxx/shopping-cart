@@ -10,19 +10,19 @@ import type { PanInfo } from 'framer-motion';
 const carouselImages = [
   {
     src: '/images/electronics.jpg',
-    alt: 'Electronics'
+    alt: 'electronics'
   },
   {
     src: '/images/jewelery.jpg',
-    alt: 'Jewelery'
+    alt: 'jewelery'
   },
   {
     src: '/images/mens-clothing.jpg',
-    alt: "Men's clothing"
+    alt: "men's clothing"
   },
   {
     src: '/images/womens-clothing.jpg',
-    alt: "Women's clothing"
+    alt: "women's clothing"
   }
 ];
 
@@ -122,7 +122,6 @@ export function Carousel(): JSX.Element {
                 <Link href={`/store?category=${alt}`}>
                   <motion.a
                     className='absolute bottom-10 w-max'
-                    tabIndex={-1}
                     {...setTransition({
                       typeIn: 'tween',
                       typeOut: 'tween',
