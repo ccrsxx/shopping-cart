@@ -1,8 +1,9 @@
 import { Navbar } from './navbar';
 import { Footer } from './footer';
+import type { ReactNode } from 'react';
 
 type AppLayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function AppLayout({ children }: AppLayoutProps): JSX.Element {

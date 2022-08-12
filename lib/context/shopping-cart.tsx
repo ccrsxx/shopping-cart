@@ -1,23 +1,18 @@
-import { useState, useEffect, useMemo, useContext, createContext } from 'react';
+import { useMemo, useContext, createContext } from 'react';
 import { useLocalStorage as useStore } from '@lib/hooks/useLocalStorage';
-import { getAllProducts } from '@lib/api/products';
-import type { MouseEvent, ChangeEvent } from 'react';
-import type { Product, Products } from '@lib/api/products';
+import type { ReactNode, ChangeEvent } from 'react';
+import type { Product } from '@lib/api/products';
 
 export type Cart = Product & { quantity: number };
 export type Carts = Cart[];
 
 export type ShoppingCartContext = {
   cartProducts: number;
-  allProducts: Products;
   currentCart: Carts;
   totalPrice: number;
-  isFetching: boolean;
-  isError: boolean;
   clearCart: () => void;
-  addProduct: (productId: number) => () => void;
+  addProduct: (productData: Product) => () => void;
   deleteProduct: (productId: number) => () => void;
-  fetchAllProducts: (e?: MouseEvent<HTMLButtonElement>) => void;
   handleProductQuantity: (
     productId: number,
     type?: 'increment' | 'decrement'
@@ -38,45 +33,16 @@ export function useShoppingCart(): ShoppingCartContext {
 }
 
 type ShoppingCartProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function ShoppingCartProvider({
   children
 }: ShoppingCartProviderProps): JSX.Element {
   const [currentCart, setCurrentCart] = useStore<Carts>('currentCart', []);
-  const [allProducts, setAllProducts] = useState<Products>([]);
-  const [isFetching, setIsFetching] = useState(true);
-  const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    void fetchAllProducts();
-  }, []);
-
-  const fetchAllProducts = async (
-    e?: MouseEvent<HTMLButtonElement>
-  ): Promise<void> => {
-    if (e) {
-      setIsFetching(true);
-      setIsError(false);
-    }
-
-    try {
-      const products = await getAllProducts();
-      setAllProducts(products);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
-      setIsError(true);
-    }
-
-    setIsFetching(false);
-  };
-
-  const addProduct = (productId: number) => (): void => {
-    const product = allProducts.find(({ id }) => id === productId);
-    setCurrentCart([{ ...product, quantity: 1 } as Cart, ...currentCart]);
-  };
+  const addProduct = (productData: Product) => (): void =>
+    setCurrentCart([{ ...productData, quantity: 1 }, ...currentCart]);
 
   const deleteProduct = (productId: number) => (): void =>
     setCurrentCart(currentCart.filter(({ id }) => id !== productId));
@@ -121,15 +87,11 @@ export function ShoppingCartProvider({
 
   const value = {
     cartProducts,
-    allProducts,
     currentCart,
     totalPrice,
-    isFetching,
-    isError,
     clearCart,
     addProduct,
     deleteProduct,
-    fetchAllProducts,
     handleProductQuantity
   };
 

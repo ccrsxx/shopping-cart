@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import cn from 'clsx';
+import type { ReactNode } from 'react';
 
 type ImageLoaderProps = {
   src: string;
@@ -9,7 +10,7 @@ type ImageLoaderProps = {
   imageStyle?: string;
   objectFit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';
   draggable?: boolean;
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
 export function ImageLoader({

@@ -1,40 +1,39 @@
-import Head from 'next/head';
-import { useMemo } from 'react';
-import { useRouter } from 'next/router';
-import { AnimatePresence } from 'framer-motion';
-import { useShoppingCart } from '@lib/context/shopping-cart';
+import { MainLayout } from '@components/common/main-layout';
 import { Aside } from '@components/store/aside';
 import { Listing } from '@components/store/listing';
-import { Fetching } from '@components/ui/fetching';
-import { Error } from '@components/ui/error';
+import { getAllProducts } from '@lib/api/products';
+import type { InferGetStaticPropsType } from 'next';
+import type { Products } from '@lib/api/products';
 
-export default function Store(): JSX.Element {
-  const { pathname } = useRouter();
-  const { isFetching, isError } = useShoppingCart();
+type StaticProps = {
+  props: {
+    allProducts: Products;
+  };
+};
 
-  const randomKey = useMemo(
-    () => Math.random(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isFetching, isError, pathname]
-  );
+export async function getStaticProps(): Promise<StaticProps> {
+  const allProducts = await getAllProducts();
 
+  return {
+    props: {
+      allProducts
+    }
+  };
+}
+
+export default function Store({
+  allProducts
+}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   return (
-    <main className='flex flex-col items-start gap-6 md:flex-row md:gap-8'>
-      <Head>
-        <title>Shopping Cart | Store</title>
-      </Head>
+    <MainLayout
+      className='flex flex-col items-start gap-6 md:flex-row md:gap-8'
+      title='Shopping Cart | Store'
+      description='You can find everything you need here.'
+      image='/store.png'
+      url='/store'
+    >
       <Aside />
-      {isFetching || isError ? (
-        <AnimatePresence exitBeforeEnter>
-          {isFetching ? (
-            <Fetching key={randomKey} />
-          ) : (
-            <Error key={randomKey} />
-          )}
-        </AnimatePresence>
-      ) : (
-        <Listing />
-      )}
-    </main>
+      <Listing allProducts={allProducts} />
+    </MainLayout>
   );
 }

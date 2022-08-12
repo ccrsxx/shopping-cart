@@ -4,7 +4,6 @@ export {
   MdRemove,
   MdDelete,
   MdSearch,
-  MdWarning,
   MdArrowForward,
   MdArrowBackIos,
   MdShoppingCart,
@@ -18,4 +17,3 @@ export {
   RiGithubFill,
   RiCustomerServiceFill
 } from 'react-icons/ri';
-export { VscLoading } from 'react-icons/vsc';
