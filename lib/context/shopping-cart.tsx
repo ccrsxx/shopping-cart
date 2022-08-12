@@ -1,12 +1,12 @@
-import { useMemo, useContext, createContext } from 'react';
+import { useContext, createContext } from 'react';
 import { useLocalStorage as useStore } from '@lib/hooks/useLocalStorage';
 import type { ReactNode, ChangeEvent } from 'react';
 import type { Product } from '@lib/api/products';
 
-export type Cart = Product & { quantity: number };
-export type Carts = Cart[];
+type Cart = Product & { quantity: number };
+type Carts = Cart[];
 
-export type ShoppingCartContext = {
+type ShoppingCartContext = {
   cartProducts: number;
   currentCart: Carts;
   totalPrice: number;
@@ -73,16 +73,12 @@ export function ShoppingCartProvider({
 
   const clearCart = (): void => setCurrentCart([]);
 
-  const [cartProducts, totalPrice] = useMemo(
-    () =>
-      currentCart.reduce(
-        ([products, total], { price, quantity }) => [
-          products + quantity,
-          total + price * quantity
-        ],
-        [0, 0]
-      ),
-    [currentCart]
+  const [cartProducts, totalPrice] = currentCart.reduce(
+    ([products, total], { price, quantity }) => [
+      products + quantity,
+      total + price * quantity
+    ],
+    [0, 0]
   );
 
   const value = {
