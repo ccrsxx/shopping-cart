@@ -31,7 +31,7 @@ export function ProductView({
       image='/product.png'
       url={`/product/${pid}`}
     >
-      <ProductImage image={image} title={title} />
+      <ProductImage image={image} title={title} key={id} />
       <div className='flex w-full max-w-4xl flex-col-reverse gap-4 md:gap-6 lg:flex-row lg:gap-8'>
         <ProductDetail
           title={title}
@@ -40,8 +40,9 @@ export function ProductView({
           price={price}
           category={category}
           description={description}
+          key={title}
         />
-        <ProductCart id={id} productData={productData} />
+        <ProductCart id={id} productData={productData} key={price} />
       </div>
     </MainLayout>
   );
