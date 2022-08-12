@@ -1,4 +1,5 @@
 import cn from 'clsx';
+import type { ReactNode } from 'react';
 import type { IconType } from 'react-icons';
 
 type ButtonProps = {
@@ -9,7 +10,7 @@ type ButtonProps = {
   flipped?: boolean;
   disabled?: boolean;
   tabIndex?: number;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   ariaLabel?: string;
   onClick?: () => void;

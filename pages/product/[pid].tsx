@@ -1,90 +1,51 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import NotFound from 'pages/404';
+import { getAllProductsId, getProductData } from '@lib/api/products';
+import { ProductView } from '@components/product/product-view';
+import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import type { Product, ProductsParams } from '@lib/api/products';
 
-import Head from 'next/head';
-import { useEffect, useMemo, useState } from 'react';
-import { useRouter } from 'next/router';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useShoppingCart } from '@lib/context/shopping-cart';
-import { setTransition } from '@lib/transition';
-import { ProductImage } from '@components/product/product-image';
-import { ProductDetail } from '@components/product/product-detail';
-import { AddCart } from '@components/product/add-cart';
-import { Fetching } from '@components/ui/fetching';
-import { Error } from '@components/ui/error';
-import NotFound from '../404';
-import type { QueryType } from '@components/store/aside';
+type StaticPaths = {
+  paths: ProductsParams;
+  fallback: boolean | 'blocking';
+};
 
-export default function Product(): JSX.Element {
-  const {
-    pathname,
-    query: { pid }
-  } = useRouter() as QueryType;
+export async function getStaticPaths(): Promise<StaticPaths> {
+  const paths = await getAllProductsId();
 
-  const [currentSlug, setCurrentSlug] = useState<string | null>(null);
+  return {
+    paths,
+    fallback: 'blocking'
+  };
+}
 
-  useEffect(() => {
-    if (pid) setCurrentSlug(pid);
-  }, [pid]);
+type StaticProps = {
+  props: {
+    pid: string;
+    productData: Product | null;
+  };
+};
 
-  const { allProducts, isFetching, isError } = useShoppingCart();
+export async function getStaticProps({
+  params
+}: GetStaticPropsContext<{ pid: string }>): Promise<StaticProps> {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { pid } = params!;
+  const productData = await getProductData(pid);
 
-  const product = allProducts.find(
-    ({ id }) => id === parseInt(currentSlug as string, 10)
-  );
+  return {
+    props: {
+      pid,
+      productData
+    }
+  };
+}
 
-  const {
-    id,
-    title,
-    price,
-    description,
-    category,
-    image,
-    rating: { count, rate }
-  } = product ?? { rating: {} };
-
-  const randomKey = useMemo(
-    () => Math.random(),
-    [isFetching, isError, pathname]
-  );
-
-  return id || isFetching || isError ? (
-    <main
-      className={`${
-        isFetching ? 'items-center' : 'items-start'
-      } flex flex-col gap-4 sm:flex-row md:gap-6 lg:justify-center lg:gap-8`}
-      key={currentSlug}
-    >
-      <Head>
-        <title>Shopping Cart | Product</title>
-      </Head>
-      {isFetching || isError ? (
-        <>
-          <motion.div className='absolute scale-0' {...setTransition({})} />
-          <AnimatePresence exitBeforeEnter>
-            {isFetching ? (
-              <Fetching key={randomKey} />
-            ) : (
-              <Error key={randomKey} />
-            )}
-          </AnimatePresence>
-        </>
-      ) : (
-        <>
-          <ProductImage image={image} title={title} />
-          <div className='flex w-full max-w-4xl flex-col-reverse gap-4 md:gap-6 lg:flex-row lg:gap-8'>
-            <ProductDetail
-              title={title}
-              count={count}
-              rate={rate}
-              price={price}
-              category={category}
-              description={description}
-            />
-            <AddCart id={id} />
-          </div>
-        </>
-      )}
-    </main>
+export default function Product({
+  pid,
+  productData
+}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+  return productData ? (
+    <ProductView pid={pid} productData={productData} />
   ) : (
     <NotFound pid={pid} />
   );

@@ -24,7 +24,7 @@ describe('test filterQuery', () => {
 
   it('trims string and still matches', () => {
     const test = '     Vladilena      Milizé    ';
-    const match = '   nami   ';
+    const match = '   na  mi   ';
     expect(filterQuery(test, match)).toBe(true);
   });
 });

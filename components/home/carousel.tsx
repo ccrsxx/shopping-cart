@@ -9,19 +9,19 @@ import type { PanInfo } from 'framer-motion';
 
 const carouselImages = [
   {
-    src: '/images/electronics.jpg',
+    src: '/assets/electronics.jpg',
     alt: 'electronics'
   },
   {
-    src: '/images/jewelery.jpg',
+    src: '/assets/jewelery.jpg',
     alt: 'jewelery'
   },
   {
-    src: '/images/mens-clothing.jpg',
+    src: '/assets/mens-clothing.jpg',
     alt: "men's clothing"
   },
   {
-    src: '/images/womens-clothing.jpg',
+    src: '/assets/womens-clothing.jpg',
     alt: "women's clothing"
   }
 ];

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useShoppingCart } from '@lib/context/shopping-cart';
 import { Button } from '@components/ui/button';
@@ -9,37 +10,47 @@ import {
   MdRemoveShoppingCart
 } from '@assets/icons';
 import type { MouseEvent } from 'react';
+import type { Product } from '@lib/api/products';
 
 type ProductCardProps = {
-  id: number;
-  title: string;
-  image: string;
-  price: number;
-  rating: {
-    count: number;
-    rate: number;
-  };
+  productData: Product;
 };
 
-export function ProductCard({
-  id,
-  title,
-  image,
-  price,
-  rating: { count, rate }
-}: ProductCardProps): JSX.Element {
+export function ProductCard({ productData }: ProductCardProps): JSX.Element {
+  const {
+    id,
+    title,
+    image,
+    price,
+    rating: { count, rate }
+  } = productData;
+
+  const [productQuantity, setProductQuantity] = useState(0);
+
   const { currentCart, addProduct, deleteProduct } = useShoppingCart();
 
   const { quantity } =
     currentCart.find(({ id: cartId }) => cartId === id) ?? {};
 
-  const { label, Icon, onClick } = quantity
-    ? { label: 'Remove', Icon: MdRemoveShoppingCart, onClick: deleteProduct }
-    : { label: 'Add', Icon: MdAddShoppingCart, onClick: addProduct };
+  useEffect(() => {
+    setProductQuantity(quantity ?? 0);
+  }, [quantity]);
+
+  const { label, Icon, onClick } = productQuantity
+    ? {
+        label: 'Remove',
+        Icon: MdRemoveShoppingCart,
+        onClick: deleteProduct(id)
+      }
+    : {
+        label: 'Add',
+        Icon: MdAddShoppingCart,
+        onClick: addProduct(productData)
+      };
 
   const handleClick = (e?: MouseEvent<HTMLButtonElement>): void => {
     e?.preventDefault();
-    onClick(id)();
+    onClick();
   };
 
   return (

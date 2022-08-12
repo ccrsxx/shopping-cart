@@ -4,16 +4,18 @@ import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import cn from 'clsx';
 import { motion } from 'framer-motion';
-import { useShoppingCart } from '@lib/context/shopping-cart';
 import { setTransition } from '@lib/transition';
 import { filterQuery } from '@lib/query';
 import { Empty } from '@components/ui/empty';
 import { ProductCard } from './product-card';
+import type { Products } from '@lib/api/products';
 import type { QueryType } from './aside';
 
-export function Listing(): JSX.Element {
-  const { allProducts } = useShoppingCart();
+type ListingProps = {
+  allProducts: Products;
+};
 
+export function Listing({ allProducts }: ListingProps): JSX.Element {
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -54,8 +56,8 @@ export function Listing(): JSX.Element {
       key={key}
     >
       {!productsNotFound ? (
-        filteredProducts.map((product) => (
-          <ProductCard {...product} key={product.id} />
+        filteredProducts.map((productData) => (
+          <ProductCard productData={productData} key={productData.id} />
         ))
       ) : (
         <Empty searchQuery={searchQuery} />

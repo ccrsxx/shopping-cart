@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import { motion } from 'framer-motion';
 import { setTransition } from '@lib/transition';
 import { formatCurrency } from '@lib/currency';
 import { RiStarSFill } from '@assets/icons';
 
 interface ProductDetailProps {
-  title?: string;
-  count?: number;
-  rate?: number;
-  price?: number;
-  category?: string;
-  description?: string;
+  title: string;
+  count: number;
+  rate: number;
+  price: number;
+  category: string;
+  description: string;
 }
 
 export function ProductDetail({
@@ -44,7 +42,7 @@ export function ProductDetail({
             </p>
           </div>
         </div>
-        <h2 className='text-3xl font-bold'>{formatCurrency(price!)}</h2>
+        <h2 className='text-3xl font-bold'>{formatCurrency(price)}</h2>
       </div>
       <hr />
       <div className='flex flex-col gap-2'>
