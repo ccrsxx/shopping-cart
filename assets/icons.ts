@@ -17,3 +17,4 @@ export {
   RiGithubFill,
   RiCustomerServiceFill
 } from 'react-icons/ri';
+export { VscLoading } from 'react-icons/vsc';

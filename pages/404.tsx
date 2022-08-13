@@ -15,6 +15,7 @@ export default function NotFound({ pid }: NotFoundProps): JSX.Element {
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
 
   const {
+    isReady,
     asPath,
     query: { redirect },
     push
@@ -42,6 +43,7 @@ export default function NotFound({ pid }: NotFoundProps): JSX.Element {
   }, []);
 
   useEffect(() => {
+    if (!isReady) return;
     const timeoutId = setTimeout(
       () => setCurrentUrl(Array.isArray(redirect) ? asPath : pid ?? asPath),
       500

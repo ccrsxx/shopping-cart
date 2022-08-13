@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import cn from 'clsx';
 import { setTransition } from '@lib/transition';
 import { CategoryLink } from './category-link';
 
@@ -12,6 +13,7 @@ const categories = [
 ];
 
 export type QueryType = {
+  isReady: boolean;
   pathname: string;
   query: {
     [queryName: string]: string | undefined;
@@ -19,19 +21,19 @@ export type QueryType = {
 };
 
 export function Aside(): JSX.Element {
+  const [currentCategory, setCurrentCategory] = useState<null | string>(null);
+
   const {
+    isReady,
     pathname,
-    query: { category }
+    query: { search, category }
   } = useRouter() as QueryType;
 
-  const currentCategory = category ?? 'All';
-
-  const [savedCategory, setSavedCategory] = useState(currentCategory);
-
   useEffect(() => {
-    if (pathname === '/store') setSavedCategory(currentCategory);
+    if (!isReady) return;
+    if (pathname === '/store') setCurrentCategory(category ?? 'all');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCategory]);
+  }, [category]);
 
   return (
     <motion.aside
@@ -39,20 +41,35 @@ export function Aside(): JSX.Element {
                  border border-border-primary p-4 md:sticky md:max-w-sm'
       {...setTransition({ direction: 'left' })}
     >
-      <div className='flex flex-wrap items-center justify-center gap-2 text-center md:block md:text-left'>
+      <div
+        className={cn(
+          'flex flex-wrap items-center justify-center gap-2 text-center md:block md:text-left',
+          !currentCategory && 'animate-pulse'
+        )}
+      >
         <h1 className='text-xl'>Store /</h1>
         <p className='text-2xl font-bold capitalize md:text-4xl'>
-          {savedCategory}
+          {currentCategory ?? '...'}
         </p>
       </div>
       <hr />
       <ul className='flex flex-wrap justify-center gap-2 inner:text-lg inner:capitalize inner:text-secondary md:block'>
         <li>
-          <CategoryLink categoryName='all' />
+          <CategoryLink
+            search={search}
+            category={category}
+            currentCategory={currentCategory}
+            categoryName='all'
+          />
         </li>
         {categories.map((categoryName) => (
           <li key={categoryName}>
-            <CategoryLink categoryName={categoryName} />
+            <CategoryLink
+              search={search}
+              category={category}
+              currentCategory={currentCategory}
+              categoryName={categoryName}
+            />
           </li>
         ))}
       </ul>

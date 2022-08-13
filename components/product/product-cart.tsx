@@ -27,13 +27,8 @@ export function ProductCart({ id, productData }: AddCartProps): JSX.Element {
     currentCart.find(({ id: cartId }) => cartId === id) ?? {};
 
   useEffect(() => {
-    const sleep = (ms: number): Promise<void> =>
-      new Promise((resolve) => setTimeout(resolve, ms));
-    const addCartData = async (): Promise<void> => {
-      await sleep(500);
-      setLoading(false);
-    };
-    void addCartData();
+    const timeoutId = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {

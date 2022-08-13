@@ -28,8 +28,7 @@ export function SearchBar(): JSX.Element {
   useEffect(() => {
     if (!search) setSearchInput('');
     else setSearchInput(search);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [search, pathname]);
 
   const setMaxWidth = (maxWidth: number) => (): void =>
     void controls.start({

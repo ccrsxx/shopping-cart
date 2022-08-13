@@ -1,17 +1,19 @@
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import cn from 'clsx';
-import type { QueryType } from './aside';
 
 type CategoryLinkProps = {
+  search: string | undefined;
+  category: string | undefined;
   categoryName: string;
+  currentCategory: string | null;
 };
 
-export function CategoryLink({ categoryName }: CategoryLinkProps): JSX.Element {
-  const {
-    query: { search, category }
-  } = useRouter() as QueryType;
-
+export function CategoryLink({
+  search,
+  category,
+  categoryName,
+  currentCategory
+}: CategoryLinkProps): JSX.Element {
   const isActive =
     categoryName === 'all' ? !category : category === categoryName;
 
@@ -28,7 +30,7 @@ export function CategoryLink({ categoryName }: CategoryLinkProps): JSX.Element {
       <a
         className={cn(
           'tab transition hover:brightness-125',
-          isActive && 'text-primary'
+          currentCategory && isActive && 'text-primary'
         )}
       >
         {categoryName}
