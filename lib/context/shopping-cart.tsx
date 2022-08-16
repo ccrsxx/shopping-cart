@@ -1,5 +1,6 @@
 import { useContext, createContext } from 'react';
 import { useLocalStorage as useStore } from '@lib/hooks/useLocalStorage';
+import { useWindowSize } from '@lib/hooks/useWindowSize';
 import type { ReactNode, ChangeEvent } from 'react';
 import type { Product } from '@lib/api/products';
 
@@ -7,9 +8,10 @@ type Cart = Product & { quantity: number };
 type Carts = Cart[];
 
 type ShoppingCartContext = {
-  cartProducts: number;
-  currentCart: Carts;
+  isMobile: boolean;
   totalPrice: number;
+  currentCart: Carts;
+  cartProducts: number;
   clearCart: () => void;
   addProduct: (productData: Product) => () => void;
   deleteProduct: (productId: number) => () => void;
@@ -40,6 +42,7 @@ export function ShoppingCartProvider({
   children
 }: ShoppingCartProviderProps): JSX.Element {
   const [currentCart, setCurrentCart] = useStore<Carts>('currentCart', []);
+  const [width] = useWindowSize();
 
   const addProduct = (productData: Product) => (): void =>
     setCurrentCart([{ ...productData, quantity: 1 }, ...currentCart]);
@@ -81,10 +84,13 @@ export function ShoppingCartProvider({
     [0, 0]
   );
 
+  const isMobile = width < 768;
+
   const value = {
-    cartProducts,
-    currentCart,
+    isMobile,
     totalPrice,
+    currentCart,
+    cartProducts,
     clearCart,
     addProduct,
     deleteProduct,

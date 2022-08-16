@@ -1,3 +1,4 @@
+import { useShoppingCart } from '@lib/context/shopping-cart';
 import { MainLayout } from '@components/common/main-layout';
 import { ProductImage } from './product-image';
 import { ProductDetail } from './product-detail';
@@ -13,6 +14,8 @@ export function ProductView({
   pid,
   productData
 }: ProductViewProps): JSX.Element {
+  const { isMobile } = useShoppingCart();
+
   const {
     id,
     title,
@@ -31,7 +34,7 @@ export function ProductView({
       image='/product.png'
       url={`/product/${pid}`}
     >
-      <ProductImage image={image} title={title} key={id} />
+      <ProductImage image={image} title={title} isMobile={isMobile} key={id} />
       <div className='flex w-full max-w-4xl flex-col-reverse gap-4 md:gap-6 lg:flex-row lg:gap-8'>
         <ProductDetail
           title={title}
@@ -42,7 +45,12 @@ export function ProductView({
           description={description}
           key={title}
         />
-        <ProductCart id={id} productData={productData} key={price} />
+        <ProductCart
+          id={id}
+          isMobile={isMobile}
+          productData={productData}
+          key={price}
+        />
       </div>
     </MainLayout>
   );

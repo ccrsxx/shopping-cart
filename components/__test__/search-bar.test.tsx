@@ -7,11 +7,15 @@ import type { ExtraQueryType } from '@components/common/search-bar';
 const mockRouterPush = jest.fn();
 
 jest.mock('next/router', () => ({
-  useRouter: (): ExtraQueryType => ({
+  useRouter: (): Omit<ExtraQueryType, 'isReady'> => ({
     pathname: 'home',
     query: { search: '', category: '' },
     push: mockRouterPush
   })
+}));
+
+jest.mock('@lib/context/shopping-cart', () => ({
+  useShoppingCart: (): { isMobile: boolean } => ({ isMobile: false })
 }));
 
 describe('test SearchBar', () => {

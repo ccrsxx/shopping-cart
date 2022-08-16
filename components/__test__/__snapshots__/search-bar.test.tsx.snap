@@ -9,7 +9,7 @@ exports[`test SearchBar renders correctly 1`] = `
   >
     <input
       class="tab w-full rounded-lg border border-neutral-500 bg-inherit px-2 py-1"
-      placeholder="Search product..."
+      placeholder="Search product"
       type="text"
       value=""
     />

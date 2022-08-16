@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useShoppingCart } from '@lib/context/shopping-cart';
+import { delayScroll } from '@lib/scroll';
 import { Button } from '@components/ui/button';
 import { ImageLoader } from '@components/ui/image-loader';
 import { formatCurrency } from '@lib/currency';
@@ -58,6 +59,7 @@ export function ProductCard({ productData }: ProductCardProps): JSX.Element {
       <a
         className='tab group relative rounded-lg ring-2 ring-border-primary
                    transition duration-300 hover:ring hover:ring-accent'
+        onClick={delayScroll}
       >
         <div className='transition duration-300 group-hover:brightness-90 group-focus-visible:brightness-90'>
           <ImageLoader

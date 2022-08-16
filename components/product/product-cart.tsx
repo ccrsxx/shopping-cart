@@ -13,10 +13,15 @@ import type { Product } from '@lib/api/products';
 
 type AddCartProps = {
   id: number;
+  isMobile: boolean;
   productData: Product;
 };
 
-export function ProductCart({ id, productData }: AddCartProps): JSX.Element {
+export function ProductCart({
+  id,
+  isMobile,
+  productData
+}: AddCartProps): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [productQuantity, setProductQuantity] = useState(0);
 
@@ -38,7 +43,7 @@ export function ProductCart({ id, productData }: AddCartProps): JSX.Element {
   return (
     <motion.div
       className='w-full shrink-[1.25] lg:max-w-none xl:max-w-xs'
-      {...setTransition({ direction: 'right' })}
+      {...setTransition({ direction: isMobile ? 'bottom' : 'right' })}
     >
       <motion.div
         className='flex flex-col gap-6 self-start overflow-hidden 

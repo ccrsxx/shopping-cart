@@ -1,3 +1,4 @@
+import { useShoppingCart } from '@lib/context/shopping-cart';
 import { MainLayout } from '@components/common/main-layout';
 import { Aside } from '@components/store/aside';
 import { Listing } from '@components/store/listing';
@@ -24,6 +25,8 @@ export async function getStaticProps(): Promise<StaticProps> {
 export default function Store({
   allProducts
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+  const { isMobile } = useShoppingCart();
+
   return (
     <MainLayout
       className='flex flex-col items-start gap-6 md:flex-row md:gap-8'
@@ -32,8 +35,8 @@ export default function Store({
       image='/store.png'
       url='/store'
     >
-      <Aside />
-      <Listing allProducts={allProducts} />
+      <Aside isMobile={isMobile} />
+      <Listing allProducts={allProducts} isMobile={isMobile} />
     </MainLayout>
   );
 }

@@ -13,10 +13,11 @@ import type { Products } from '@lib/api/products';
 import type { QueryType } from './aside';
 
 type ListingProps = {
+  isMobile: boolean;
   allProducts: Products;
 };
 
-export function Listing({ allProducts }: ListingProps): JSX.Element {
+export function Listing({ isMobile, allProducts }: ListingProps): JSX.Element {
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +65,7 @@ export function Listing({ allProducts }: ListingProps): JSX.Element {
         '[grid-template-columns:repeat(auto-fill,minmax(230px,1fr))]':
           !isLoading && !productsNotFound
       })}
-      {...setTransition({ direction: 'right' })}
+      {...setTransition({ direction: isMobile ? 'bottom' : 'right' })}
       key={isLoading ? null : key}
     >
       {isLoading ? (

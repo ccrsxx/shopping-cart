@@ -20,7 +20,11 @@ export type QueryType = {
   };
 };
 
-export function Aside(): JSX.Element {
+type AsideProps = {
+  isMobile: boolean;
+};
+
+export function Aside({ isMobile }: AsideProps): JSX.Element {
   const [currentCategory, setCurrentCategory] = useState<null | string>(null);
 
   const {
@@ -39,7 +43,7 @@ export function Aside(): JSX.Element {
     <motion.aside
       className='top-28 flex w-full max-w-none flex-col gap-4 self-start rounded-lg
                  border border-border-primary p-4 md:sticky md:max-w-sm'
-      {...setTransition({ direction: 'left' })}
+      {...setTransition({ direction: isMobile ? 'top' : 'left' })}
     >
       <div
         className={cn(

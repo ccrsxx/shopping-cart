@@ -1,15 +1,12 @@
 import Link from 'next/link';
 import cn from 'clsx';
+import { delayScroll } from '@lib/scroll';
 
 type NavLinkProps = {
   href: string;
   linkName: string;
   pathname: string;
   disableScroll?: boolean;
-};
-
-const delayScroll = (): void => {
-  setTimeout(() => window.scrollTo(0, 0), 500);
 };
 
 export function NavLink({
