@@ -19,10 +19,12 @@ export async function getAllProducts(): Promise<Products> {
   return data;
 }
 
+export type Params = {
+  pid: string;
+};
+
 type ProductParams = {
-  params: {
-    pid: string;
-  };
+  params: Params;
 };
 
 export type ProductsParams = ProductParams[];

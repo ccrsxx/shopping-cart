@@ -1,15 +1,15 @@
 import NotFound from 'pages/404';
 import { getAllProductsId, getProductData } from '@lib/api/products';
 import { ProductView } from '@components/product/product-view';
-import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import type { Product, ProductsParams } from '@lib/api/products';
+import type {
+  GetStaticPathsResult,
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+  InferGetStaticPropsType
+} from 'next';
+import type { Params, Product } from '@lib/api/products';
 
-type StaticPaths = {
-  paths: ProductsParams;
-  fallback: boolean | 'blocking';
-};
-
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult<Params>> {
   const paths = await getAllProductsId();
 
   return {
@@ -18,16 +18,14 @@ export async function getStaticPaths(): Promise<StaticPaths> {
   };
 }
 
-type StaticProps = {
-  props: {
-    pid: string;
-    productData: Product | null;
-  };
+type ProductProps = {
+  pid: string;
+  productData: Product | null;
 };
 
 export async function getStaticProps({
   params
-}: GetStaticPropsContext<{ pid: string }>): Promise<StaticProps> {
+}: GetStaticPropsContext<Params>): Promise<GetStaticPropsResult<ProductProps>> {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { pid } = params!;
   const productData = await getProductData(pid);
