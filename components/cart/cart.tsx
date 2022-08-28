@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MdShoppingCart, MdArrowForward } from '@assets/icons';
@@ -9,26 +9,23 @@ import { setTransition } from '@lib/transition';
 import { CartItem } from './cart-item';
 
 export function Cart(): JSX.Element {
-  const { cartProducts, currentCart, totalPrice, clearCart } =
+  const { cartProducts, currentCart, totalPrice, isMobile, clearCart } =
     useShoppingCart();
 
   const [totalProducts, setTotalProducts] = useState(0);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const isMobile = useRef(false);
 
   useEffect(() => {
     setTotalProducts(cartProducts);
   }, [cartProducts]);
 
   useEffect(() => {
-    if (isMobile.current && !isCartOpen)
-      document.documentElement.style.overflow = '';
+    if (isMobile && !isCartOpen) document.documentElement.style.overflow = '';
 
-    isMobile.current = window.innerWidth < 768;
-
-    document[isMobile.current ? 'documentElement' : 'body'].style.overflowY =
-      isCartOpen ? 'hidden' : '';
+    document[isMobile ? 'documentElement' : 'body'].style.overflowY = isCartOpen
+      ? 'hidden'
+      : '';
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCartOpen]);
 
   const toggleCart = (): void => setIsCartOpen(!isCartOpen);
