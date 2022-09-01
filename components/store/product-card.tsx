@@ -50,6 +50,7 @@ export function ProductCard({ productData }: ProductCardProps): JSX.Element {
       };
 
   const handleClick = (e?: MouseEvent<HTMLButtonElement>): void => {
+    e?.stopPropagation();
     e?.preventDefault();
     onClick();
   };
